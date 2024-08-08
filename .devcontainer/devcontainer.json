@@ -52,7 +52,10 @@
 			"humao.rest-client"
 		  ]
 		}
-	  }
+	  },
+"mounts": [
+	 "source=${localEnv:HOME}/.ssh,target=/home/node/.ssh,type=bind,consistency=cached"
+]
 	//   "postStartCommand": "git config --global --add safe.directory /workspaces && zsh"
 	  // Use 'forwardPorts' to make a list of ports inside the container available locally.
 	  // "forwardPorts": [],
