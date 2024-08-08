@@ -1,0 +1,42 @@
+### Local variable
+@urlLocal = {{apiUrl}}/users
+@contentType = application/json
+
+### GET all
+GET {{urlLocal}}
+
+### GET one
+GET {{urlLocal}}/10
+
+### POST
+POST {{urlLocal}}
+Content-Type: {{contentType}}
+
+{
+    "name": "example",
+    "email": "example@provider.com",
+    "password": "123456"
+}
+
+### PUT
+PUT {{urlLocal}}/10
+Content-Type: {{contentType}}
+
+{
+    "name": "example",
+    "email": "example@provider.com",
+    "password": "123456"
+}
+
+### PATCH
+PATCH {{urlLocal}}/25
+Content-Type: {{contentType}}
+
+{
+    "name": "example",
+    "email": "example@provider.com",
+    "password": "123456"
+}
+
+### DELETE one
+DELETE {{urlLocal}}/10
