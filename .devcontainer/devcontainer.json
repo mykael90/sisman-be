@@ -48,7 +48,7 @@
 			"streetsidesoftware.code-spell-checker",
 			"eamodio.gitlens",
 			"codeium.codeium",
-			// "prisma.prisma",
+			"prisma.prisma",
 			"humao.rest-client"
 		  ]
 		}
