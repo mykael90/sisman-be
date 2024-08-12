@@ -3,5 +3,19 @@
         "$shared": {
             "apiUrl": "http://localhost:3000"
         }
-    }
+    },
+
+    "editor.rulers": [
+        80,
+        120
+      ],
+
+    "files.associations": {
+    ".env.*": "dotenv",
+    ".prettierrc": "json",
+    "*.css": "css",
+    ".dev.vars": "dotenv"
+  },
+
+
 }

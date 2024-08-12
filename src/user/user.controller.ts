@@ -9,7 +9,7 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { CreateUserDTO } from './dto/create-user.dto';
+import { CreateUserDTO, blankUser } from './dto/create-user.dto';
 import { UpdatePutUserDTO } from './dto/update-put-user.dto';
 import { UpdatePatchUserDTO } from './dto/update-patch-user.dto';
 import { UserService } from './user.service';
@@ -24,8 +24,9 @@ export class UserController {
   }
 
   @Post()
-  async create(@Body() { name, email, password }: CreateUserDTO) {
-    return this.userService.create({ name, email, password });
+  async create(@Body() data: CreateUserDTO) {
+    data.birthAt = data.birthAt ? new Date(data.birthAt) : null;
+    return this.userService.create(data);
   }
 
   @Get(':id')
@@ -36,44 +37,24 @@ export class UserController {
   @Put(':id')
   async updateAll(
     @Param('id', ParseIntPipe) id,
-    @Body() { name, email, password }: UpdatePutUserDTO,
+    @Body() data: UpdatePutUserDTO,
   ) {
-    return {
-      statusCode: 200,
-      method: 'PUT',
-      message: 'User updated successfully',
-      user: {},
-      id,
-      name,
-      email,
-      password,
-    };
+    data.birthAt = data.birthAt ? new Date(data.birthAt) : null;
+    const mergedData: UpdatePutUserDTO = { ...blankUser, ...data };
+    return this.userService.update(id, mergedData);
   }
 
   @Patch(':id')
   async update(
     @Param('id', ParseIntPipe) id,
-    @Body() { name, email, password }: UpdatePatchUserDTO,
+    @Body() data: UpdatePatchUserDTO,
   ) {
-    return {
-      statusCode: 200,
-      method: 'PUT',
-      message: 'User updated successfully',
-      user: {},
-      id,
-      name,
-      email,
-      password,
-    };
+    data.birthAt = data.birthAt ? new Date(data.birthAt) : undefined;
+    return this.userService.updatePartial(id, data);
   }
 
   @Delete(':id')
   async delete(@Param('id', ParseIntPipe) id) {
-    return {
-      statusCode: 200,
-      message: 'User deleted successfully',
-      user: {},
-      id,
-    };
+    return this.userService.delete(id);
   }
 }

@@ -1,0 +1,7 @@
+Comandos utilizados no prisma
+
+- npx prisma db pull
+# do banco para o esquema do prisma
+
+- npx migrate dev --name [descrição]
+# do esquema do prisma para o banco
