@@ -6,7 +6,7 @@
 GET {{urlLocal}}
 
 ### GET one
-GET {{urlLocal}}/10
+GET {{urlLocal}}/20
 
 ### POST
 POST {{urlLocal}}

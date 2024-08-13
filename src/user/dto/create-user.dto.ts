@@ -26,10 +26,3 @@ export class CreateUserDTO {
   @IsDateString()
   birthAt: string | Date | null;
 }
-
-export const blankUser: CreateUserDTO = {
-  name: '',
-  email: '',
-  password: '',
-  birthAt: '',
-};
