@@ -16,8 +16,8 @@
 
 	// The optional 'workspaceFolder' property is the path VS Code should open by default when
 	// connected. This is typically a file mount in .devcontainer/docker-compose.yml
-	// "workspaceFolder": "/home/node/${localWorkspaceFolderBasename}",
-	"workspaceFolder": "/home/node/nest-essentials",
+	// "workspaceFolder": "/home/${localWorkspaceFolderBasename}",
+	"workspaceFolder": "/home/nest-essentials",
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	"features": {
@@ -54,7 +54,7 @@
 		}
 	  },
 "mounts": [
-	 "source=${localEnv:HOME}/.ssh,target=/home/node/.ssh,type=bind,consistency=cached"
+	 "source=${localEnv:HOME}/.ssh,target=/home/.ssh,type=bind,consistency=cached"
 ]
 	//   "postStartCommand": "git config --global --add safe.directory /workspaces && zsh"
 	  // Use 'forwardPorts' to make a list of ports inside the container available locally.
