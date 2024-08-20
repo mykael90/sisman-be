@@ -1,12 +1,6 @@
-import {
-  IsEmail,
-  IsOptional,
-  IsString,
-  IsStrongPassword,
-  IsDateString,
-} from 'class-validator';
+import { IsEmail, IsString, IsStrongPassword } from 'class-validator';
 
-export class CreateUserDTO {
+export class AuthRegisterDTO {
   @IsString()
   name: string;
 
@@ -21,8 +15,4 @@ export class CreateUserDTO {
     minSymbols: 0,
   })
   password: string;
-
-  @IsOptional()
-  @IsDateString()
-  birthAt?: string | Date | null;
 }

@@ -6,7 +6,8 @@
 GET {{urlLocal}}
 
 ### GET one
-GET {{urlLocal}}/20
+# @prompt userId
+GET {{urlLocal}}/{{userId}}
 
 ### POST
 POST {{urlLocal}}
@@ -30,7 +31,8 @@ Content-Type: {{contentType}}
 }
 
 ### PUT
-PUT {{urlLocal}}/4
+# @prompt userId
+PUT {{urlLocal}}/{{userId}}
 Content-Type: {{contentType}}
 
 {
@@ -40,7 +42,8 @@ Content-Type: {{contentType}}
 }
 
 ### PUT
-PUT {{urlLocal}}/4
+# @prompt userId
+PUT {{urlLocal}}/{{userId}}
 Content-Type: {{contentType}}
 
 {
@@ -51,7 +54,8 @@ Content-Type: {{contentType}}
 }
 
 ### PATCH
-PATCH {{urlLocal}}/4
+# @prompt userId
+PATCH {{urlLocal}}/{{userId}}
 Content-Type: {{contentType}}
 
 {
@@ -59,4 +63,5 @@ Content-Type: {{contentType}}
 }
 
 ### DELETE one
-DELETE {{urlLocal}}/11
+# @prompt userId
+DELETE {{urlLocal}}/{{userId}}
