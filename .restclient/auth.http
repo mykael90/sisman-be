@@ -42,6 +42,10 @@ Content-Type: multipart/form-data; boundary=MfnBoundry
 Authorization: Bearer {{token}}
 
 --MfnBoundry
+Content-Disposition: form-data; name="title"
+
+Título
+--MfnBoundry
 Content-Disposition: form-data; name="photo"; filename="imageNest.png"
 Content-Type: image/png
 

@@ -75,6 +75,7 @@ export class AuthController {
       }),
     )
     photo: Express.Multer.File,
+    @Body('title') title: string,
   ) {
     const path = `./storage/photos/photo-${id}.jpg`;
 
@@ -84,7 +85,7 @@ export class AuthController {
       return new BadRequestException(e);
     }
 
-    return { id, success: true };
+    return { title, id, success: true };
   }
 
   @UseInterceptors(FilesInterceptor('files'))
