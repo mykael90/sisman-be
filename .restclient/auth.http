@@ -35,3 +35,15 @@ Authorization: Bearer {{token}}
 {
   
 }
+
+### Upload-photo
+POST {{urlLocal}}/photo
+Content-Type: multipart/form-data; boundary=MfnBoundry
+Authorization: Bearer {{token}}
+
+--MfnBoundry
+Content-Disposition: form-data; name="photo"; filename="imageNest.png"
+Content-Type: image/png
+
+< ./imageNest.png
+--MfnBoundry--
