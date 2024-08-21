@@ -9,7 +9,7 @@ Content-Type: {{contentType}}
 
 {
     "email": "example@provider.com",
-    "password": "123456"
+    "password": "654321"
 }
 
 ###
@@ -24,6 +24,23 @@ Content-Type: {{contentType}}
     "name": "example10",
     "email": "example@provider.com",
     "password": "123456"
+}
+
+### Forget
+POST {{urlLocal}}/forget
+Content-Type: {{contentType}}
+
+{
+    "email": "example@provider.com"
+}
+
+### Reset
+POST {{urlLocal}}/reset
+Content-Type: {{contentType}}
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzI0MjQ2NjYyLCJleHAiOjE3MjQyNDg0NjIsImF1ZCI6InVzZXJzIiwiaXNzIjoiZm9yZ2V0Iiwic3ViIjoiMSJ9.W0vzEUtuGoJCZl_sFqvrwpZbVcYkkFi-L5N5K4b88_8",
+    "password": "654321"
 }
 
 
