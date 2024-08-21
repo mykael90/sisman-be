@@ -25,15 +25,15 @@ import { PugAdapter } from '@nestjs-modules/mailer/dist/adapters/pug.adapter';
     FileModule,
     MailerModule.forRoot({
       transport: {
-        host: 'smtp.ethereal.email',
-        port: 587,
+        host: process.env.MAILER_HOST,
+        port: Number(process.env.MAILER_PORT) || 587,
         auth: {
-          user: 'margot.roob@ethereal.email',
-          pass: 'hYwBtRj16u6mWzWB2y',
+          user: process.env.MAILER_USER,
+          pass: process.env.MAILER_PASS,
         },
       },
       defaults: {
-        from: '"Hcode" <margot.roob@ethereal.email>',
+        from: `"Sisman Messenger" <${process.env.MAILER_USER}>`,
       },
       template: {
         dir: __dirname + '/templates',
