@@ -1,39 +1,57 @@
-### Local variable
+### Variables
 @urlLocal = {{apiUrl}}/users
 @contentType = application/json
 
 ### GET all
 GET {{urlLocal}}
+Authorization: Bearer {{token}}
 
 ### GET one
 # @prompt userId
 GET {{urlLocal}}/{{userId}}
+Authorization: Bearer {{token}}
 
 ### POST
 POST {{urlLocal}}
 Content-Type: {{contentType}}
+Authorization: Bearer {{token}}
 
 {
     "name": "example",
-    "email": "example@provider.com",
+    "email": "example3@provider.com",
     "password": "123456"
 }
 
 ### POST
 POST {{urlLocal}}
 Content-Type: {{contentType}}
+Authorization: Bearer {{token}}
 
 {
     "name": "example",
-    "email": "example@provider.com",
+    "email": "example2@provider.com",
     "password": "123456",
     "birthAt": "1990-06-18"
+}
+
+### POST role 2
+POST {{urlLocal}}
+Content-Type: {{contentType}}
+Authorization: Bearer {{token}}
+
+{
+    "name": "admin",
+    "email": "admin@provider.com",
+    "password": "123456",
+    "birthAt": "1990-06-18",
+    "role": 2
 }
 
 ### PUT
 # @prompt userId
 PUT {{urlLocal}}/{{userId}}
 Content-Type: {{contentType}}
+Authorization: Bearer {{token}}
 
 {
     "name": "example4",
@@ -45,6 +63,7 @@ Content-Type: {{contentType}}
 # @prompt userId
 PUT {{urlLocal}}/{{userId}}
 Content-Type: {{contentType}}
+Authorization: Bearer {{token}}
 
 {
     "name": "example4",
@@ -57,6 +76,7 @@ Content-Type: {{contentType}}
 # @prompt userId
 PATCH {{urlLocal}}/{{userId}}
 Content-Type: {{contentType}}
+Authorization: Bearer {{token}}
 
 {
     "name": "example"

@@ -2,7 +2,13 @@
     "rest-client.environmentVariables": {
         "$shared": {
             "apiUrl": "http://localhost:3000"
-        }
+        },
+        "development": {
+          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImV4YW1wbGUiLCJlbWFpbCI6ImV4YW1wbGVAcHJvdmlkZXIuY29tIiwiaWF0IjoxNzI0MTkxMDEzLCJleHAiOjE3MjQ3OTU4MTMsImF1ZCI6InVzZXJzIiwiaXNzIjoibG9naW4iLCJzdWIiOiIxIn0.WUw881NdyrOFw001JaJEnwlLJVR24DABGjJuoFgUDt4",
+      },
+        "production": {
+          "token": "TODO TOKEN",
+      }
     },
 
     "editor.rulers": [

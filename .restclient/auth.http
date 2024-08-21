@@ -21,17 +21,16 @@ POST {{urlLocal}}/register
 Content-Type: {{contentType}}
 
 {
-    "name": "example",
+    "name": "example10",
     "email": "example@provider.com",
     "password": "123456"
 }
 
 
 ### Check-token
-
 POST {{urlLocal}}/check-token
 Content-Type: {{contentType}}
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImV4YW1wbGUiLCJlbWFpbCI6ImV4YW1wbGVAcHJvdmlkZXIuY29tIiwiaWF0IjoxNzI0MTY3ODQxLCJleHAiOjE3MjQ3NzI2NDEsImF1ZCI6InVzZXJzIiwiaXNzIjoibG9naW4iLCJzdWIiOiIxIn0.HDGeG2oLtdy1dAug1GOTOCMo44BUHzAz6Nkub9y9S-Q
+Authorization: Bearer {{token}}
 
 {
   
