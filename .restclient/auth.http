@@ -31,7 +31,7 @@ POST {{urlLocal}}/forget
 Content-Type: {{contentType}}
 
 {
-    "email": "eng.mykael@gmail.com"
+    "email": "eng3.mykael@gmail.com"
 }
 
 ### Reset

@@ -137,15 +137,11 @@ export class AuthService {
   }
 
   async reset(data: AuthResetDTO) {
+    const token = this.checkTokenForgetPassword(data.token);
+
+    const { id } = token;
+
     try {
-      const token = this.checkTokenForgetPassword(data.token);
-
-      if (!token) {
-        throw new UnauthorizedException(`Token inválido!`);
-      }
-
-      const { id } = token;
-
       const salt = await bcrypt.genSalt();
       const password = await bcrypt.hash(data.password, salt);
 
