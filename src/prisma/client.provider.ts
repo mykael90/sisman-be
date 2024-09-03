@@ -22,7 +22,7 @@ export class PrismaClientProvider
     private readonly computedFieldExtension: ComputedFieldExtension,
   ) {
     super({
-      log: ['query'],
+      log: ['query', 'info', 'warn', 'error'],
     });
   }
 

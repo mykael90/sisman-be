@@ -1,7 +1,6 @@
 // ALT + SHIFT + F -> ALINHAR E AUTO-AJUSTES
 generator client {
   provider = "prisma-client-js"
-  previewFeatures = ["clientExtensions"]
 }
 
 datasource db {
