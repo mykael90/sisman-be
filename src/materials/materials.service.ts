@@ -45,6 +45,6 @@ export class MaterialsService {
   }
 
   async exists(id: number) {
-    return await this.prisma.material.count({ where: { id } });
+    return await this.prisma.material.exists({ id });
   }
 }

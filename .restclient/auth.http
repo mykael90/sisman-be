@@ -8,8 +8,8 @@ POST {{urlLocal}}/login
 Content-Type: {{contentType}}
 
 {
-    "email": "example@provider.com",
-    "password": "654321"
+    "email": "eng.mykael@gmail.com",
+    "password": "123456"
 }
 
 ###
