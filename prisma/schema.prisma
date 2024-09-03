@@ -8,15 +8,28 @@ datasource db {
   url      = env("DB_URL")
 }
 
+// ------------------ MODELS ----------------------
 model User {
   id        Int       @id @default(autoincrement())
   name      String    @db.VarChar(63)
-  email     String    @db.VarChar(127)
+  email     String    @unique @db.VarChar(127)
   password  String    @db.VarChar(127)
   birthAt   DateTime? @db.Date
-  role      Int       @db.Int @default(1)
+  role      Int       @default(1) @db.Int
   createdAt DateTime  @default(now()) @db.Timestamp(0)
   updatedAt DateTime  @default(now()) @db.Timestamp(0)
 
   @@map("users")
+}
+
+model Material {
+  id            BigInt   @id @db.UnsignedBigInt()
+  name          String   @db.TinyText
+  specification String?  @db.VarChar(1022)
+  unit          String   @db.VarChar(31)
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now()) @db.Timestamp(0)
+  updatedAt     DateTime @default(now()) @db.Timestamp(0)
+
+  @@map("materials")
 }

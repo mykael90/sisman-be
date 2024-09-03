@@ -1,26 +1,50 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateMaterialDto } from './dto/create-material.dto';
 import { UpdateMaterialDto } from './dto/update-material.dto';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class MaterialsService {
-  create(createMaterialDto: CreateMaterialDto) {
-    return 'This action adds a new material';
+  constructor(private readonly prisma: PrismaService) {}
+  async create(data: CreateMaterialDto) {
+    const exists = await this.exists(data.id);
+    if (exists) throw new BadRequestException('Material already exists');
+    return await this.prisma.material.create({ data });
   }
 
-  findAll() {
-    return `This action returns all materials`;
+  async findAll() {
+    return await this.prisma.material.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} material`;
+  async findOne(id: number) {
+    const exists = await this.exists(id);
+    if (!exists) throw new NotFoundException('Material not found');
+    return await this.prisma.material.findFirst({ where: { id } });
   }
 
-  update(id: number, updateMaterialDto: UpdateMaterialDto) {
-    return `This action updates a #${id} material`;
+  async update(id: number, data: UpdateMaterialDto) {
+    const exists = await this.exists(id);
+    if (!exists) throw new NotFoundException('Material not found');
+    return await this.prisma.material.update({
+      where: { id },
+      data: {
+        ...data,
+        updatedAt: new Date(),
+      },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} material`;
+  async remove(id: number) {
+    const exists = await this.exists(id);
+    if (!exists) throw new NotFoundException('Material not found');
+    return await this.prisma.material.delete({ where: { id } });
+  }
+
+  async exists(id: number) {
+    return await this.prisma.material.count({ where: { id } });
   }
 }

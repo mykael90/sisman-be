@@ -157,7 +157,16 @@ export class AuthService {
   }
 
   async register(data: AuthRegisterDTO) {
+    if (await this.existsEmail(data.email)) {
+      throw new BadRequestException(`E-mail already in use!`);
+    }
+
     const user = await this.userService.create(data);
     return this.createToken(user);
+  }
+
+  async existsEmail(email: string) {
+    const user = await this.prisma.user.findFirst({ where: { email } });
+    return !!user;
   }
 }
