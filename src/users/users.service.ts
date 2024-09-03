@@ -6,7 +6,7 @@ import { UpdatePatchUserDTO } from './dto/update-patch-user.dto';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
-export class UserService {
+export class UsersService {
   constructor(private readonly prisma: PrismaService) {}
   async create(data: CreateUserDTO) {
     data.password = await this.hashPassword(data.password);

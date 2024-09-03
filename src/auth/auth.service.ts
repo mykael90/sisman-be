@@ -10,7 +10,7 @@ import { AuthForgetDTO } from './dto/auth-forget.dto';
 import { AuthResetDTO } from './dto/auth-reset.dto';
 import { User } from '@prisma/client';
 import { AuthRegisterDTO } from './dto/auth-register.dto';
-import { UserService } from 'src/user/user.service';
+import { UsersService } from 'src/users/users.service';
 import * as bcrypt from 'bcrypt';
 import { MailerService } from '@nestjs-modules/mailer';
 
@@ -21,7 +21,7 @@ export class AuthService {
   constructor(
     private readonly jwtService: JwtService,
     private readonly prisma: PrismaService,
-    private readonly userService: UserService,
+    private readonly userService: UsersService,
     private readonly mailer: MailerService,
   ) {}
 

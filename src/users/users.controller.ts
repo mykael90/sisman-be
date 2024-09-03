@@ -14,7 +14,7 @@ import {
 import { CreateUserDTO } from './dto/create-user.dto';
 import { UpdatePutUserDTO } from './dto/update-put-user.dto';
 import { UpdatePatchUserDTO } from './dto/update-patch-user.dto';
-import { UserService } from './user.service';
+import { UsersService } from './users.service';
 import { LogInterceptor } from 'src/interceptors/log.interceptor';
 import { ParamId } from 'src/decorators/param-id-decorator';
 import { Roles } from 'src/decorators/roles.decorator';
@@ -25,8 +25,8 @@ import { AuthGuard } from 'src/guards/auth.guard';
 @Roles(Role.Admin)
 @UseGuards(AuthGuard, RoleGuard)
 @Controller('users')
-export class UserController {
-  constructor(private readonly userService: UserService) {}
+export class UsersController {
+  constructor(private readonly userService: UsersService) {}
 
   @UseInterceptors(LogInterceptor)
   @Get()

@@ -7,7 +7,6 @@ import {
   UploadedFile,
   BadRequestException,
   UploadedFiles,
-  Req,
   ParseFilePipe,
   FileTypeValidator,
   MaxFileSizeValidator,
@@ -19,19 +18,19 @@ import { AuthResetDTO } from './dto/auth-reset.dto';
 import { AuthService } from './auth.service';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { User } from 'src/decorators/user-decorator';
-import { CreateUserDTO } from 'src/user/dto/create-user.dto';
+import { CreateUserDTO } from 'src/users/dto/create-user.dto';
 import {
   FileFieldsInterceptor,
   FileInterceptor,
   FilesInterceptor,
 } from '@nestjs/platform-express';
-import { FileService } from 'src/file/file.service';
+import { FilesService } from 'src/files/files.service';
 
 @Controller('auth')
 export class AuthController {
   constructor(
     private readonly authService: AuthService,
-    private readonly fileService: FileService,
+    private readonly fileService: FilesService,
   ) {}
 
   @Post('login')

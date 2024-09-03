@@ -5,19 +5,19 @@ import {
   NestModule,
   RequestMethod,
 } from '@nestjs/common';
-import { UserController } from './user.controller';
-import { UserService } from './user.service';
+import { UsersController } from './users.controller';
+import { UsersService } from './users.service';
 import { PrismaModule } from 'src/prisma/prisma.module';
 import { UserIdCheckMiddleware } from 'src/middlewares/user-id-check.middleware';
 import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
   imports: [PrismaModule, forwardRef(() => AuthModule)],
-  controllers: [UserController],
-  providers: [UserService],
-  exports: [UserService],
+  controllers: [UsersController],
+  providers: [UsersService],
+  exports: [UsersService],
 })
-export class UserModule implements NestModule {
+export class UsersModule implements NestModule {
   constructor() {}
 
   configure(consumer: MiddlewareConsumer) {

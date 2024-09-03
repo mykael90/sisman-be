@@ -1,13 +1,14 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UserModule } from './user/user.module';
+import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
-import { FileModule } from './file/file.module';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { PugAdapter } from '@nestjs-modules/mailer/dist/adapters/pug.adapter';
+import { MaterialsModule } from './materials/materials.module';
+import { FilesModule } from './files/files.module';
 
 @Module({
   imports: [
@@ -20,9 +21,9 @@ import { PugAdapter } from '@nestjs-modules/mailer/dist/adapters/pug.adapter';
       ],
       ignoreUserAgents: [/Googlebot/gi],
     }),
-    UserModule,
+    UsersModule,
     AuthModule,
-    FileModule,
+    FilesModule,
     MailerModule.forRoot({
       transport: {
         host: process.env.MAILER_HOST,
@@ -43,6 +44,7 @@ import { PugAdapter } from '@nestjs-modules/mailer/dist/adapters/pug.adapter';
         },
       },
     }),
+    MaterialsModule,
   ],
   controllers: [AppController],
   providers: [
