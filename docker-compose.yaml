@@ -2,20 +2,20 @@ services:
 
   app:
     build: .
-    container_name: my-app
+    container_name: api-sisman
     ports:
       - 3000:3000
     volumes:
-      - .:/home/node/nest-essentials
+      - .:/home/node/nest-sisman
 
   db:
-    image: mysql:8.0.37-debian
-    container_name: my-db
+    image: mariadb:11.5.2-noble
+    container_name: ${DB_HOST}
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: nest
+      MARIADB_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_SCHEMA}${ENV}
     ports:
       - 3306:3306
     volumes:
-    - ./.docker/mysql:/docker-entrypoint-initdb.d
+    - ./.docker/mariadb:/docker-entrypoint-initdb.d
       # - ./docker/dbdata:/var/lib/mysql

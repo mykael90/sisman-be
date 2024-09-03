@@ -6,8 +6,8 @@ RUN apt update && apt install -y openssl procps
 
 USER node
 
-RUN mkdir /home/node/nest-essentials/
+RUN mkdir /home/node/nest-sisman/
 
-WORKDIR /home/node/nest-essentials/
+WORKDIR /home/node/nest-sisman/
 
-CMD ["/home/node/nest-essentials/.docker/start-dev.sh"]
+CMD ["/home/node/nest-sisman/.docker/start-dev.sh"]
