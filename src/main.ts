@@ -12,7 +12,7 @@ async function bootstrap() {
     origin: ['http://10.10.10.10:3002', 'http://localhost:3000'],
   });
 
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
 
   app.enableShutdownHooks();
 
