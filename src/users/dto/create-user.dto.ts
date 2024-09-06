@@ -5,10 +5,12 @@ import {
   IsStrongPassword,
   IsDateString,
   IsEnum,
+  IsNotEmpty,
 } from 'class-validator';
 import { Role } from 'src/enums/role.enum';
 
 export class CreateUserDTO {
+  @IsNotEmpty()
   @IsString()
   name: string;
 
