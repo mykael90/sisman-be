@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 // import { LogInterceptor } from './interceptors/log.interceptor';
 import 'src/utils/bigint-tojson';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -16,6 +17,15 @@ async function bootstrap() {
   app.enableShutdownHooks();
 
   // app.useGlobalInterceptors(new LogInterceptor());
+
+  const config = new DocumentBuilder()
+    .setTitle('Sisman')
+    .setDescription('The Sisman API description')
+    .setVersion('0.1')
+    .build();
+
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
 
   await app.listen(3000);
 }

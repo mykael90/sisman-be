@@ -2,9 +2,13 @@
     "version": "0.2",
     "ignorePaths": [],
     "dictionaryDefinitions": [],
-    "dictionaries": ["pt", "en"],
+    "dictionaries": [
+        "pt",
+        "en"
+    ],
     "words": [
-        "fieldname"
+        "fieldname",
+        "Sisman"
     ],
     "ignoreWords": [],
     "import": []

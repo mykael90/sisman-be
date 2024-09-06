@@ -21,19 +21,17 @@ import { Roles } from 'src/decorators/roles.decorator';
 import { Role } from 'src/enums/role.enum';
 import { RoleGuard } from 'src/guards/role.guard';
 import { AuthGuard } from 'src/guards/auth.guard';
+import { ApiTags, ApiCreatedResponse, ApiOkResponse } from '@nestjs/swagger';
+import { UsersEntity } from './entities/users.entity';
 
 @Roles(Role.Admin)
 @UseGuards(AuthGuard, RoleGuard)
 @Controller('users')
+@ApiTags('users')
 export class UsersController {
   constructor(private readonly userService: UsersService) {}
 
-  @UseInterceptors(LogInterceptor)
-  @Get()
-  async list() {
-    return this.userService.list();
-  }
-
+  @ApiCreatedResponse({ type: UsersEntity })
   @Post()
   async create(@Body() data: CreateUserDTO) {
     return this.userService.create({
@@ -42,13 +40,22 @@ export class UsersController {
     });
   }
 
+  @UseInterceptors(LogInterceptor)
+  @Get()
+  @ApiOkResponse({ type: UsersEntity, isArray: true })
+  async list() {
+    return this.userService.list();
+  }
+
   @Roles(Role.Admin, Role.User)
   @Get(':id')
-  async show(@ParamId() id: number) {
+  @ApiOkResponse({ type: UsersEntity })
+  async show(@Param('id', ParseIntPipe) id: number) {
     return this.userService.show(id);
   }
 
   @Put(':id')
+  @ApiOkResponse({ type: UsersEntity })
   async updateAll(
     @Param('id', ParseIntPipe) id: number,
     @Body() data: UpdatePutUserDTO,
@@ -60,6 +67,7 @@ export class UsersController {
   }
 
   @Patch(':id')
+  @ApiOkResponse({ type: UsersEntity })
   async update(
     @Param('id', ParseIntPipe) id: number,
     @Body() data: UpdatePatchUserDTO,
@@ -71,6 +79,7 @@ export class UsersController {
   }
 
   @Delete(':id')
+  @ApiOkResponse({ type: UsersEntity })
   async delete(@Param('id', ParseIntPipe) id: number) {
     return this.userService.delete(id);
   }
