@@ -31,10 +31,7 @@ export class MaterialsService {
     if (!exists) throw new NotFoundException('Material not found');
     return await this.prisma.material.update({
       where: { id },
-      data: {
-        ...data,
-        updatedAt: new Date(),
-      },
+      data,
     });
   }
 

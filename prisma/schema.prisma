@@ -17,7 +17,7 @@ model User {
   birthAt   DateTime? @db.Date
   role      Int       @default(1) @db.Int
   createdAt DateTime  @default(now()) @db.Timestamp(0)
-  updatedAt DateTime  @default(now()) @db.Timestamp(0)
+  updatedAt DateTime  @updatedAt @db.Timestamp(0)
 
   @@map("users")
 }
@@ -29,7 +29,7 @@ model Material {
   unit          String   @db.VarChar(31)
   isActive      Boolean  @default(true)
   createdAt     DateTime @default(now()) @db.Timestamp(0)
-  updatedAt     DateTime @default(now()) @db.Timestamp(0)
+  updatedAt     DateTime @updatedAt @db.Timestamp(0)
 
   @@map("materials")
 }
