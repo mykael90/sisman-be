@@ -3,12 +3,13 @@ import {
   IsOptional,
   IsString,
   IsStrongPassword,
-  IsDateString,
   IsEnum,
   IsNotEmpty,
+  IsDate,
 } from 'class-validator';
 import { Role } from 'src/enums/role.enum';
 import { ApiProperty } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
 
 export class CreateUserDTO {
   @ApiProperty()
@@ -32,8 +33,9 @@ export class CreateUserDTO {
 
   @ApiProperty({ required: false, type: Date })
   @IsOptional()
-  @IsDateString()
-  birthAt?: string | Date | null;
+  @IsDate()
+  @Type(() => Date)
+  birthAt?: Date;
 
   @ApiProperty({ required: false, enum: Role })
   @IsOptional()

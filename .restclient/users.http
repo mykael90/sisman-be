@@ -17,8 +17,8 @@ Content-Type: {{contentType}}
 Authorization: Bearer {{token}}
 
 {
-    "name": "example",
-    "email": "example3@provider.com",
+    "name": "example2",
+    "email": "example2@provider.com",
     "password": "123456"
 }
 
@@ -28,8 +28,8 @@ Content-Type: {{contentType}}
 Authorization: Bearer {{token}}
 
 {
-    "name": "example",
-    "email": "example2@provider.com",
+    "name": "example6",
+    "email": "example6@provider.com",
     "password": "123456",
     "birthAt": "1990-06-18"
 }
