@@ -34,10 +34,7 @@ export class UsersController {
   @ApiCreatedResponse({ type: UsersEntity })
   @Post()
   async create(@Body() data: CreateUserDTO) {
-    return this.userService.create({
-      ...data,
-      birthAt: data.birthAt ? new Date(data.birthAt) : null,
-    });
+    return this.userService.create(data);
   }
 
   @UseInterceptors(LogInterceptor)
