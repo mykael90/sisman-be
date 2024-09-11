@@ -2,8 +2,9 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 // import { LogInterceptor } from './interceptors/log.interceptor';
-import 'src/utils/bigint-tojson';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import 'src/utils/bigint-tojson';
+import 'src/utils/date-tojson';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
