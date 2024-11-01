@@ -1,7 +1,7 @@
 import { Prisma } from '@prisma/client';
 import { Injectable } from '@nestjs/common';
-import { formatDates } from 'src/utils/format-date-time-br';
-import { toUpperCaseRecursive } from 'src/utils/format-all-uppercase';
+import { formatDates } from 'src/common/utils/format-date-time-br';
+import { toUpperCaseRecursive } from 'src/common/utils/format-all-uppercase';
 
 @Injectable()
 export class FormatResponseExtension {

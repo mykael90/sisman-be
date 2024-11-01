@@ -1,6 +1,6 @@
 import { Prisma } from '@prisma/client';
 import { Injectable } from '@nestjs/common';
-import { formatDates } from 'src/utils/format-date-time-br';
+import { formatDates } from 'src/common/utils/format-date-time-br';
 
 @Injectable()
 export class ComputedFieldExtension {
