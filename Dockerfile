@@ -7,8 +7,8 @@ RUN apt update && apt install -y openssl procps
 #non-root user
 USER node
 
-RUN mkdir /home/node/nest-sisman/
+RUN mkdir /home/node/sisman-be/
 
-WORKDIR /home/node/nest-sisman/
+WORKDIR /home/node/sisman-be/
 
-CMD ["/home/node/nest-sisman/.docker/start-dev.sh"]
+CMD ["/home/node/sisman-be/.docker/start-dev.sh"]
