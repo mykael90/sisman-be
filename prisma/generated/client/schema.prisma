@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "generated/client"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DB_URL")
+}
+
+model User {
+  id          Int         @id @default(autoincrement())
+  name        String      @db.VarChar(63)
+  email       String      @unique @db.VarChar(127)
+  password    String      @db.VarChar(127)
+  birthAt     DateTime?   @db.Date
+  role        Int         @default(1)
+  createdAt   DateTime    @default(now()) @db.Timestamp(0)
+  updatedAt   DateTime    @updatedAt @db.Timestamp(0)
+  users_roles UserRoles[]
+
+  @@map("users")
+}
+
+model Material {
+  id            BigInt   @id @db.UnsignedBigInt
+  name          String   @db.TinyText
+  specification String?  @db.VarChar(1022)
+  unit          String   @db.VarChar(31)
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now()) @db.Timestamp(0)
+  updatedAt     DateTime @updatedAt @db.Timestamp(0)
+
+  @@map("materials")
+}
+
+model UserRoletypes {
+  id          Int         @id
+  role        String      @db.VarChar(255)
+  description String      @db.Text
+  created_at  DateTime    @default(now()) @db.Timestamp(0)
+  updated_at  DateTime    @db.Timestamp(0)
+  users_roles UserRoles[]
+
+  @@map("users_roletypes")
+}
+
+model UserRoles {
+  user_id          Int
+  user_roletype_id Int
+  users            User          @relation(fields: [user_id], references: [id], onUpdate: Restrict, map: "users_roles_ibfk_1")
+  users_roletypes  UserRoletypes @relation(fields: [user_roletype_id], references: [id], onUpdate: Restrict, map: "users_roles_ibfk_2")
+
+  @@id([user_id, user_roletype_id])
+  @@index([user_roletype_id], map: "role_id")
+  @@map("users_roles")
+}

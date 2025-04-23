@@ -1,6 +1,6 @@
 // query-helper.service.ts
 import { Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
+import { Prisma } from 'prisma/generated/client';
 
 @Injectable()
 export class AddMethodsExtension {

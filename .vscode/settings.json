@@ -24,6 +24,7 @@
   },
 
   "cSpell.words": [
+    "autoincrement",
     "typeorm"
   ],
   "typescript.preferences.importModuleSpecifier": "relative",

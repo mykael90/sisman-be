@@ -1,6 +1,6 @@
 //Need to fix this
 
-import { Prisma, PrismaClient } from '@prisma/client';
+import { Prisma, PrismaClient } from 'prisma/generated/client';
 
 const softDelete = async function <M, A>(
   this: M,

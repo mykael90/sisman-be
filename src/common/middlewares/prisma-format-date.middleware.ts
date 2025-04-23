@@ -1,4 +1,4 @@
-import { Prisma } from '@prisma/client';
+import { Prisma } from 'prisma/generated/client';
 import { formatWithOptions } from 'date-fns/fp';
 import { ptBR } from 'date-fns/locale';
 

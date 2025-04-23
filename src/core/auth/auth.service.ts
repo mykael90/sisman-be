@@ -8,7 +8,7 @@ import { AuthLoginDTO } from './dto/auth-login.dto';
 import { PrismaService } from 'src/core/prisma/prisma.service';
 import { AuthForgetDTO } from './dto/auth-forget.dto';
 import { AuthResetDTO } from './dto/auth-reset.dto';
-import { User } from '@prisma/client';
+import { User } from 'prisma/generated/client';
 import { AuthRegisterDTO } from './dto/auth-register.dto';
 import { UsersService } from 'src/modules/users/users.service';
 import * as bcrypt from 'bcrypt';

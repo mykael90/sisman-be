@@ -4,7 +4,7 @@ import {
   OnModuleDestroy,
   OnModuleInit,
 } from '@nestjs/common';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from 'prisma/generated/client';
 import { AddMethodsExtension } from './extensions/add-methods-extension';
 import { FormatResponseExtension } from './extensions/format-response-extension';
 import { AddLogsExtension } from './extensions/add-logs-extension';

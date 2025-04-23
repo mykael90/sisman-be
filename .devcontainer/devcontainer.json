@@ -47,9 +47,10 @@
 			"vivaxy.vscode-conventional-commits",
 			"streetsidesoftware.code-spell-checker",
 			"eamodio.gitlens",
-			"codeium.codeium",
+			// "codeium.codeium",
 			"prisma.prisma",
-			"humao.rest-client"
+			"humao.rest-client",
+			"google.geminicodeassist"
 		  ]
 		}
 	  },

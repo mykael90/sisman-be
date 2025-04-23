@@ -1,4 +1,4 @@
-import { Prisma } from '@prisma/client';
+import { Prisma } from 'prisma/generated/client';
 import { Injectable } from '@nestjs/common';
 import { formatDates } from 'src/common/utils/format-date-time-br';
 import { toUpperCaseRecursive } from 'src/common/utils/format-all-uppercase';
