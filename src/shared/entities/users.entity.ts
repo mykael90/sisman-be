@@ -10,7 +10,7 @@ export class UsersEntity implements User {
   name: string;
 
   @ApiProperty({ example: 'Jonh Smith' })
-  username: string;
+  login: string;
 
   @ApiProperty({ example: 'example@mailserver.com' })
   email: string;

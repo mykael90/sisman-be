@@ -10,9 +10,10 @@ import { UsersService } from './users.service';
 import { PrismaModule } from 'src/shared/prisma/prisma.module';
 import { UserIdCheckMiddleware } from 'src/shared/middlewares/user-id-check.middleware';
 import { AuthModule } from 'src/shared/auth/auth.module';
+import { RolesModule } from './roles/roles.module';
 
 @Module({
-  imports: [PrismaModule, forwardRef(() => AuthModule)],
+  imports: [PrismaModule, forwardRef(() => AuthModule), RolesModule],
   controllers: [UsersController],
   providers: [UsersService],
   exports: [UsersService],

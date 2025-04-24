@@ -12,7 +12,7 @@ export class AuthRegisterDTO {
 
   @IsNotEmpty()
   @IsString()
-  username: string;
+  login: string;
 
   @IsEmail()
   email: string;

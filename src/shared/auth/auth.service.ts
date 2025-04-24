@@ -1,5 +1,6 @@
 import {
   BadRequestException,
+  ConsoleLogger,
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
@@ -8,11 +9,13 @@ import { AuthLoginDTO } from './dto/auth-login.dto';
 import { PrismaService } from 'src/shared/prisma/prisma.service';
 import { AuthForgetDTO } from './dto/auth-forget.dto';
 import { AuthResetDTO } from './dto/auth-reset.dto';
-import { User } from 'prisma/generated/client';
+import { User, UserRoles } from 'prisma/generated/client';
 import { AuthRegisterDTO } from './dto/auth-register.dto';
 import { UsersService } from 'src/modules/users/users.service';
 import * as bcrypt from 'bcrypt';
 import { MailerService } from '@nestjs-modules/mailer';
+import { AuthRegisterAuthorizationTokenDTO } from './dto/auth-register-authorization-token.dto';
+import { AuthLoginAuthorizationTokenDTO } from './dto/auth-login-authorization-token.dto';
 
 @Injectable()
 export class AuthService {
@@ -25,13 +28,14 @@ export class AuthService {
     private readonly mailer: MailerService,
   ) {}
 
-  createToken(user: User) {
+  createToken(user: User, roles: UserRoles[] = []) {
     return {
       accessToken: this.jwtService.sign(
         {
           id: user.id,
           name: user.name,
           email: user.email,
+          roles: roles.map((role) => role.userRoletypeId),
         },
         {
           expiresIn: '7 days',
@@ -40,6 +44,7 @@ export class AuthService {
           audience: this.audience,
         },
       ),
+      roles: roles.map((role) => role.userRoletypeId),
     };
   }
 
@@ -111,6 +116,39 @@ export class AuthService {
 
     return this.createToken(user);
   }
+  async loginAuthorizationToken(data: AuthLoginAuthorizationTokenDTO) {
+    const token = this.jwtService.verify(data.token, {
+      secret: process.env.AUTHORIZATION_JWT_SECRET,
+    });
+
+    if (!token) {
+      throw new UnauthorizedException(`Token inválido!`);
+    }
+
+    if (!token.email) {
+      throw new UnauthorizedException(`Token inválido!`);
+    }
+
+    const user: User = await this.prisma.user.findFirst({
+      where: { email: token.email },
+    });
+
+    if (!user) {
+      return this.register({
+        name: token.name,
+        email: token.email,
+        login: token.login,
+      });
+    }
+
+    const roles = await this.prisma.userRoles.findMany({
+      where: { userId: user.id },
+    });
+
+    console.log(roles);
+
+    return this.createToken(user, roles);
+  }
 
   async forget(data: AuthForgetDTO) {
     const user = await this.prisma.user.findFirst({
@@ -163,6 +201,30 @@ export class AuthService {
 
     const user = await this.userService.create(data);
     return this.createToken(user);
+  }
+
+  async registerAuthorizationToken(data: AuthRegisterAuthorizationTokenDTO) {
+    const token = this.jwtService.verify(data.token, {
+      secret: process.env.AUTHORIZATION_JWT_SECRET,
+    });
+
+    if (!token) {
+      throw new UnauthorizedException(`Token inválido!`);
+    }
+
+    if (!token.email) {
+      throw new UnauthorizedException(`Token inválido!`);
+    }
+
+    if (await this.existsEmail(token.email)) {
+      throw new BadRequestException(`E-mail already in use!`);
+    }
+
+    return this.register({
+      name: token.name,
+      email: token.email,
+      login: token.login,
+    });
   }
 
   async existsEmail(email: string) {

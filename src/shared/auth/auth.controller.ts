@@ -28,6 +28,8 @@ import {
 } from '@nestjs/platform-express';
 import { FilesService } from 'src/shared/files/files.service';
 import { ApiTags } from '@nestjs/swagger';
+import { AuthRegisterAuthorizationTokenDTO } from './dto/auth-register-authorization-token.dto';
+import { AuthLoginAuthorizationTokenDTO } from './dto/auth-login-authorization-token.dto';
 
 @Controller('auth')
 @ApiTags('auth')
@@ -41,11 +43,23 @@ export class AuthController {
   async login(@Body() body: AuthLoginDTO) {
     return this.authService.login(body);
   }
+  @Post('login-authorization-token')
+  async loginAuthorizationToken(@Body() body: AuthLoginAuthorizationTokenDTO) {
+    return this.authService.loginAuthorizationToken(body);
+  }
 
   @Post('register')
   @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
   async register(@Body() body: AuthRegisterDTO) {
     return this.authService.register(body);
+  }
+
+  @Post('register-authorization-token')
+  @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
+  async registerAuthorizationToken(
+    @Body() body: AuthRegisterAuthorizationTokenDTO,
+  ) {
+    return this.authService.registerAuthorizationToken(body);
   }
 
   @Post('forget')

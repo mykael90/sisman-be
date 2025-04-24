@@ -9,7 +9,19 @@ Content-Type: {{contentType}}
 
 {
     "email": "eng.mykael@gmail.com",
-    "password": "123456"
+    "login": "mykael.mello"
+}
+
+###
+
+
+### Login authorization token
+# @name login
+POST {{urlLocal}}/login-authorization-token
+Content-Type: {{contentType}}
+
+{
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImRlc2VudkBzaS51ZnJuLmJyIiwibG9naW4iOiJteWthZWwubWVsbG8iLCJuYW1lIjoiTVlLQUVMIERPUyBBTkpPUyBFIE1FTExPIiwiaWF0IjoxNzQ1NTM0OTE5LCJleHAiOjE3NDU1MzUyMTl9.hmLDJIQ_stzEBebWh00q655LqJdGTYqJVFH1KOs4CiU"
 }
 
 ###
@@ -22,9 +34,17 @@ Content-Type: {{contentType}}
 
 {
     "name": "Mykael",
-    "username": "mykael.mello",
+    "login": "mykael.mello",
     "email": "eng.mykael@gmail.com",
     "password": "123456"
+}
+
+### Register authorization token
+POST {{urlLocal}}/register-authorization-token
+Content-Type: {{contentType}}
+
+{
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImRlc2VudkBzaS51ZnJuLmJyIiwibG9naW4iOiJteWthZWwubWVsbG8iLCJuYW1lIjoiTVlLQUVMIERPUyBBTkpPUyBFIE1FTExPIiwiaWF0IjoxNzQ1NTI1OTA1LCJleHAiOjE3NDU1MjYyMDV9.7s5Pbqks1bLRzqhPLiWL51gaMgnv0AWinlN6Hex9Doo"
 }
 
 ### Forget

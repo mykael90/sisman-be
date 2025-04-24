@@ -1110,11 +1110,11 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
-    users_roles: number
+    userRoles: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    users_roles?: boolean | UserCountOutputTypeCountUsers_rolesArgs
+    userRoles?: boolean | UserCountOutputTypeCountUserRolesArgs
   }
 
   // Custom InputTypes
@@ -1131,7 +1131,7 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountUsers_rolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserCountOutputTypeCountUserRolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UserRolesWhereInput
   }
 
@@ -1141,11 +1141,11 @@ export namespace Prisma {
    */
 
   export type UserRoletypesCountOutputType = {
-    users_roles: number
+    userRoles: number
   }
 
   export type UserRoletypesCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    users_roles?: boolean | UserRoletypesCountOutputTypeCountUsers_rolesArgs
+    userRoles?: boolean | UserRoletypesCountOutputTypeCountUserRolesArgs
   }
 
   // Custom InputTypes
@@ -1162,7 +1162,7 @@ export namespace Prisma {
   /**
    * UserRoletypesCountOutputType without action
    */
-  export type UserRoletypesCountOutputTypeCountUsers_rolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserRoletypesCountOutputTypeCountUserRolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UserRolesWhereInput
   }
 
@@ -1194,7 +1194,7 @@ export namespace Prisma {
   export type UserMinAggregateOutputType = {
     id: number | null
     name: string | null
-    username: string | null
+    login: string | null
     email: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -1203,7 +1203,7 @@ export namespace Prisma {
   export type UserMaxAggregateOutputType = {
     id: number | null
     name: string | null
-    username: string | null
+    login: string | null
     email: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -1212,7 +1212,7 @@ export namespace Prisma {
   export type UserCountAggregateOutputType = {
     id: number
     name: number
-    username: number
+    login: number
     email: number
     createdAt: number
     updatedAt: number
@@ -1231,7 +1231,7 @@ export namespace Prisma {
   export type UserMinAggregateInputType = {
     id?: true
     name?: true
-    username?: true
+    login?: true
     email?: true
     createdAt?: true
     updatedAt?: true
@@ -1240,7 +1240,7 @@ export namespace Prisma {
   export type UserMaxAggregateInputType = {
     id?: true
     name?: true
-    username?: true
+    login?: true
     email?: true
     createdAt?: true
     updatedAt?: true
@@ -1249,7 +1249,7 @@ export namespace Prisma {
   export type UserCountAggregateInputType = {
     id?: true
     name?: true
-    username?: true
+    login?: true
     email?: true
     createdAt?: true
     updatedAt?: true
@@ -1345,7 +1345,7 @@ export namespace Prisma {
   export type UserGroupByOutputType = {
     id: number
     name: string
-    username: string
+    login: string
     email: string
     createdAt: Date
     updatedAt: Date
@@ -1373,11 +1373,11 @@ export namespace Prisma {
   export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    username?: boolean
+    login?: boolean
     email?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    users_roles?: boolean | User$users_rolesArgs<ExtArgs>
+    userRoles?: boolean | User$userRolesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1386,27 +1386,27 @@ export namespace Prisma {
   export type UserSelectScalar = {
     id?: boolean
     name?: boolean
-    username?: boolean
+    login?: boolean
     email?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "username" | "email" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "login" | "email" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    users_roles?: boolean | User$users_rolesArgs<ExtArgs>
+    userRoles?: boolean | User$userRolesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
 
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
-      users_roles: Prisma.$UserRolesPayload<ExtArgs>[]
+      userRoles: Prisma.$UserRolesPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       name: string
-      username: string
+      login: string
       email: string
       createdAt: Date
       updatedAt: Date
@@ -1750,7 +1750,7 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    users_roles<T extends User$users_rolesArgs<ExtArgs> = {}>(args?: Subset<T, User$users_rolesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserRolesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    userRoles<T extends User$userRolesArgs<ExtArgs> = {}>(args?: Subset<T, User$userRolesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserRolesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1782,7 +1782,7 @@ export namespace Prisma {
   interface UserFieldRefs {
     readonly id: FieldRef<"User", 'Int'>
     readonly name: FieldRef<"User", 'String'>
-    readonly username: FieldRef<"User", 'String'>
+    readonly login: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
@@ -2129,9 +2129,9 @@ export namespace Prisma {
   }
 
   /**
-   * User.users_roles
+   * User.userRoles
    */
-  export type User$users_rolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$userRolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the UserRoles
      */
@@ -3307,7 +3307,7 @@ export namespace Prisma {
     description?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    users_roles?: boolean | UserRoletypes$users_rolesArgs<ExtArgs>
+    userRoles?: boolean | UserRoletypes$userRolesArgs<ExtArgs>
     _count?: boolean | UserRoletypesCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["userRoletypes"]>
 
@@ -3323,14 +3323,14 @@ export namespace Prisma {
 
   export type UserRoletypesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "role" | "description" | "createdAt" | "updatedAt", ExtArgs["result"]["userRoletypes"]>
   export type UserRoletypesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    users_roles?: boolean | UserRoletypes$users_rolesArgs<ExtArgs>
+    userRoles?: boolean | UserRoletypes$userRolesArgs<ExtArgs>
     _count?: boolean | UserRoletypesCountOutputTypeDefaultArgs<ExtArgs>
   }
 
   export type $UserRoletypesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "UserRoletypes"
     objects: {
-      users_roles: Prisma.$UserRolesPayload<ExtArgs>[]
+      userRoles: Prisma.$UserRolesPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -3678,7 +3678,7 @@ export namespace Prisma {
    */
   export interface Prisma__UserRoletypesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    users_roles<T extends UserRoletypes$users_rolesArgs<ExtArgs> = {}>(args?: Subset<T, UserRoletypes$users_rolesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserRolesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    userRoles<T extends UserRoletypes$userRolesArgs<ExtArgs> = {}>(args?: Subset<T, UserRoletypes$userRolesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserRolesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4056,9 +4056,9 @@ export namespace Prisma {
   }
 
   /**
-   * UserRoletypes.users_roles
+   * UserRoletypes.userRoles
    */
-  export type UserRoletypes$users_rolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserRoletypes$userRolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the UserRoles
      */
@@ -4276,8 +4276,8 @@ export namespace Prisma {
   export type UserRolesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     userId?: boolean
     userRoletypeId?: boolean
-    users?: boolean | UserDefaultArgs<ExtArgs>
-    users_roletypes?: boolean | UserRoletypesDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    userRoletype?: boolean | UserRoletypesDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["userRoles"]>
 
 
@@ -4289,15 +4289,15 @@ export namespace Prisma {
 
   export type UserRolesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"userId" | "userRoletypeId", ExtArgs["result"]["userRoles"]>
   export type UserRolesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    users?: boolean | UserDefaultArgs<ExtArgs>
-    users_roletypes?: boolean | UserRoletypesDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    userRoletype?: boolean | UserRoletypesDefaultArgs<ExtArgs>
   }
 
   export type $UserRolesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "UserRoles"
     objects: {
-      users: Prisma.$UserPayload<ExtArgs>
-      users_roletypes: Prisma.$UserRoletypesPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
+      userRoletype: Prisma.$UserRoletypesPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       userId: number
@@ -4642,8 +4642,8 @@ export namespace Prisma {
    */
   export interface Prisma__UserRolesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    users<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    users_roletypes<T extends UserRoletypesDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserRoletypesDefaultArgs<ExtArgs>>): Prisma__UserRoletypesClient<$Result.GetResult<Prisma.$UserRoletypesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    userRoletype<T extends UserRoletypesDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserRoletypesDefaultArgs<ExtArgs>>): Prisma__UserRoletypesClient<$Result.GetResult<Prisma.$UserRoletypesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5053,7 +5053,7 @@ export namespace Prisma {
   export const UserScalarFieldEnum: {
     id: 'id',
     name: 'name',
-    username: 'username',
+    login: 'login',
     email: 'email',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -5104,7 +5104,7 @@ export namespace Prisma {
 
   export const UserOrderByRelevanceFieldEnum: {
     name: 'name',
-    username: 'username',
+    login: 'login',
     email: 'email'
   };
 
@@ -5192,21 +5192,21 @@ export namespace Prisma {
     NOT?: UserWhereInput | UserWhereInput[]
     id?: IntFilter<"User"> | number
     name?: StringFilter<"User"> | string
-    username?: StringFilter<"User"> | string
+    login?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
-    users_roles?: UserRolesListRelationFilter
+    userRoles?: UserRolesListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
-    username?: SortOrder
+    login?: SortOrder
     email?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    users_roles?: UserRolesOrderByRelationAggregateInput
+    userRoles?: UserRolesOrderByRelationAggregateInput
     _relevance?: UserOrderByRelevanceInput
   }
 
@@ -5217,16 +5217,16 @@ export namespace Prisma {
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     name?: StringFilter<"User"> | string
-    username?: StringFilter<"User"> | string
+    login?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
-    users_roles?: UserRolesListRelationFilter
+    userRoles?: UserRolesListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
-    username?: SortOrder
+    login?: SortOrder
     email?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -5243,7 +5243,7 @@ export namespace Prisma {
     NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"User"> | number
     name?: StringWithAggregatesFilter<"User"> | string
-    username?: StringWithAggregatesFilter<"User"> | string
+    login?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -5323,7 +5323,7 @@ export namespace Prisma {
     description?: StringFilter<"UserRoletypes"> | string
     createdAt?: DateTimeFilter<"UserRoletypes"> | Date | string
     updatedAt?: DateTimeFilter<"UserRoletypes"> | Date | string
-    users_roles?: UserRolesListRelationFilter
+    userRoles?: UserRolesListRelationFilter
   }
 
   export type UserRoletypesOrderByWithRelationInput = {
@@ -5332,7 +5332,7 @@ export namespace Prisma {
     description?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    users_roles?: UserRolesOrderByRelationAggregateInput
+    userRoles?: UserRolesOrderByRelationAggregateInput
     _relevance?: UserRoletypesOrderByRelevanceInput
   }
 
@@ -5345,7 +5345,7 @@ export namespace Prisma {
     description?: StringFilter<"UserRoletypes"> | string
     createdAt?: DateTimeFilter<"UserRoletypes"> | Date | string
     updatedAt?: DateTimeFilter<"UserRoletypes"> | Date | string
-    users_roles?: UserRolesListRelationFilter
+    userRoles?: UserRolesListRelationFilter
   }, "id">
 
   export type UserRoletypesOrderByWithAggregationInput = {
@@ -5378,15 +5378,15 @@ export namespace Prisma {
     NOT?: UserRolesWhereInput | UserRolesWhereInput[]
     userId?: IntFilter<"UserRoles"> | number
     userRoletypeId?: IntFilter<"UserRoles"> | number
-    users?: XOR<UserScalarRelationFilter, UserWhereInput>
-    users_roletypes?: XOR<UserRoletypesScalarRelationFilter, UserRoletypesWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    userRoletype?: XOR<UserRoletypesScalarRelationFilter, UserRoletypesWhereInput>
   }
 
   export type UserRolesOrderByWithRelationInput = {
     userId?: SortOrder
     userRoletypeId?: SortOrder
-    users?: UserOrderByWithRelationInput
-    users_roletypes?: UserRoletypesOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
+    userRoletype?: UserRoletypesOrderByWithRelationInput
   }
 
   export type UserRolesWhereUniqueInput = Prisma.AtLeast<{
@@ -5396,8 +5396,8 @@ export namespace Prisma {
     NOT?: UserRolesWhereInput | UserRolesWhereInput[]
     userId?: IntFilter<"UserRoles"> | number
     userRoletypeId?: IntFilter<"UserRoles"> | number
-    users?: XOR<UserScalarRelationFilter, UserWhereInput>
-    users_roletypes?: XOR<UserRoletypesScalarRelationFilter, UserRoletypesWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    userRoletype?: XOR<UserRoletypesScalarRelationFilter, UserRoletypesWhereInput>
   }, "userId_userRoletypeId">
 
   export type UserRolesOrderByWithAggregationInput = {
@@ -5420,46 +5420,46 @@ export namespace Prisma {
 
   export type UserCreateInput = {
     name: string
-    username: string
+    login: string
     email: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    users_roles?: UserRolesCreateNestedManyWithoutUsersInput
+    userRoles?: UserRolesCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
     id?: number
     name: string
-    username: string
+    login: string
     email: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    users_roles?: UserRolesUncheckedCreateNestedManyWithoutUsersInput
+    userRoles?: UserRolesUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
+    login?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    users_roles?: UserRolesUpdateManyWithoutUsersNestedInput
+    userRoles?: UserRolesUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
+    login?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    users_roles?: UserRolesUncheckedUpdateManyWithoutUsersNestedInput
+    userRoles?: UserRolesUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
     id?: number
     name: string
-    username: string
+    login: string
     email: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -5467,7 +5467,7 @@ export namespace Prisma {
 
   export type UserUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
+    login?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -5476,7 +5476,7 @@ export namespace Prisma {
   export type UserUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
+    login?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -5558,7 +5558,7 @@ export namespace Prisma {
     description: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    users_roles?: UserRolesCreateNestedManyWithoutUsers_roletypesInput
+    userRoles?: UserRolesCreateNestedManyWithoutUserRoletypeInput
   }
 
   export type UserRoletypesUncheckedCreateInput = {
@@ -5567,7 +5567,7 @@ export namespace Prisma {
     description: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    users_roles?: UserRolesUncheckedCreateNestedManyWithoutUsers_roletypesInput
+    userRoles?: UserRolesUncheckedCreateNestedManyWithoutUserRoletypeInput
   }
 
   export type UserRoletypesUpdateInput = {
@@ -5576,7 +5576,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    users_roles?: UserRolesUpdateManyWithoutUsers_roletypesNestedInput
+    userRoles?: UserRolesUpdateManyWithoutUserRoletypeNestedInput
   }
 
   export type UserRoletypesUncheckedUpdateInput = {
@@ -5585,7 +5585,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    users_roles?: UserRolesUncheckedUpdateManyWithoutUsers_roletypesNestedInput
+    userRoles?: UserRolesUncheckedUpdateManyWithoutUserRoletypeNestedInput
   }
 
   export type UserRoletypesCreateManyInput = {
@@ -5613,8 +5613,8 @@ export namespace Prisma {
   }
 
   export type UserRolesCreateInput = {
-    users: UserCreateNestedOneWithoutUsers_rolesInput
-    users_roletypes: UserRoletypesCreateNestedOneWithoutUsers_rolesInput
+    user: UserCreateNestedOneWithoutUserRolesInput
+    userRoletype: UserRoletypesCreateNestedOneWithoutUserRolesInput
   }
 
   export type UserRolesUncheckedCreateInput = {
@@ -5623,8 +5623,8 @@ export namespace Prisma {
   }
 
   export type UserRolesUpdateInput = {
-    users?: UserUpdateOneRequiredWithoutUsers_rolesNestedInput
-    users_roletypes?: UserRoletypesUpdateOneRequiredWithoutUsers_rolesNestedInput
+    user?: UserUpdateOneRequiredWithoutUserRolesNestedInput
+    userRoletype?: UserRoletypesUpdateOneRequiredWithoutUserRolesNestedInput
   }
 
   export type UserRolesUncheckedUpdateInput = {
@@ -5702,7 +5702,7 @@ export namespace Prisma {
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    username?: SortOrder
+    login?: SortOrder
     email?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -5715,7 +5715,7 @@ export namespace Prisma {
   export type UserMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    username?: SortOrder
+    login?: SortOrder
     email?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -5724,7 +5724,7 @@ export namespace Prisma {
   export type UserMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    username?: SortOrder
+    login?: SortOrder
     email?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -5982,17 +5982,17 @@ export namespace Prisma {
     userRoletypeId?: SortOrder
   }
 
-  export type UserRolesCreateNestedManyWithoutUsersInput = {
-    create?: XOR<UserRolesCreateWithoutUsersInput, UserRolesUncheckedCreateWithoutUsersInput> | UserRolesCreateWithoutUsersInput[] | UserRolesUncheckedCreateWithoutUsersInput[]
-    connectOrCreate?: UserRolesCreateOrConnectWithoutUsersInput | UserRolesCreateOrConnectWithoutUsersInput[]
-    createMany?: UserRolesCreateManyUsersInputEnvelope
+  export type UserRolesCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserRolesCreateWithoutUserInput, UserRolesUncheckedCreateWithoutUserInput> | UserRolesCreateWithoutUserInput[] | UserRolesUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserRolesCreateOrConnectWithoutUserInput | UserRolesCreateOrConnectWithoutUserInput[]
+    createMany?: UserRolesCreateManyUserInputEnvelope
     connect?: UserRolesWhereUniqueInput | UserRolesWhereUniqueInput[]
   }
 
-  export type UserRolesUncheckedCreateNestedManyWithoutUsersInput = {
-    create?: XOR<UserRolesCreateWithoutUsersInput, UserRolesUncheckedCreateWithoutUsersInput> | UserRolesCreateWithoutUsersInput[] | UserRolesUncheckedCreateWithoutUsersInput[]
-    connectOrCreate?: UserRolesCreateOrConnectWithoutUsersInput | UserRolesCreateOrConnectWithoutUsersInput[]
-    createMany?: UserRolesCreateManyUsersInputEnvelope
+  export type UserRolesUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserRolesCreateWithoutUserInput, UserRolesUncheckedCreateWithoutUserInput> | UserRolesCreateWithoutUserInput[] | UserRolesUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserRolesCreateOrConnectWithoutUserInput | UserRolesCreateOrConnectWithoutUserInput[]
+    createMany?: UserRolesCreateManyUserInputEnvelope
     connect?: UserRolesWhereUniqueInput | UserRolesWhereUniqueInput[]
   }
 
@@ -6004,17 +6004,17 @@ export namespace Prisma {
     set?: Date | string
   }
 
-  export type UserRolesUpdateManyWithoutUsersNestedInput = {
-    create?: XOR<UserRolesCreateWithoutUsersInput, UserRolesUncheckedCreateWithoutUsersInput> | UserRolesCreateWithoutUsersInput[] | UserRolesUncheckedCreateWithoutUsersInput[]
-    connectOrCreate?: UserRolesCreateOrConnectWithoutUsersInput | UserRolesCreateOrConnectWithoutUsersInput[]
-    upsert?: UserRolesUpsertWithWhereUniqueWithoutUsersInput | UserRolesUpsertWithWhereUniqueWithoutUsersInput[]
-    createMany?: UserRolesCreateManyUsersInputEnvelope
+  export type UserRolesUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserRolesCreateWithoutUserInput, UserRolesUncheckedCreateWithoutUserInput> | UserRolesCreateWithoutUserInput[] | UserRolesUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserRolesCreateOrConnectWithoutUserInput | UserRolesCreateOrConnectWithoutUserInput[]
+    upsert?: UserRolesUpsertWithWhereUniqueWithoutUserInput | UserRolesUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserRolesCreateManyUserInputEnvelope
     set?: UserRolesWhereUniqueInput | UserRolesWhereUniqueInput[]
     disconnect?: UserRolesWhereUniqueInput | UserRolesWhereUniqueInput[]
     delete?: UserRolesWhereUniqueInput | UserRolesWhereUniqueInput[]
     connect?: UserRolesWhereUniqueInput | UserRolesWhereUniqueInput[]
-    update?: UserRolesUpdateWithWhereUniqueWithoutUsersInput | UserRolesUpdateWithWhereUniqueWithoutUsersInput[]
-    updateMany?: UserRolesUpdateManyWithWhereWithoutUsersInput | UserRolesUpdateManyWithWhereWithoutUsersInput[]
+    update?: UserRolesUpdateWithWhereUniqueWithoutUserInput | UserRolesUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserRolesUpdateManyWithWhereWithoutUserInput | UserRolesUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: UserRolesScalarWhereInput | UserRolesScalarWhereInput[]
   }
 
@@ -6026,17 +6026,17 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type UserRolesUncheckedUpdateManyWithoutUsersNestedInput = {
-    create?: XOR<UserRolesCreateWithoutUsersInput, UserRolesUncheckedCreateWithoutUsersInput> | UserRolesCreateWithoutUsersInput[] | UserRolesUncheckedCreateWithoutUsersInput[]
-    connectOrCreate?: UserRolesCreateOrConnectWithoutUsersInput | UserRolesCreateOrConnectWithoutUsersInput[]
-    upsert?: UserRolesUpsertWithWhereUniqueWithoutUsersInput | UserRolesUpsertWithWhereUniqueWithoutUsersInput[]
-    createMany?: UserRolesCreateManyUsersInputEnvelope
+  export type UserRolesUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserRolesCreateWithoutUserInput, UserRolesUncheckedCreateWithoutUserInput> | UserRolesCreateWithoutUserInput[] | UserRolesUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserRolesCreateOrConnectWithoutUserInput | UserRolesCreateOrConnectWithoutUserInput[]
+    upsert?: UserRolesUpsertWithWhereUniqueWithoutUserInput | UserRolesUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserRolesCreateManyUserInputEnvelope
     set?: UserRolesWhereUniqueInput | UserRolesWhereUniqueInput[]
     disconnect?: UserRolesWhereUniqueInput | UserRolesWhereUniqueInput[]
     delete?: UserRolesWhereUniqueInput | UserRolesWhereUniqueInput[]
     connect?: UserRolesWhereUniqueInput | UserRolesWhereUniqueInput[]
-    update?: UserRolesUpdateWithWhereUniqueWithoutUsersInput | UserRolesUpdateWithWhereUniqueWithoutUsersInput[]
-    updateMany?: UserRolesUpdateManyWithWhereWithoutUsersInput | UserRolesUpdateManyWithWhereWithoutUsersInput[]
+    update?: UserRolesUpdateWithWhereUniqueWithoutUserInput | UserRolesUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserRolesUpdateManyWithWhereWithoutUserInput | UserRolesUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: UserRolesScalarWhereInput | UserRolesScalarWhereInput[]
   }
 
@@ -6056,74 +6056,74 @@ export namespace Prisma {
     set?: boolean
   }
 
-  export type UserRolesCreateNestedManyWithoutUsers_roletypesInput = {
-    create?: XOR<UserRolesCreateWithoutUsers_roletypesInput, UserRolesUncheckedCreateWithoutUsers_roletypesInput> | UserRolesCreateWithoutUsers_roletypesInput[] | UserRolesUncheckedCreateWithoutUsers_roletypesInput[]
-    connectOrCreate?: UserRolesCreateOrConnectWithoutUsers_roletypesInput | UserRolesCreateOrConnectWithoutUsers_roletypesInput[]
-    createMany?: UserRolesCreateManyUsers_roletypesInputEnvelope
+  export type UserRolesCreateNestedManyWithoutUserRoletypeInput = {
+    create?: XOR<UserRolesCreateWithoutUserRoletypeInput, UserRolesUncheckedCreateWithoutUserRoletypeInput> | UserRolesCreateWithoutUserRoletypeInput[] | UserRolesUncheckedCreateWithoutUserRoletypeInput[]
+    connectOrCreate?: UserRolesCreateOrConnectWithoutUserRoletypeInput | UserRolesCreateOrConnectWithoutUserRoletypeInput[]
+    createMany?: UserRolesCreateManyUserRoletypeInputEnvelope
     connect?: UserRolesWhereUniqueInput | UserRolesWhereUniqueInput[]
   }
 
-  export type UserRolesUncheckedCreateNestedManyWithoutUsers_roletypesInput = {
-    create?: XOR<UserRolesCreateWithoutUsers_roletypesInput, UserRolesUncheckedCreateWithoutUsers_roletypesInput> | UserRolesCreateWithoutUsers_roletypesInput[] | UserRolesUncheckedCreateWithoutUsers_roletypesInput[]
-    connectOrCreate?: UserRolesCreateOrConnectWithoutUsers_roletypesInput | UserRolesCreateOrConnectWithoutUsers_roletypesInput[]
-    createMany?: UserRolesCreateManyUsers_roletypesInputEnvelope
+  export type UserRolesUncheckedCreateNestedManyWithoutUserRoletypeInput = {
+    create?: XOR<UserRolesCreateWithoutUserRoletypeInput, UserRolesUncheckedCreateWithoutUserRoletypeInput> | UserRolesCreateWithoutUserRoletypeInput[] | UserRolesUncheckedCreateWithoutUserRoletypeInput[]
+    connectOrCreate?: UserRolesCreateOrConnectWithoutUserRoletypeInput | UserRolesCreateOrConnectWithoutUserRoletypeInput[]
+    createMany?: UserRolesCreateManyUserRoletypeInputEnvelope
     connect?: UserRolesWhereUniqueInput | UserRolesWhereUniqueInput[]
   }
 
-  export type UserRolesUpdateManyWithoutUsers_roletypesNestedInput = {
-    create?: XOR<UserRolesCreateWithoutUsers_roletypesInput, UserRolesUncheckedCreateWithoutUsers_roletypesInput> | UserRolesCreateWithoutUsers_roletypesInput[] | UserRolesUncheckedCreateWithoutUsers_roletypesInput[]
-    connectOrCreate?: UserRolesCreateOrConnectWithoutUsers_roletypesInput | UserRolesCreateOrConnectWithoutUsers_roletypesInput[]
-    upsert?: UserRolesUpsertWithWhereUniqueWithoutUsers_roletypesInput | UserRolesUpsertWithWhereUniqueWithoutUsers_roletypesInput[]
-    createMany?: UserRolesCreateManyUsers_roletypesInputEnvelope
+  export type UserRolesUpdateManyWithoutUserRoletypeNestedInput = {
+    create?: XOR<UserRolesCreateWithoutUserRoletypeInput, UserRolesUncheckedCreateWithoutUserRoletypeInput> | UserRolesCreateWithoutUserRoletypeInput[] | UserRolesUncheckedCreateWithoutUserRoletypeInput[]
+    connectOrCreate?: UserRolesCreateOrConnectWithoutUserRoletypeInput | UserRolesCreateOrConnectWithoutUserRoletypeInput[]
+    upsert?: UserRolesUpsertWithWhereUniqueWithoutUserRoletypeInput | UserRolesUpsertWithWhereUniqueWithoutUserRoletypeInput[]
+    createMany?: UserRolesCreateManyUserRoletypeInputEnvelope
     set?: UserRolesWhereUniqueInput | UserRolesWhereUniqueInput[]
     disconnect?: UserRolesWhereUniqueInput | UserRolesWhereUniqueInput[]
     delete?: UserRolesWhereUniqueInput | UserRolesWhereUniqueInput[]
     connect?: UserRolesWhereUniqueInput | UserRolesWhereUniqueInput[]
-    update?: UserRolesUpdateWithWhereUniqueWithoutUsers_roletypesInput | UserRolesUpdateWithWhereUniqueWithoutUsers_roletypesInput[]
-    updateMany?: UserRolesUpdateManyWithWhereWithoutUsers_roletypesInput | UserRolesUpdateManyWithWhereWithoutUsers_roletypesInput[]
+    update?: UserRolesUpdateWithWhereUniqueWithoutUserRoletypeInput | UserRolesUpdateWithWhereUniqueWithoutUserRoletypeInput[]
+    updateMany?: UserRolesUpdateManyWithWhereWithoutUserRoletypeInput | UserRolesUpdateManyWithWhereWithoutUserRoletypeInput[]
     deleteMany?: UserRolesScalarWhereInput | UserRolesScalarWhereInput[]
   }
 
-  export type UserRolesUncheckedUpdateManyWithoutUsers_roletypesNestedInput = {
-    create?: XOR<UserRolesCreateWithoutUsers_roletypesInput, UserRolesUncheckedCreateWithoutUsers_roletypesInput> | UserRolesCreateWithoutUsers_roletypesInput[] | UserRolesUncheckedCreateWithoutUsers_roletypesInput[]
-    connectOrCreate?: UserRolesCreateOrConnectWithoutUsers_roletypesInput | UserRolesCreateOrConnectWithoutUsers_roletypesInput[]
-    upsert?: UserRolesUpsertWithWhereUniqueWithoutUsers_roletypesInput | UserRolesUpsertWithWhereUniqueWithoutUsers_roletypesInput[]
-    createMany?: UserRolesCreateManyUsers_roletypesInputEnvelope
+  export type UserRolesUncheckedUpdateManyWithoutUserRoletypeNestedInput = {
+    create?: XOR<UserRolesCreateWithoutUserRoletypeInput, UserRolesUncheckedCreateWithoutUserRoletypeInput> | UserRolesCreateWithoutUserRoletypeInput[] | UserRolesUncheckedCreateWithoutUserRoletypeInput[]
+    connectOrCreate?: UserRolesCreateOrConnectWithoutUserRoletypeInput | UserRolesCreateOrConnectWithoutUserRoletypeInput[]
+    upsert?: UserRolesUpsertWithWhereUniqueWithoutUserRoletypeInput | UserRolesUpsertWithWhereUniqueWithoutUserRoletypeInput[]
+    createMany?: UserRolesCreateManyUserRoletypeInputEnvelope
     set?: UserRolesWhereUniqueInput | UserRolesWhereUniqueInput[]
     disconnect?: UserRolesWhereUniqueInput | UserRolesWhereUniqueInput[]
     delete?: UserRolesWhereUniqueInput | UserRolesWhereUniqueInput[]
     connect?: UserRolesWhereUniqueInput | UserRolesWhereUniqueInput[]
-    update?: UserRolesUpdateWithWhereUniqueWithoutUsers_roletypesInput | UserRolesUpdateWithWhereUniqueWithoutUsers_roletypesInput[]
-    updateMany?: UserRolesUpdateManyWithWhereWithoutUsers_roletypesInput | UserRolesUpdateManyWithWhereWithoutUsers_roletypesInput[]
+    update?: UserRolesUpdateWithWhereUniqueWithoutUserRoletypeInput | UserRolesUpdateWithWhereUniqueWithoutUserRoletypeInput[]
+    updateMany?: UserRolesUpdateManyWithWhereWithoutUserRoletypeInput | UserRolesUpdateManyWithWhereWithoutUserRoletypeInput[]
     deleteMany?: UserRolesScalarWhereInput | UserRolesScalarWhereInput[]
   }
 
-  export type UserCreateNestedOneWithoutUsers_rolesInput = {
-    create?: XOR<UserCreateWithoutUsers_rolesInput, UserUncheckedCreateWithoutUsers_rolesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutUsers_rolesInput
+  export type UserCreateNestedOneWithoutUserRolesInput = {
+    create?: XOR<UserCreateWithoutUserRolesInput, UserUncheckedCreateWithoutUserRolesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUserRolesInput
     connect?: UserWhereUniqueInput
   }
 
-  export type UserRoletypesCreateNestedOneWithoutUsers_rolesInput = {
-    create?: XOR<UserRoletypesCreateWithoutUsers_rolesInput, UserRoletypesUncheckedCreateWithoutUsers_rolesInput>
-    connectOrCreate?: UserRoletypesCreateOrConnectWithoutUsers_rolesInput
+  export type UserRoletypesCreateNestedOneWithoutUserRolesInput = {
+    create?: XOR<UserRoletypesCreateWithoutUserRolesInput, UserRoletypesUncheckedCreateWithoutUserRolesInput>
+    connectOrCreate?: UserRoletypesCreateOrConnectWithoutUserRolesInput
     connect?: UserRoletypesWhereUniqueInput
   }
 
-  export type UserUpdateOneRequiredWithoutUsers_rolesNestedInput = {
-    create?: XOR<UserCreateWithoutUsers_rolesInput, UserUncheckedCreateWithoutUsers_rolesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutUsers_rolesInput
-    upsert?: UserUpsertWithoutUsers_rolesInput
+  export type UserUpdateOneRequiredWithoutUserRolesNestedInput = {
+    create?: XOR<UserCreateWithoutUserRolesInput, UserUncheckedCreateWithoutUserRolesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUserRolesInput
+    upsert?: UserUpsertWithoutUserRolesInput
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUsers_rolesInput, UserUpdateWithoutUsers_rolesInput>, UserUncheckedUpdateWithoutUsers_rolesInput>
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUserRolesInput, UserUpdateWithoutUserRolesInput>, UserUncheckedUpdateWithoutUserRolesInput>
   }
 
-  export type UserRoletypesUpdateOneRequiredWithoutUsers_rolesNestedInput = {
-    create?: XOR<UserRoletypesCreateWithoutUsers_rolesInput, UserRoletypesUncheckedCreateWithoutUsers_rolesInput>
-    connectOrCreate?: UserRoletypesCreateOrConnectWithoutUsers_rolesInput
-    upsert?: UserRoletypesUpsertWithoutUsers_rolesInput
+  export type UserRoletypesUpdateOneRequiredWithoutUserRolesNestedInput = {
+    create?: XOR<UserRoletypesCreateWithoutUserRolesInput, UserRoletypesUncheckedCreateWithoutUserRolesInput>
+    connectOrCreate?: UserRoletypesCreateOrConnectWithoutUserRolesInput
+    upsert?: UserRoletypesUpsertWithoutUserRolesInput
     connect?: UserRoletypesWhereUniqueInput
-    update?: XOR<XOR<UserRoletypesUpdateToOneWithWhereWithoutUsers_rolesInput, UserRoletypesUpdateWithoutUsers_rolesInput>, UserRoletypesUncheckedUpdateWithoutUsers_rolesInput>
+    update?: XOR<XOR<UserRoletypesUpdateToOneWithWhereWithoutUserRolesInput, UserRoletypesUpdateWithoutUserRolesInput>, UserRoletypesUncheckedUpdateWithoutUserRolesInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -6306,38 +6306,38 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
-  export type UserRolesCreateWithoutUsersInput = {
-    users_roletypes: UserRoletypesCreateNestedOneWithoutUsers_rolesInput
+  export type UserRolesCreateWithoutUserInput = {
+    userRoletype: UserRoletypesCreateNestedOneWithoutUserRolesInput
   }
 
-  export type UserRolesUncheckedCreateWithoutUsersInput = {
+  export type UserRolesUncheckedCreateWithoutUserInput = {
     userRoletypeId: number
   }
 
-  export type UserRolesCreateOrConnectWithoutUsersInput = {
+  export type UserRolesCreateOrConnectWithoutUserInput = {
     where: UserRolesWhereUniqueInput
-    create: XOR<UserRolesCreateWithoutUsersInput, UserRolesUncheckedCreateWithoutUsersInput>
+    create: XOR<UserRolesCreateWithoutUserInput, UserRolesUncheckedCreateWithoutUserInput>
   }
 
-  export type UserRolesCreateManyUsersInputEnvelope = {
-    data: UserRolesCreateManyUsersInput | UserRolesCreateManyUsersInput[]
+  export type UserRolesCreateManyUserInputEnvelope = {
+    data: UserRolesCreateManyUserInput | UserRolesCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
-  export type UserRolesUpsertWithWhereUniqueWithoutUsersInput = {
+  export type UserRolesUpsertWithWhereUniqueWithoutUserInput = {
     where: UserRolesWhereUniqueInput
-    update: XOR<UserRolesUpdateWithoutUsersInput, UserRolesUncheckedUpdateWithoutUsersInput>
-    create: XOR<UserRolesCreateWithoutUsersInput, UserRolesUncheckedCreateWithoutUsersInput>
+    update: XOR<UserRolesUpdateWithoutUserInput, UserRolesUncheckedUpdateWithoutUserInput>
+    create: XOR<UserRolesCreateWithoutUserInput, UserRolesUncheckedCreateWithoutUserInput>
   }
 
-  export type UserRolesUpdateWithWhereUniqueWithoutUsersInput = {
+  export type UserRolesUpdateWithWhereUniqueWithoutUserInput = {
     where: UserRolesWhereUniqueInput
-    data: XOR<UserRolesUpdateWithoutUsersInput, UserRolesUncheckedUpdateWithoutUsersInput>
+    data: XOR<UserRolesUpdateWithoutUserInput, UserRolesUncheckedUpdateWithoutUserInput>
   }
 
-  export type UserRolesUpdateManyWithWhereWithoutUsersInput = {
+  export type UserRolesUpdateManyWithWhereWithoutUserInput = {
     where: UserRolesScalarWhereInput
-    data: XOR<UserRolesUpdateManyMutationInput, UserRolesUncheckedUpdateManyWithoutUsersInput>
+    data: XOR<UserRolesUpdateManyMutationInput, UserRolesUncheckedUpdateManyWithoutUserInput>
   }
 
   export type UserRolesScalarWhereInput = {
@@ -6348,63 +6348,63 @@ export namespace Prisma {
     userRoletypeId?: IntFilter<"UserRoles"> | number
   }
 
-  export type UserRolesCreateWithoutUsers_roletypesInput = {
-    users: UserCreateNestedOneWithoutUsers_rolesInput
+  export type UserRolesCreateWithoutUserRoletypeInput = {
+    user: UserCreateNestedOneWithoutUserRolesInput
   }
 
-  export type UserRolesUncheckedCreateWithoutUsers_roletypesInput = {
+  export type UserRolesUncheckedCreateWithoutUserRoletypeInput = {
     userId: number
   }
 
-  export type UserRolesCreateOrConnectWithoutUsers_roletypesInput = {
+  export type UserRolesCreateOrConnectWithoutUserRoletypeInput = {
     where: UserRolesWhereUniqueInput
-    create: XOR<UserRolesCreateWithoutUsers_roletypesInput, UserRolesUncheckedCreateWithoutUsers_roletypesInput>
+    create: XOR<UserRolesCreateWithoutUserRoletypeInput, UserRolesUncheckedCreateWithoutUserRoletypeInput>
   }
 
-  export type UserRolesCreateManyUsers_roletypesInputEnvelope = {
-    data: UserRolesCreateManyUsers_roletypesInput | UserRolesCreateManyUsers_roletypesInput[]
+  export type UserRolesCreateManyUserRoletypeInputEnvelope = {
+    data: UserRolesCreateManyUserRoletypeInput | UserRolesCreateManyUserRoletypeInput[]
     skipDuplicates?: boolean
   }
 
-  export type UserRolesUpsertWithWhereUniqueWithoutUsers_roletypesInput = {
+  export type UserRolesUpsertWithWhereUniqueWithoutUserRoletypeInput = {
     where: UserRolesWhereUniqueInput
-    update: XOR<UserRolesUpdateWithoutUsers_roletypesInput, UserRolesUncheckedUpdateWithoutUsers_roletypesInput>
-    create: XOR<UserRolesCreateWithoutUsers_roletypesInput, UserRolesUncheckedCreateWithoutUsers_roletypesInput>
+    update: XOR<UserRolesUpdateWithoutUserRoletypeInput, UserRolesUncheckedUpdateWithoutUserRoletypeInput>
+    create: XOR<UserRolesCreateWithoutUserRoletypeInput, UserRolesUncheckedCreateWithoutUserRoletypeInput>
   }
 
-  export type UserRolesUpdateWithWhereUniqueWithoutUsers_roletypesInput = {
+  export type UserRolesUpdateWithWhereUniqueWithoutUserRoletypeInput = {
     where: UserRolesWhereUniqueInput
-    data: XOR<UserRolesUpdateWithoutUsers_roletypesInput, UserRolesUncheckedUpdateWithoutUsers_roletypesInput>
+    data: XOR<UserRolesUpdateWithoutUserRoletypeInput, UserRolesUncheckedUpdateWithoutUserRoletypeInput>
   }
 
-  export type UserRolesUpdateManyWithWhereWithoutUsers_roletypesInput = {
+  export type UserRolesUpdateManyWithWhereWithoutUserRoletypeInput = {
     where: UserRolesScalarWhereInput
-    data: XOR<UserRolesUpdateManyMutationInput, UserRolesUncheckedUpdateManyWithoutUsers_roletypesInput>
+    data: XOR<UserRolesUpdateManyMutationInput, UserRolesUncheckedUpdateManyWithoutUserRoletypeInput>
   }
 
-  export type UserCreateWithoutUsers_rolesInput = {
+  export type UserCreateWithoutUserRolesInput = {
     name: string
-    username: string
+    login: string
     email: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type UserUncheckedCreateWithoutUsers_rolesInput = {
+  export type UserUncheckedCreateWithoutUserRolesInput = {
     id?: number
     name: string
-    username: string
+    login: string
     email: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type UserCreateOrConnectWithoutUsers_rolesInput = {
+  export type UserCreateOrConnectWithoutUserRolesInput = {
     where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutUsers_rolesInput, UserUncheckedCreateWithoutUsers_rolesInput>
+    create: XOR<UserCreateWithoutUserRolesInput, UserUncheckedCreateWithoutUserRolesInput>
   }
 
-  export type UserRoletypesCreateWithoutUsers_rolesInput = {
+  export type UserRoletypesCreateWithoutUserRolesInput = {
     id: number
     role: string
     description: string
@@ -6412,7 +6412,7 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type UserRoletypesUncheckedCreateWithoutUsers_rolesInput = {
+  export type UserRoletypesUncheckedCreateWithoutUserRolesInput = {
     id: number
     role: string
     description: string
@@ -6420,51 +6420,51 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type UserRoletypesCreateOrConnectWithoutUsers_rolesInput = {
+  export type UserRoletypesCreateOrConnectWithoutUserRolesInput = {
     where: UserRoletypesWhereUniqueInput
-    create: XOR<UserRoletypesCreateWithoutUsers_rolesInput, UserRoletypesUncheckedCreateWithoutUsers_rolesInput>
+    create: XOR<UserRoletypesCreateWithoutUserRolesInput, UserRoletypesUncheckedCreateWithoutUserRolesInput>
   }
 
-  export type UserUpsertWithoutUsers_rolesInput = {
-    update: XOR<UserUpdateWithoutUsers_rolesInput, UserUncheckedUpdateWithoutUsers_rolesInput>
-    create: XOR<UserCreateWithoutUsers_rolesInput, UserUncheckedCreateWithoutUsers_rolesInput>
+  export type UserUpsertWithoutUserRolesInput = {
+    update: XOR<UserUpdateWithoutUserRolesInput, UserUncheckedUpdateWithoutUserRolesInput>
+    create: XOR<UserCreateWithoutUserRolesInput, UserUncheckedCreateWithoutUserRolesInput>
     where?: UserWhereInput
   }
 
-  export type UserUpdateToOneWithWhereWithoutUsers_rolesInput = {
+  export type UserUpdateToOneWithWhereWithoutUserRolesInput = {
     where?: UserWhereInput
-    data: XOR<UserUpdateWithoutUsers_rolesInput, UserUncheckedUpdateWithoutUsers_rolesInput>
+    data: XOR<UserUpdateWithoutUserRolesInput, UserUncheckedUpdateWithoutUserRolesInput>
   }
 
-  export type UserUpdateWithoutUsers_rolesInput = {
+  export type UserUpdateWithoutUserRolesInput = {
     name?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
+    login?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type UserUncheckedUpdateWithoutUsers_rolesInput = {
+  export type UserUncheckedUpdateWithoutUserRolesInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
+    login?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type UserRoletypesUpsertWithoutUsers_rolesInput = {
-    update: XOR<UserRoletypesUpdateWithoutUsers_rolesInput, UserRoletypesUncheckedUpdateWithoutUsers_rolesInput>
-    create: XOR<UserRoletypesCreateWithoutUsers_rolesInput, UserRoletypesUncheckedCreateWithoutUsers_rolesInput>
+  export type UserRoletypesUpsertWithoutUserRolesInput = {
+    update: XOR<UserRoletypesUpdateWithoutUserRolesInput, UserRoletypesUncheckedUpdateWithoutUserRolesInput>
+    create: XOR<UserRoletypesCreateWithoutUserRolesInput, UserRoletypesUncheckedCreateWithoutUserRolesInput>
     where?: UserRoletypesWhereInput
   }
 
-  export type UserRoletypesUpdateToOneWithWhereWithoutUsers_rolesInput = {
+  export type UserRoletypesUpdateToOneWithWhereWithoutUserRolesInput = {
     where?: UserRoletypesWhereInput
-    data: XOR<UserRoletypesUpdateWithoutUsers_rolesInput, UserRoletypesUncheckedUpdateWithoutUsers_rolesInput>
+    data: XOR<UserRoletypesUpdateWithoutUserRolesInput, UserRoletypesUncheckedUpdateWithoutUserRolesInput>
   }
 
-  export type UserRoletypesUpdateWithoutUsers_rolesInput = {
+  export type UserRoletypesUpdateWithoutUserRolesInput = {
     id?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
@@ -6472,7 +6472,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type UserRoletypesUncheckedUpdateWithoutUsers_rolesInput = {
+  export type UserRoletypesUncheckedUpdateWithoutUserRolesInput = {
     id?: IntFieldUpdateOperationsInput | number
     role?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
@@ -6480,35 +6480,35 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type UserRolesCreateManyUsersInput = {
+  export type UserRolesCreateManyUserInput = {
     userRoletypeId: number
   }
 
-  export type UserRolesUpdateWithoutUsersInput = {
-    users_roletypes?: UserRoletypesUpdateOneRequiredWithoutUsers_rolesNestedInput
+  export type UserRolesUpdateWithoutUserInput = {
+    userRoletype?: UserRoletypesUpdateOneRequiredWithoutUserRolesNestedInput
   }
 
-  export type UserRolesUncheckedUpdateWithoutUsersInput = {
+  export type UserRolesUncheckedUpdateWithoutUserInput = {
     userRoletypeId?: IntFieldUpdateOperationsInput | number
   }
 
-  export type UserRolesUncheckedUpdateManyWithoutUsersInput = {
+  export type UserRolesUncheckedUpdateManyWithoutUserInput = {
     userRoletypeId?: IntFieldUpdateOperationsInput | number
   }
 
-  export type UserRolesCreateManyUsers_roletypesInput = {
+  export type UserRolesCreateManyUserRoletypeInput = {
     userId: number
   }
 
-  export type UserRolesUpdateWithoutUsers_roletypesInput = {
-    users?: UserUpdateOneRequiredWithoutUsers_rolesNestedInput
+  export type UserRolesUpdateWithoutUserRoletypeInput = {
+    user?: UserUpdateOneRequiredWithoutUserRolesNestedInput
   }
 
-  export type UserRolesUncheckedUpdateWithoutUsers_roletypesInput = {
+  export type UserRolesUncheckedUpdateWithoutUserRoletypeInput = {
     userId?: IntFieldUpdateOperationsInput | number
   }
 
-  export type UserRolesUncheckedUpdateManyWithoutUsers_roletypesInput = {
+  export type UserRolesUncheckedUpdateManyWithoutUserRoletypeInput = {
     userId?: IntFieldUpdateOperationsInput | number
   }
 

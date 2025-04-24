@@ -1,0 +1,20 @@
+### Variables
+@urlLocal = {{apiUrl}}/roles
+@contentType = application/json
+
+### POST
+POST {{urlLocal}}
+Content-Type: {{contentType}}
+Authorization: Bearer {{token}}
+
+{
+    "userId": "1",
+    "userRoletypeId": "300"
+}
+
+### GET
+get {{urlLocal}}
+Content-Type: {{contentType}}
+Authorization: Bearer {{token}}
+
+

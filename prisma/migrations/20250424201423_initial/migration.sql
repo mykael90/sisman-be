@@ -2,7 +2,7 @@
 CREATE TABLE `users` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(63) NOT NULL,
-    `username` VARCHAR(63) NOT NULL,
+    `login` VARCHAR(63) NOT NULL,
     `email` VARCHAR(127) NOT NULL,
     `created_at` TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
     `updated_at` TIMESTAMP(0) NOT NULL,

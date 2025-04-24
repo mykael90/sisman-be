@@ -7,7 +7,7 @@ import {
   seedModel,
   TransformValidateFn,
 } from './seed-utils';
-import { CreateUserRoletypeDto } from '../../dto/user-roletype/create-user-roletype.dto';
+import { CreateUserRoletypeDto } from '../../dto/user/role/create-user-roletype.dto';
 // Adjust the path if your DTO is located elsewhere
 
 const logger = console;

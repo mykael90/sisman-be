@@ -25,7 +25,16 @@ export class UsersService {
   }
   async show(id: number) {
     await this.exists(id);
-    return await this.prisma.user.findUnique({ where: { id } });
+    return await this.prisma.user.findUnique({
+      where: { id },
+      include: {
+        userRoles: {
+          select: {
+            userRoletypeId: true,
+          },
+        },
+      },
+    });
   }
 
   async update(id: number, data: UpdatePutUserDTO) {

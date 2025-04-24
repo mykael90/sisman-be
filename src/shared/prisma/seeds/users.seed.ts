@@ -66,7 +66,7 @@ const transformAndValidateUser: TransformValidateFn<
   const createInput: Prisma.UserCreateInput = {
     name: userDto.name,
     email: userDto.email,
-    username: userDto.username,
+    login: userDto.login,
     // password: hashedPassword, // Use the hashed password
     // // Only include birthAt if it exists and is valid in the DTO
     // ...(userDto.birthAt && { birthAt: userDto.birthAt }),

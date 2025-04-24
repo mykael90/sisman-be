@@ -9,13 +9,13 @@ datasource db {
 }
 
 model User {
-  id          Int         @id @default(autoincrement())
-  name        String      @db.VarChar(63)
-  username    String      @db.VarChar(63)
-  email       String      @unique @db.VarChar(127)
-  createdAt   DateTime    @default(now()) @map("created_at") @db.Timestamp(0)
-  updatedAt   DateTime    @updatedAt @map("updated_at") @db.Timestamp(0)
-  users_roles UserRoles[]
+  id        Int         @id @default(autoincrement())
+  name      String      @db.VarChar(63)
+  login     String      @db.VarChar(63)
+  email     String      @unique @db.VarChar(127)
+  createdAt DateTime    @default(now()) @map("created_at") @db.Timestamp(0)
+  updatedAt DateTime    @updatedAt @map("updated_at") @db.Timestamp(0)
+  userRoles UserRoles[]
 
   @@map("users")
 }
@@ -38,16 +38,16 @@ model UserRoletypes {
   description String      @db.Text
   createdAt   DateTime    @default(now()) @map("created_at") @db.Timestamp(0)
   updatedAt   DateTime    @updatedAt @map("updated_at") @db.Timestamp(0)
-  users_roles UserRoles[]
+  userRoles   UserRoles[]
 
   @@map("users_roletypes")
 }
 
 model UserRoles {
-  userId          Int           @map("user_id")
-  userRoletypeId  Int           @map("user_roletype_id")
-  users           User          @relation(fields: [userId], references: [id], onUpdate: Restrict, map: "users_roles_ibfk_1")
-  users_roletypes UserRoletypes @relation(fields: [userRoletypeId], references: [id], onUpdate: Restrict, map: "users_roles_ibfk_2")
+  userId         Int           @map("user_id")
+  userRoletypeId Int           @map("user_roletype_id")
+  user           User          @relation(fields: [userId], references: [id], onUpdate: Restrict, map: "users_roles_ibfk_1")
+  userRoletype   UserRoletypes @relation(fields: [userRoletypeId], references: [id], onUpdate: Restrict, map: "users_roles_ibfk_2")
 
   @@id([userId, userRoletypeId])
   @@index([userRoletypeId], map: "role_id")
