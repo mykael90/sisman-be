@@ -6,6 +6,12 @@ Comandos utilizados no prisma
 - npx migrate dev --name [descrição]
 # do esquema do prisma para o banco
 
+- npx ts-node prisma/seed.ts
+# Para executar o seed, é necessario adicionar no packege.json a configuração
+#"prisma": {
+#  "seed": "ts-node prisma/seed.ts"
+#}
+
 
  Examples
 
