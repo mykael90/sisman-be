@@ -1,7 +1,7 @@
 {
     "rest-client.environmentVariables": {
         "$shared": {
-            "apiUrl": "http://localhost:3000"
+            "apiUrl": "http://localhost:3080"
         },
         "development": {
           "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6Ik15a2FlbCIsImVtYWlsIjoiZW5nLm15a2FlbEBnbWFpbC5jb20iLCJpYXQiOjE3MjYwMTEyMjUsImV4cCI6MTcyNjYxNjAyNSwiYXVkIjoidXNlcnMiLCJpc3MiOiJsb2dpbiIsInN1YiI6IjEifQ.eBFPvLBl3-pVbISLdSwj2vKwFeOt1V0oceVYLWwRqCg"
