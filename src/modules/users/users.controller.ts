@@ -57,10 +57,7 @@ export class UsersController {
     @Param('id', ParseIntPipe) id: number,
     @Body() data: UpdatePutUserDTO,
   ) {
-    return this.userService.update(id, {
-      ...data,
-      birthAt: data.birthAt ? new Date(data.birthAt) : null,
-    });
+    return this.userService.update(id, data);
   }
 
   @Patch(':id')
@@ -69,10 +66,7 @@ export class UsersController {
     @Param('id', ParseIntPipe) id: number,
     @Body() data: UpdatePatchUserDTO,
   ) {
-    return this.userService.updatePartial(id, {
-      ...data,
-      birthAt: data.birthAt ? new Date(data.birthAt) : undefined,
-    });
+    return this.userService.updatePartial(id, data);
   }
 
   @Delete(':id')

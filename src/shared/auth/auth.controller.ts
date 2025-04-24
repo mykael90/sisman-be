@@ -53,10 +53,10 @@ export class AuthController {
     return this.authService.forget(body);
   }
 
-  @Post('reset')
-  async reset(@Body() body: AuthResetDTO) {
-    return this.authService.reset(body);
-  }
+  // @Post('reset')
+  // async reset(@Body() body: AuthResetDTO) {
+  //   return this.authService.reset(body);
+  // }
 
   @UseGuards(AuthGuard)
   @Post('check-token')

@@ -9,7 +9,7 @@ import * as bcrypt from 'bcrypt';
 export class UsersService {
   constructor(private readonly prisma: PrismaService) {}
   async create(data: CreateUserDTO) {
-    data.password = await this.hashPassword(data.password);
+    // data.password = await this.hashPassword(data.password);
 
     return await this.prisma.user.create({
       data,
@@ -31,13 +31,13 @@ export class UsersService {
   async update(id: number, data: UpdatePutUserDTO) {
     3;
     await this.exists(id);
-    data.password = await this.hashPassword(data.password);
+    // data.password = await this.hashPassword(data.password);
     return await this.prisma.user.update({ where: { id }, data });
   }
 
   async updatePartial(id: number, data: UpdatePatchUserDTO) {
     await this.exists(id);
-    if (data.password) data.password = await this.hashPassword(data.password);
+    // if (data.password) data.password = await this.hashPassword(data.password);
     return await this.prisma.user.update({ where: { id }, data });
   }
 

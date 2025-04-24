@@ -44,33 +44,34 @@ const transformAndValidateUser: TransformValidateFn<
   // --- 3. Data Transformation & Prisma Input Construction ---
 
   // **SECURITY**: Hash the password before seeding
-  let hashedPassword;
-  try {
-    // Check if password might already be hashed (simple check, adjust if needed)
-    if (userDto.password.startsWith('$2b$')) {
-      hashedPassword = userDto.password;
-      logger.debug(
-        `Password for ${userDto.email} seems already hashed. Using as is.`,
-      );
-    } else {
-      const saltRounds = 10; // Standard salt rounds
-      hashedPassword = await bcrypt.hash(userDto.password, saltRounds);
-      logger.debug(`Hashed password for ${userDto.email}.`);
-    }
-  } catch (hashError) {
-    logger.error(`Failed to hash password for ${userDto.email}:`, hashError);
-    return null; // Skip user if hashing fails
-  }
+  // let hashedPassword;
+  // try {
+  //   // Check if password might already be hashed (simple check, adjust if needed)
+  //   if (userDto.password.startsWith('$2b$')) {
+  //     hashedPassword = userDto.password;
+  //     logger.debug(
+  //       `Password for ${userDto.email} seems already hashed. Using as is.`,
+  //     );
+  //   } else {
+  //     const saltRounds = 10; // Standard salt rounds
+  //     hashedPassword = await bcrypt.hash(userDto.password, saltRounds);
+  //     logger.debug(`Hashed password for ${userDto.email}.`);
+  //   }
+  // } catch (hashError) {
+  //   logger.error(`Failed to hash password for ${userDto.email}:`, hashError);
+  //   return null; // Skip user if hashing fails
+  // }
 
   // Construct the Prisma Create Input object using the validated DTO data
   const createInput: Prisma.UserCreateInput = {
     name: userDto.name,
     email: userDto.email,
-    password: hashedPassword, // Use the hashed password
-    // Only include birthAt if it exists and is valid in the DTO
-    ...(userDto.birthAt && { birthAt: userDto.birthAt }),
-    // Only include role if it exists in the DTO (it should be the correct enum type now)
-    ...(userDto.role !== undefined && { role: userDto.role }),
+    username: userDto.username,
+    // password: hashedPassword, // Use the hashed password
+    // // Only include birthAt if it exists and is valid in the DTO
+    // ...(userDto.birthAt && { birthAt: userDto.birthAt }),
+    // // Only include role if it exists in the DTO (it should be the correct enum type now)
+    // ...(userDto.role !== undefined && { role: userDto.role }),
   };
 
   return createInput; // Return the data ready for Prisma

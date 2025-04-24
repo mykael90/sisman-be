@@ -1,1 +1,4 @@
-[{"name":"Mykael", "email":"eng.mykael@gmail.com", "password":"$2b$10$fGMGl7mQ3tmpAmHZqvqNTudMgyoFOclNADviCNFGTU6N3/xAjRTLa", "birthAt":"", "role":1}]
+[
+    {"name":"Mykael", 
+    "email":"eng.mykael@gmail.com",
+    "username":"mykael.mello"}]

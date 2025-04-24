@@ -100,14 +100,14 @@ export class AuthService {
       throw new UnauthorizedException(`E-mail e/ou senha inválidos!`);
     }
 
-    const isPasswordCorrect = await bcrypt.compare(
-      data.password,
-      user.password,
-    );
+    // const isPasswordCorrect = await bcrypt.compare(
+    //   data.password,
+    //   user.password,
+    // );
 
-    if (!isPasswordCorrect) {
-      throw new UnauthorizedException(`E-mail e/ou senha inválidos!`);
-    }
+    // if (!isPasswordCorrect) {
+    //   throw new UnauthorizedException(`E-mail e/ou senha inválidos!`);
+    // }
 
     return this.createToken(user);
   }
@@ -136,25 +136,25 @@ export class AuthService {
     return true;
   }
 
-  async reset(data: AuthResetDTO) {
-    const token = this.checkTokenForgetPassword(data.token);
+  // async reset(data: AuthResetDTO) {
+  //   const token = this.checkTokenForgetPassword(data.token);
 
-    const { id } = token;
+  //   const { id } = token;
 
-    try {
-      const salt = await bcrypt.genSalt();
-      const password = await bcrypt.hash(data.password, salt);
+  //   try {
+  //     const salt = await bcrypt.genSalt();
+  //     const password = await bcrypt.hash(data.password, salt);
 
-      const user = await this.prisma.user.update({
-        where: { id },
-        data: { password },
-      });
+  //     const user = await this.prisma.user.update({
+  //       where: { id },
+  //       data: { password },
+  //     });
 
-      return this.createToken(user);
-    } catch (e) {
-      throw new BadRequestException(e);
-    }
-  }
+  //     return this.createToken(user);
+  //   } catch (e) {
+  //     throw new BadRequestException(e);
+  //   }
+  // }
 
   async register(data: AuthRegisterDTO) {
     if (await this.existsEmail(data.email)) {

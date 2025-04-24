@@ -11,12 +11,10 @@ datasource db {
 model User {
   id          Int         @id @default(autoincrement())
   name        String      @db.VarChar(63)
+  username    String      @db.VarChar(63)
   email       String      @unique @db.VarChar(127)
-  password    String      @db.VarChar(127)
-  birthAt     DateTime?   @db.Date
-  role        Int         @default(1)
-  createdAt   DateTime    @default(now()) @db.Timestamp(0)
-  updatedAt   DateTime    @updatedAt @db.Timestamp(0)
+  createdAt   DateTime    @default(now()) @map("created_at") @db.Timestamp(0)
+  updatedAt   DateTime    @updatedAt @map("updated_at") @db.Timestamp(0)
   users_roles UserRoles[]
 
   @@map("users")
@@ -28,8 +26,8 @@ model Material {
   specification String?  @db.VarChar(1022)
   unit          String   @db.VarChar(31)
   isActive      Boolean  @default(true)
-  createdAt     DateTime @default(now()) @db.Timestamp(0)
-  updatedAt     DateTime @updatedAt @db.Timestamp(0)
+  createdAt     DateTime @default(now()) @map("created_at") @db.Timestamp(0)
+  updatedAt     DateTime @updatedAt @map("updated_at") @db.Timestamp(0)
 
   @@map("materials")
 }
@@ -38,20 +36,20 @@ model UserRoletypes {
   id          Int         @id
   role        String      @db.VarChar(255)
   description String      @db.Text
-  created_at  DateTime    @default(now()) @db.Timestamp(0)
-  updated_at  DateTime    @db.Timestamp(0)
+  createdAt   DateTime    @default(now()) @map("created_at") @db.Timestamp(0)
+  updatedAt   DateTime    @updatedAt @map("updated_at") @db.Timestamp(0)
   users_roles UserRoles[]
 
   @@map("users_roletypes")
 }
 
 model UserRoles {
-  user_id          Int
-  user_roletype_id Int
-  users            User          @relation(fields: [user_id], references: [id], onUpdate: Restrict, map: "users_roles_ibfk_1")
-  users_roletypes  UserRoletypes @relation(fields: [user_roletype_id], references: [id], onUpdate: Restrict, map: "users_roles_ibfk_2")
+  userId          Int           @map("user_id")
+  userRoletypeId  Int           @map("user_roletype_id")
+  users           User          @relation(fields: [userId], references: [id], onUpdate: Restrict, map: "users_roles_ibfk_1")
+  users_roletypes UserRoletypes @relation(fields: [userRoletypeId], references: [id], onUpdate: Restrict, map: "users_roles_ibfk_2")
 
-  @@id([user_id, user_roletype_id])
-  @@index([user_roletype_id], map: "role_id")
+  @@id([userId, userRoletypeId])
+  @@index([userRoletypeId], map: "role_id")
   @@map("users_roles")
 }

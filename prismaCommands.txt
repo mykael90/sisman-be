@@ -1,5 +1,7 @@
 Comandos utilizados no prisma
 
+SHIFT + ALT + F ==> FORMATA O SCHEMA DO PRISMA
+
 - npx prisma db pull
 # do banco para o esquema do prisma
 
