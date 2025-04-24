@@ -2,14 +2,14 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './modules/users/users.module';
-import { AuthModule } from './core/auth/auth.module';
+import { AuthModule } from './shared/auth/auth.module';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { APP_FILTER, APP_GUARD } from '@nestjs/core';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { MaterialsModule } from './modules/materials/materials.module';
-import { FilesModule } from './core/files/files.module';
+import { FilesModule } from './shared/files/files.module';
 import { ConfigModule } from '@nestjs/config';
-import { HttpExceptionFilter } from './common/exception_filters/http-exception.filter';
+import { HttpExceptionFilter } from './shared/exception_filters/http-exception.filter';
 import mailerConfig from './config/mailer.config';
 import { validationSchema } from './config/validation.schema';
 

@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { AuthLoginDTO } from './dto/auth-login.dto';
-import { PrismaService } from 'src/core/prisma/prisma.service';
+import { PrismaService } from 'src/shared/prisma/prisma.service';
 import { AuthForgetDTO } from './dto/auth-forget.dto';
 import { AuthResetDTO } from './dto/auth-reset.dto';
 import { User } from 'prisma/generated/client';

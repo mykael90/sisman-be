@@ -1,6 +1,6 @@
 import { User } from 'prisma/generated/client';
 import { ApiProperty } from '@nestjs/swagger';
-import { Role } from 'src/common/enums/role.enum';
+import { Role } from 'src/shared/enums/role.enum';
 
 export class UsersEntity implements User {
   @ApiProperty()

@@ -11,18 +11,18 @@ import {
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
-import { CreateUserDTO } from './dto/create-user.dto';
-import { UpdatePutUserDTO } from './dto/update-put-user.dto';
-import { UpdatePatchUserDTO } from './dto/update-patch-user.dto';
+import { CreateUserDTO } from 'src/shared/dto/user/create-user.dto';
+import { UpdatePutUserDTO } from 'src/shared/dto/user/update-put-user.dto';
+import { UpdatePatchUserDTO } from 'src/shared/dto/user/update-patch-user.dto';
 import { UsersService } from './users.service';
-import { LogInterceptor } from 'src/common/interceptors/log.interceptor';
-import { ParamId } from 'src/common/decorators/param-id-decorator';
-import { Roles } from 'src/common/decorators/roles.decorator';
-import { Role } from 'src/common/enums/role.enum';
-import { RoleGuard } from 'src/core/auth/guards/role.guard';
-import { AuthGuard } from 'src/core/auth/guards/auth.guard';
+import { LogInterceptor } from 'src/shared/interceptors/log.interceptor';
+import { ParamId } from 'src/shared/decorators/param-id-decorator';
+import { Roles } from 'src/shared/decorators/roles.decorator';
+import { Role } from 'src/shared/enums/role.enum';
+import { RoleGuard } from 'src/shared/auth/guards/role.guard';
+import { AuthGuard } from 'src/shared/auth/guards/auth.guard';
 import { ApiTags, ApiCreatedResponse, ApiOkResponse } from '@nestjs/swagger';
-import { UsersEntity } from './entities/users.entity';
+import { UsersEntity } from '../../shared/entities/users.entity';
 
 @Roles(Role.Admin)
 @UseGuards(AuthGuard, RoleGuard)

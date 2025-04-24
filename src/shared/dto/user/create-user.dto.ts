@@ -7,7 +7,7 @@ import {
   IsNotEmpty,
   IsDate,
 } from 'class-validator';
-import { Role } from 'src/common/enums/role.enum';
+import { Role } from 'src/shared/enums/role.enum';
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 

@@ -4,8 +4,8 @@ import { Logger } from '@nestjs/common';
 import { ValidationPipe } from '@nestjs/common';
 // import { LogInterceptor } from './interceptors/log.interceptor';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import 'src/common/utils/bigint-tojson';
-import 'src/common/utils/date-tojson';
+import 'src/shared/utils/bigint-tojson';
+import 'src/shared/utils/date-tojson';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -31,7 +31,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  await app.listen(3090);
+  await app.listen(3000);
   logger.log('Admin microservice is listening...');
 
   // Se o modo de desenvolvimento estiver ativo, inicie o debugger manualmente

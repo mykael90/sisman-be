@@ -3,8 +3,8 @@ import { JwtModule } from '@nestjs/jwt';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { UsersModule } from 'src/modules/users/users.module';
-import { PrismaModule } from 'src/core/prisma/prisma.module';
-import { FilesModule } from 'src/core/files/files.module';
+import { PrismaModule } from 'src/shared/prisma/prisma.module';
+import { FilesModule } from 'src/shared/files/files.module';
 
 @Module({
   imports: [
