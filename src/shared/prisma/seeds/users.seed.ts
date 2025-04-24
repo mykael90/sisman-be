@@ -1,5 +1,5 @@
 // prisma/seeds/users.seed.ts
-import type { PrismaClient, Prisma } from '../generated/client';
+import type { PrismaClient, Prisma } from 'prisma/generated/client';
 import { validate } from 'class-validator';
 import { plainToInstance } from 'class-transformer';
 import {
@@ -7,7 +7,7 @@ import {
   seedModel,
   TransformValidateFn,
 } from './seed-utils';
-import { CreateUserDTO } from '../../src/shared/dto/user/create-user.dto';
+import { CreateUserDTO } from '../../dto/user/create-user.dto';
 import * as bcrypt from 'bcrypt'; // Import bcrypt
 
 const logger = console;

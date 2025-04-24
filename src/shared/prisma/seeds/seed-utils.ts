@@ -1,5 +1,5 @@
 // prisma/seeds/seed-utils.ts
-import type { PrismaClient, Prisma } from '../generated/client';
+import type { PrismaClient, Prisma } from 'prisma/generated/client';
 import * as fs from 'fs';
 import * as path from 'path'; // Needed if jsonFilePath is relative
 

@@ -1,5 +1,5 @@
 // This file is the main seed file, responsible for calling other seed files to populate the database.
-import { PrismaClient } from './generated/client'; // Correct path for generated client
+import { PrismaClient } from 'prisma/generated/client'; // Correct path for generated client
 
 // Import the exported 'main' functions from the specific seed files
 import { main as seedUsers } from './seeds/users.seed';

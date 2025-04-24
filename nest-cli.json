@@ -7,16 +7,6 @@
     "assets": [{
       "include": "templates/**/*",
       "outDir": "dist"
-    },
-    {
-      "include": "../prisma/generated/client/**/*",
-      "outDir": "dist/prisma/generated/client",   
-      "watchAssets": true 
-    },
-    {
-      "include": "../prisma/schema.prisma",
-      "outDir": "dist/prisma",
-      "watchAssets": false
     }]
   }
 }

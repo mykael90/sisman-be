@@ -1,5 +1,5 @@
-import { CreateMaterialDto } from '../../src/shared/dto/material/create-material.dto';
-import type { PrismaClient, Prisma } from '../generated/client';
+import { CreateMaterialDto } from '../../dto/material/create-material.dto';
+import type { PrismaClient, Prisma } from 'prisma/generated/client';
 import { validate } from 'class-validator';
 import { plainToInstance } from 'class-transformer';
 // Importe a função de limpeza e as outras utilidades

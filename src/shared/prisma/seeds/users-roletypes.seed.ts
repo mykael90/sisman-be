@@ -1,5 +1,5 @@
 // prisma/seeds/users-roletypes.seed.ts
-import type { PrismaClient, Prisma } from '../generated/client';
+import type { PrismaClient, Prisma } from 'prisma/generated/client';
 import { validate } from 'class-validator';
 import { plainToInstance } from 'class-transformer';
 import {
@@ -7,7 +7,7 @@ import {
   seedModel,
   TransformValidateFn,
 } from './seed-utils';
-import { CreateUserRoletypeDto } from '../../src/shared/dto/user-roletype/create-user-roletype.dto';
+import { CreateUserRoletypeDto } from '../../dto/user-roletype/create-user-roletype.dto';
 // Adjust the path if your DTO is located elsewhere
 
 const logger = console;
