@@ -12,7 +12,7 @@ async function bootstrap() {
   const logger = new Logger('Bootstrap');
 
   app.enableCors({
-    origin: ['http://10.10.10.10:3002', 'http://localhost:3000'],
+    origin: ['http://10.10.10.10:3002', 'http://localhost:3090'],
   });
 
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
@@ -31,7 +31,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  await app.listen(3000);
+  await app.listen(3090);
   logger.log('Admin microservice is listening...');
 
   // Se o modo de desenvolvimento estiver ativo, inicie o debugger manualmente
