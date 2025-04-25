@@ -27,8 +27,8 @@ export class AuthService {
     private readonly prisma: PrismaService,
     private readonly userService: UsersService,
     private readonly mailer: MailerService,
-    @Inject(MetricsService) private readonly metricsService: MetricsService, // Injete o serviço de métricas
-    @Inject(LogLoginService) private readonly logLoginService: LogLoginService, // Injete o serviço de métricas
+    private readonly metricsService: MetricsService, // Injete o serviço de métricas
+    private readonly logLoginService: LogLoginService, // Injete o serviço de métricas
   ) {}
 
   createToken(user: User, roles: UserRole[] = []) {
