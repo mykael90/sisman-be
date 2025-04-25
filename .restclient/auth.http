@@ -2,66 +2,40 @@
 @urlLocal = {{apiUrl}}/auth
 @contentType = application/json
 
-### Login
-# @name login
-POST {{urlLocal}}/login
-Content-Type: {{contentType}}
-
-{
-    "email": "eng.mykael@gmail.com",
-    "login": "mykael.mello"
-}
-
-###
-
 
 ### Login authorization token
 # @name login
+# @prompt authorizationToken
 POST {{urlLocal}}/login-authorization-token
 Content-Type: {{contentType}}
 
 {
-    "token": "eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImRlc2VudkBzaS51ZnJuLmJyIiwibG9naW4iOiJteWthZWwubWVsbG8iLCJuYW1lIjoiTVlLQUVMIERPUyBBTkpPUyBFIE1FTExPIiwiaWF0IjoxNzQ1NTM0OTE5LCJleHAiOjE3NDU1MzUyMTl9.hmLDJIQ_stzEBebWh00q655LqJdGTYqJVFH1KOs4CiU"
+    "token": {{authorizationToken}}
 }
 
 ###
 
 # @authToken = {{login.response.headers.X-AuthToken}}
 
+### Register authorization token
+# @prompt authorizationToken
+POST {{urlLocal}}/register-authorization-token
+Content-Type: {{contentType}}
+
+{
+    "token": {{authorizationToken}}
+}
+
 ### Register
 POST {{urlLocal}}/register
 Content-Type: {{contentType}}
+Authorization: Bearer {{token}}
 
 {
     "name": "Mykael",
     "login": "mykael.mello",
     "email": "eng.mykael@gmail.com",
     "password": "123456"
-}
-
-### Register authorization token
-POST {{urlLocal}}/register-authorization-token
-Content-Type: {{contentType}}
-
-{
-    "token": "eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImRlc2VudkBzaS51ZnJuLmJyIiwibG9naW4iOiJteWthZWwubWVsbG8iLCJuYW1lIjoiTVlLQUVMIERPUyBBTkpPUyBFIE1FTExPIiwiaWF0IjoxNzQ1NTI1OTA1LCJleHAiOjE3NDU1MjYyMDV9.7s5Pbqks1bLRzqhPLiWL51gaMgnv0AWinlN6Hex9Doo"
-}
-
-### Forget
-POST {{urlLocal}}/forget
-Content-Type: {{contentType}}
-
-{
-    "email": "eng.mykael@gmail.com"
-}
-
-### Reset
-POST {{urlLocal}}/reset
-Content-Type: {{contentType}}
-
-{
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImlhdCI6MTcyNDI2ODM0NywiZXhwIjoxNzI0MjcwMTQ3LCJhdWQiOiJ1c2VycyIsImlzcyI6ImZvcmdldCIsInN1YiI6IjEzIn0.CMWX6a5AWovZJoayFN2dlnkI66G5Oo2TjHg9wvEziC4",
-    "password": "654321"
 }
 
 

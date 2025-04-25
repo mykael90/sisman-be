@@ -13,10 +13,7 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { AuthLoginDTO } from './dto/auth-login.dto';
 import { AuthRegisterDTO } from './dto/auth-register.dto';
-import { AuthForgetDTO } from './dto/auth-forget.dto';
-import { AuthResetDTO } from './dto/auth-reset.dto';
 import { AuthService } from './auth.service';
 import { AuthGuard } from 'src/shared/auth/guards/auth.guard';
 import { User } from 'src/shared/decorators/user-decorator';
@@ -30,6 +27,9 @@ import { FilesService } from 'src/shared/files/files.service';
 import { ApiTags } from '@nestjs/swagger';
 import { AuthRegisterAuthorizationTokenDTO } from './dto/auth-register-authorization-token.dto';
 import { AuthLoginAuthorizationTokenDTO } from './dto/auth-login-authorization-token.dto';
+import { Roles } from '../decorators/roles.decorator';
+import { Role } from '../enums/role.enum';
+import { RoleGuard } from './guards/role.guard';
 
 @Controller('auth')
 @ApiTags('auth')
@@ -39,15 +39,13 @@ export class AuthController {
     private readonly fileService: FilesService,
   ) {}
 
-  @Post('login')
-  async login(@Body() body: AuthLoginDTO) {
-    return this.authService.login(body);
-  }
   @Post('login-authorization-token')
   async loginAuthorizationToken(@Body() body: AuthLoginAuthorizationTokenDTO) {
     return this.authService.loginAuthorizationToken(body);
   }
 
+  @Roles(Role.Admin)
+  @UseGuards(AuthGuard, RoleGuard)
   @Post('register')
   @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
   async register(@Body() body: AuthRegisterDTO) {
@@ -61,16 +59,6 @@ export class AuthController {
   ) {
     return this.authService.registerAuthorizationToken(body);
   }
-
-  @Post('forget')
-  async forget(@Body() body: AuthForgetDTO) {
-    return this.authService.forget(body);
-  }
-
-  // @Post('reset')
-  // async reset(@Body() body: AuthResetDTO) {
-  //   return this.authService.reset(body);
-  // }
 
   @UseGuards(AuthGuard)
   @Post('check-token')

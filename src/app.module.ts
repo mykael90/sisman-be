@@ -13,6 +13,7 @@ import { HttpExceptionFilter } from './shared/exception_filters/http-exception.f
 import mailerConfig from './config/mailer.config';
 import { validationSchema } from './config/validation.schema';
 import { LogErrorModule } from './shared/log-error/log-error.module';
+import { AllExceptionsFilter } from './shared/exception_filters/all-exception.filter';
 
 @Module({
   imports: [
@@ -47,9 +48,14 @@ import { LogErrorModule } from './shared/log-error/log-error.module';
       provide: APP_GUARD,
       useClass: ThrottlerGuard,
     },
+    // Ordem dos Filtros é Importante: Mais específico primeiro!
     {
       provide: APP_FILTER,
-      useClass: HttpExceptionFilter,
+      useClass: HttpExceptionFilter, // 1. Tenta capturar HttpExceptions
+    },
+    {
+      provide: APP_FILTER,
+      useClass: AllExceptionsFilter, // 2. Captura qualquer outra exceção que sobrou (fallback)
     },
   ],
   exports: [AppService], //dá acesso ao AppService a quem importar o AppModule
