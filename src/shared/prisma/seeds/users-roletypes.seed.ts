@@ -11,12 +11,12 @@ import { CreateUserRoletypeDto } from '../../dto/user/role/create-user-roletype.
 // Adjust the path if your DTO is located elsewhere
 
 const logger = console;
-const userRoletypesJsonPath = '../data/users-roletypes.json';
+const userRoletypeJsonPath = '../data/users-roletypes.json';
 
 const transformAndValidateUserRoletypes: TransformValidateFn<
   any,
-  Prisma.UserRoletypesCreateInput // Assuming your model name is UserRoletypes
-> = async (rawRoleType): Promise<Prisma.UserRoletypesCreateInput | null> => {
+  Prisma.UserRoletypeCreateInput // Assuming your model name is UserRoletypes
+> = async (rawRoleType): Promise<Prisma.UserRoletypeCreateInput | null> => {
   // --- 1. Pre-process Raw Data ---
   const processedRawRoleType = removeNullOrEmptyStringProps(rawRoleType);
 
@@ -39,7 +39,7 @@ const transformAndValidateUserRoletypes: TransformValidateFn<
   // --- 3. Data Transformation & Prisma Input Construction ---
   // Construct the Prisma Create Input object using the validated DTO data
   // Ensure the fields match your Prisma schema for UserRoletypes
-  const createInput: Prisma.UserRoletypesCreateInput = {
+  const createInput: Prisma.UserRoletypeCreateInput = {
     id: roleTypeDto.id,
     role: roleTypeDto.role,
     description: roleTypeDto.description,
@@ -57,8 +57,8 @@ export async function main(prisma: PrismaClient): Promise<void> {
   await seedModel({
     prisma,
     modelName: 'UserRoletypes', // Make sure this matches your Prisma model name
-    jsonFilePath: userRoletypesJsonPath,
-    prismaDelegate: prisma.userRoletypes, // Make sure this matches your Prisma model delegate
+    jsonFilePath: userRoletypeJsonPath,
+    prismaDelegate: prisma.userRoletype, // Make sure this matches your Prisma model delegate
     transformAndValidate: transformAndValidateUserRoletypes,
     uniqueKey: 'id', // Use 'id' or 'role' as the unique identifier based on your schema
   });

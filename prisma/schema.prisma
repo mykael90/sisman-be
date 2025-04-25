@@ -9,13 +9,13 @@ datasource db {
 }
 
 model User {
-  id        Int         @id @default(autoincrement())
-  name      String      @db.VarChar(63)
-  login     String      @db.VarChar(63)
-  email     String      @unique @db.VarChar(127)
-  createdAt DateTime    @default(now()) @map("created_at") @db.Timestamp(0)
-  updatedAt DateTime    @updatedAt @map("updated_at") @db.Timestamp(0)
-  userRoles UserRoles[]
+  id        Int        @id @default(autoincrement())
+  name      String     @db.VarChar(63)
+  login     String     @db.VarChar(63)
+  email     String     @unique @db.VarChar(127)
+  createdAt DateTime   @default(now()) @map("created_at") @db.Timestamp(0)
+  updatedAt DateTime   @updatedAt @map("updated_at") @db.Timestamp(0)
+  userRoles UserRole[]
 
   @@map("users")
 }
@@ -32,24 +32,39 @@ model Material {
   @@map("materials")
 }
 
-model UserRoletypes {
-  id          Int         @id
-  role        String      @db.VarChar(255)
-  description String      @db.Text
-  createdAt   DateTime    @default(now()) @map("created_at") @db.Timestamp(0)
-  updatedAt   DateTime    @updatedAt @map("updated_at") @db.Timestamp(0)
-  userRoles   UserRoles[]
+model UserRoletype {
+  id          Int        @id
+  role        String     @db.VarChar(255)
+  description String     @db.Text
+  createdAt   DateTime   @default(now()) @map("created_at") @db.Timestamp(0)
+  updatedAt   DateTime   @updatedAt @map("updated_at") @db.Timestamp(0)
+  userRoles   UserRole[]
 
   @@map("users_roletypes")
 }
 
-model UserRoles {
-  userId         Int           @map("user_id")
-  userRoletypeId Int           @map("user_roletype_id")
-  user           User          @relation(fields: [userId], references: [id], onUpdate: Restrict, map: "users_roles_ibfk_1")
-  userRoletype   UserRoletypes @relation(fields: [userRoletypeId], references: [id], onUpdate: Restrict, map: "users_roles_ibfk_2")
+model UserRole {
+  userId         Int          @map("user_id")
+  userRoletypeId Int          @map("user_roletype_id")
+  user           User         @relation(fields: [userId], references: [id], onUpdate: Restrict, map: "users_roles_ibfk_1")
+  userRoletype   UserRoletype @relation(fields: [userRoletypeId], references: [id], onUpdate: Restrict, map: "users_roles_ibfk_2")
 
   @@id([userId, userRoletypeId])
   @@index([userRoletypeId], map: "role_id")
   @@map("users_roles")
+}
+
+model LogError {
+  id          String   @id @default(uuid())
+  timestamp   DateTime @default(now()) @db.Timestamp(0)
+  statusCode  Int?     @map("status_code")
+  path        String?
+  method      String?
+  message     String
+  stackTrace  String?  @map("stack_trace") @db.Text // Usar Text para stacks potencialmente longos
+  ipAddress   String?  @map("ip_address")
+  userId      String?  @map("user_id") // Opcional, depende se o usuário está logado
+  requestBody String?  @map("request_body") @db.Text // Cuidado com dados sensíveis!
+
+  @@map("log_errors")
 }

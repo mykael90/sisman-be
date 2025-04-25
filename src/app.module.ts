@@ -12,6 +12,7 @@ import { ConfigModule } from '@nestjs/config';
 import { HttpExceptionFilter } from './shared/exception_filters/http-exception.filter';
 import mailerConfig from './config/mailer.config';
 import { validationSchema } from './config/validation.schema';
+import { LogErrorModule } from './shared/log-error/log-error.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { validationSchema } from './config/validation.schema';
       useFactory: mailerConfig,
     }),
     MaterialsModule,
+    LogErrorModule,
   ],
   controllers: [AppController],
   providers: [

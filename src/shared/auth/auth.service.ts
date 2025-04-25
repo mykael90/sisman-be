@@ -9,7 +9,7 @@ import { AuthLoginDTO } from './dto/auth-login.dto';
 import { PrismaService } from 'src/shared/prisma/prisma.service';
 import { AuthForgetDTO } from './dto/auth-forget.dto';
 import { AuthResetDTO } from './dto/auth-reset.dto';
-import { User, UserRoles } from 'prisma/generated/client';
+import { User, UserRole } from 'prisma/generated/client';
 import { AuthRegisterDTO } from './dto/auth-register.dto';
 import { UsersService } from 'src/modules/users/users.service';
 import * as bcrypt from 'bcrypt';
@@ -28,7 +28,7 @@ export class AuthService {
     private readonly mailer: MailerService,
   ) {}
 
-  createToken(user: User, roles: UserRoles[] = []) {
+  createToken(user: User, roles: UserRole[] = []) {
     return {
       accessToken: this.jwtService.sign(
         {
@@ -141,7 +141,7 @@ export class AuthService {
       });
     }
 
-    const roles = await this.prisma.userRoles.findMany({
+    const roles = await this.prisma.userRole.findMany({
       where: { userId: user.id },
     });
 

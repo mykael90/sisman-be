@@ -24,8 +24,8 @@ import { AuthGuard } from 'src/shared/auth/guards/auth.guard';
 import { ApiTags, ApiCreatedResponse, ApiOkResponse } from '@nestjs/swagger';
 import { UsersEntity } from '../../shared/entities/users.entity';
 
-// @Roles(Role.Admin)
-// @UseGuards(AuthGuard, RoleGuard)
+@Roles(Role.Admin)
+@UseGuards(AuthGuard, RoleGuard)
 @Controller('users')
 @ApiTags('users')
 export class UsersController {

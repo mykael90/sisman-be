@@ -12,7 +12,7 @@ export class RolesService {
 
   async create(data: CreateUserRoleDto) {
     try {
-      return await this.prisma.userRoles.create({ data });
+      return await this.prisma.userRole.create({ data });
     } catch (error) {
       throw new BadRequestException('Error creating user role');
     }
@@ -20,7 +20,7 @@ export class RolesService {
   //implementar o método list
   async list() {
     try {
-      return await this.prisma.userRoles.findMany({
+      return await this.prisma.userRole.findMany({
         include: {
           user: false,
           userRoletype: {

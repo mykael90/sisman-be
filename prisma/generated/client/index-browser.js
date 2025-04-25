@@ -136,7 +136,7 @@ exports.Prisma.MaterialScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.UserRoletypesScalarFieldEnum = {
+exports.Prisma.UserRoletypeScalarFieldEnum = {
   id: 'id',
   role: 'role',
   description: 'description',
@@ -144,9 +144,22 @@ exports.Prisma.UserRoletypesScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.UserRolesScalarFieldEnum = {
+exports.Prisma.UserRoleScalarFieldEnum = {
   userId: 'userId',
   userRoletypeId: 'userRoletypeId'
+};
+
+exports.Prisma.LogErrorScalarFieldEnum = {
+  id: 'id',
+  timestamp: 'timestamp',
+  statusCode: 'statusCode',
+  path: 'path',
+  method: 'method',
+  message: 'message',
+  stackTrace: 'stackTrace',
+  ipAddress: 'ipAddress',
+  userId: 'userId',
+  requestBody: 'requestBody'
 };
 
 exports.Prisma.SortOrder = {
@@ -171,17 +184,29 @@ exports.Prisma.MaterialOrderByRelevanceFieldEnum = {
   unit: 'unit'
 };
 
-exports.Prisma.UserRoletypesOrderByRelevanceFieldEnum = {
+exports.Prisma.UserRoletypeOrderByRelevanceFieldEnum = {
   role: 'role',
   description: 'description'
+};
+
+exports.Prisma.LogErrorOrderByRelevanceFieldEnum = {
+  id: 'id',
+  path: 'path',
+  method: 'method',
+  message: 'message',
+  stackTrace: 'stackTrace',
+  ipAddress: 'ipAddress',
+  userId: 'userId',
+  requestBody: 'requestBody'
 };
 
 
 exports.Prisma.ModelName = {
   User: 'User',
   Material: 'Material',
-  UserRoletypes: 'UserRoletypes',
-  UserRoles: 'UserRoles'
+  UserRoletype: 'UserRoletype',
+  UserRole: 'UserRole',
+  LogError: 'LogError'
 };
 
 /**
