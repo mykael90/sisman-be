@@ -28,7 +28,10 @@
     "typeorm"
   ],
   "typescript.preferences.importModuleSpecifier": "relative",
-  "material-icon-theme.activeIconPack": "nest"
+  "material-icon-theme.activeIconPack": "nest",
+  "[prisma]": {
+    "editor.formatOnSave": true
+  }
 
 
 }

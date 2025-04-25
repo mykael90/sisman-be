@@ -38,6 +38,11 @@ export type UserRole = $Result.DefaultSelection<Prisma.$UserRolePayload>
  * 
  */
 export type LogError = $Result.DefaultSelection<Prisma.$LogErrorPayload>
+/**
+ * Model LogLogin
+ * 
+ */
+export type LogLogin = $Result.DefaultSelection<Prisma.$LogLoginPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -213,6 +218,16 @@ export class PrismaClient<
     * ```
     */
   get logError(): Prisma.LogErrorDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.logLogin`: Exposes CRUD operations for the **LogLogin** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more LogLogins
+    * const logLogins = await prisma.logLogin.findMany()
+    * ```
+    */
+  get logLogin(): Prisma.LogLoginDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -657,7 +672,8 @@ export namespace Prisma {
     Material: 'Material',
     UserRoletype: 'UserRoletype',
     UserRole: 'UserRole',
-    LogError: 'LogError'
+    LogError: 'LogError',
+    LogLogin: 'LogLogin'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -676,7 +692,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "material" | "userRoletype" | "userRole" | "logError"
+      modelProps: "user" | "material" | "userRoletype" | "userRole" | "logError" | "logLogin"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1010,6 +1026,72 @@ export namespace Prisma {
           }
         }
       }
+      LogLogin: {
+        payload: Prisma.$LogLoginPayload<ExtArgs>
+        fields: Prisma.LogLoginFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.LogLoginFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LogLoginPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.LogLoginFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LogLoginPayload>
+          }
+          findFirst: {
+            args: Prisma.LogLoginFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LogLoginPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.LogLoginFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LogLoginPayload>
+          }
+          findMany: {
+            args: Prisma.LogLoginFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LogLoginPayload>[]
+          }
+          create: {
+            args: Prisma.LogLoginCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LogLoginPayload>
+          }
+          createMany: {
+            args: Prisma.LogLoginCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.LogLoginDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LogLoginPayload>
+          }
+          update: {
+            args: Prisma.LogLoginUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LogLoginPayload>
+          }
+          deleteMany: {
+            args: Prisma.LogLoginDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.LogLoginUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.LogLoginUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LogLoginPayload>
+          }
+          aggregate: {
+            args: Prisma.LogLoginAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateLogLogin>
+          }
+          groupBy: {
+            args: Prisma.LogLoginGroupByArgs<ExtArgs>
+            result: $Utils.Optional<LogLoginGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.LogLoginCountArgs<ExtArgs>
+            result: $Utils.Optional<LogLoginCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1099,6 +1181,7 @@ export namespace Prisma {
     userRoletype?: UserRoletypeOmit
     userRole?: UserRoleOmit
     logError?: LogErrorOmit
+    logLogin?: LogLoginOmit
   }
 
   /* Types for Logging */
@@ -1194,10 +1277,12 @@ export namespace Prisma {
 
   export type UserCountOutputType = {
     userRoles: number
+    LogLogin: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     userRoles?: boolean | UserCountOutputTypeCountUserRolesArgs
+    LogLogin?: boolean | UserCountOutputTypeCountLogLoginArgs
   }
 
   // Custom InputTypes
@@ -1216,6 +1301,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountUserRolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UserRoleWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountLogLoginArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LogLoginWhereInput
   }
 
 
@@ -1461,6 +1553,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     userRoles?: boolean | User$userRolesArgs<ExtArgs>
+    LogLogin?: boolean | User$LogLoginArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1478,6 +1571,7 @@ export namespace Prisma {
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "login" | "email" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     userRoles?: boolean | User$userRolesArgs<ExtArgs>
+    LogLogin?: boolean | User$LogLoginArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -1485,6 +1579,7 @@ export namespace Prisma {
     name: "User"
     objects: {
       userRoles: Prisma.$UserRolePayload<ExtArgs>[]
+      LogLogin: Prisma.$LogLoginPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -1834,6 +1929,7 @@ export namespace Prisma {
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     userRoles<T extends User$userRolesArgs<ExtArgs> = {}>(args?: Subset<T, User$userRolesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    LogLogin<T extends User$LogLoginArgs<ExtArgs> = {}>(args?: Subset<T, User$LogLoginArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LogLoginPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2233,6 +2329,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: UserRoleScalarFieldEnum | UserRoleScalarFieldEnum[]
+  }
+
+  /**
+   * User.LogLogin
+   */
+  export type User$LogLoginArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LogLogin
+     */
+    select?: LogLoginSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LogLogin
+     */
+    omit?: LogLoginOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LogLoginInclude<ExtArgs> | null
+    where?: LogLoginWhereInput
+    orderBy?: LogLoginOrderByWithRelationInput | LogLoginOrderByWithRelationInput[]
+    cursor?: LogLoginWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LogLoginScalarFieldEnum | LogLoginScalarFieldEnum[]
   }
 
   /**
@@ -6091,6 +6211,980 @@ export namespace Prisma {
 
 
   /**
+   * Model LogLogin
+   */
+
+  export type AggregateLogLogin = {
+    _count: LogLoginCountAggregateOutputType | null
+    _avg: LogLoginAvgAggregateOutputType | null
+    _sum: LogLoginSumAggregateOutputType | null
+    _min: LogLoginMinAggregateOutputType | null
+    _max: LogLoginMaxAggregateOutputType | null
+  }
+
+  export type LogLoginAvgAggregateOutputType = {
+    userId: number | null
+  }
+
+  export type LogLoginSumAggregateOutputType = {
+    userId: number | null
+  }
+
+  export type LogLoginMinAggregateOutputType = {
+    id: string | null
+    userId: number | null
+    timestamp: Date | null
+    ipAddress: string | null
+    userAgent: string | null
+    successful: boolean | null
+  }
+
+  export type LogLoginMaxAggregateOutputType = {
+    id: string | null
+    userId: number | null
+    timestamp: Date | null
+    ipAddress: string | null
+    userAgent: string | null
+    successful: boolean | null
+  }
+
+  export type LogLoginCountAggregateOutputType = {
+    id: number
+    userId: number
+    timestamp: number
+    ipAddress: number
+    userAgent: number
+    successful: number
+    _all: number
+  }
+
+
+  export type LogLoginAvgAggregateInputType = {
+    userId?: true
+  }
+
+  export type LogLoginSumAggregateInputType = {
+    userId?: true
+  }
+
+  export type LogLoginMinAggregateInputType = {
+    id?: true
+    userId?: true
+    timestamp?: true
+    ipAddress?: true
+    userAgent?: true
+    successful?: true
+  }
+
+  export type LogLoginMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    timestamp?: true
+    ipAddress?: true
+    userAgent?: true
+    successful?: true
+  }
+
+  export type LogLoginCountAggregateInputType = {
+    id?: true
+    userId?: true
+    timestamp?: true
+    ipAddress?: true
+    userAgent?: true
+    successful?: true
+    _all?: true
+  }
+
+  export type LogLoginAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LogLogin to aggregate.
+     */
+    where?: LogLoginWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LogLogins to fetch.
+     */
+    orderBy?: LogLoginOrderByWithRelationInput | LogLoginOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: LogLoginWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LogLogins from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LogLogins.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned LogLogins
+    **/
+    _count?: true | LogLoginCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: LogLoginAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: LogLoginSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: LogLoginMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: LogLoginMaxAggregateInputType
+  }
+
+  export type GetLogLoginAggregateType<T extends LogLoginAggregateArgs> = {
+        [P in keyof T & keyof AggregateLogLogin]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateLogLogin[P]>
+      : GetScalarType<T[P], AggregateLogLogin[P]>
+  }
+
+
+
+
+  export type LogLoginGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LogLoginWhereInput
+    orderBy?: LogLoginOrderByWithAggregationInput | LogLoginOrderByWithAggregationInput[]
+    by: LogLoginScalarFieldEnum[] | LogLoginScalarFieldEnum
+    having?: LogLoginScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: LogLoginCountAggregateInputType | true
+    _avg?: LogLoginAvgAggregateInputType
+    _sum?: LogLoginSumAggregateInputType
+    _min?: LogLoginMinAggregateInputType
+    _max?: LogLoginMaxAggregateInputType
+  }
+
+  export type LogLoginGroupByOutputType = {
+    id: string
+    userId: number
+    timestamp: Date
+    ipAddress: string | null
+    userAgent: string | null
+    successful: boolean
+    _count: LogLoginCountAggregateOutputType | null
+    _avg: LogLoginAvgAggregateOutputType | null
+    _sum: LogLoginSumAggregateOutputType | null
+    _min: LogLoginMinAggregateOutputType | null
+    _max: LogLoginMaxAggregateOutputType | null
+  }
+
+  type GetLogLoginGroupByPayload<T extends LogLoginGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<LogLoginGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof LogLoginGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], LogLoginGroupByOutputType[P]>
+            : GetScalarType<T[P], LogLoginGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type LogLoginSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    timestamp?: boolean
+    ipAddress?: boolean
+    userAgent?: boolean
+    successful?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["logLogin"]>
+
+
+
+  export type LogLoginSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    timestamp?: boolean
+    ipAddress?: boolean
+    userAgent?: boolean
+    successful?: boolean
+  }
+
+  export type LogLoginOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "timestamp" | "ipAddress" | "userAgent" | "successful", ExtArgs["result"]["logLogin"]>
+  export type LogLoginInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $LogLoginPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "LogLogin"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: number
+      timestamp: Date
+      ipAddress: string | null
+      userAgent: string | null
+      successful: boolean
+    }, ExtArgs["result"]["logLogin"]>
+    composites: {}
+  }
+
+  type LogLoginGetPayload<S extends boolean | null | undefined | LogLoginDefaultArgs> = $Result.GetResult<Prisma.$LogLoginPayload, S>
+
+  type LogLoginCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<LogLoginFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: LogLoginCountAggregateInputType | true
+    }
+
+  export interface LogLoginDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['LogLogin'], meta: { name: 'LogLogin' } }
+    /**
+     * Find zero or one LogLogin that matches the filter.
+     * @param {LogLoginFindUniqueArgs} args - Arguments to find a LogLogin
+     * @example
+     * // Get one LogLogin
+     * const logLogin = await prisma.logLogin.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends LogLoginFindUniqueArgs>(args: SelectSubset<T, LogLoginFindUniqueArgs<ExtArgs>>): Prisma__LogLoginClient<$Result.GetResult<Prisma.$LogLoginPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one LogLogin that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {LogLoginFindUniqueOrThrowArgs} args - Arguments to find a LogLogin
+     * @example
+     * // Get one LogLogin
+     * const logLogin = await prisma.logLogin.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends LogLoginFindUniqueOrThrowArgs>(args: SelectSubset<T, LogLoginFindUniqueOrThrowArgs<ExtArgs>>): Prisma__LogLoginClient<$Result.GetResult<Prisma.$LogLoginPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LogLogin that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LogLoginFindFirstArgs} args - Arguments to find a LogLogin
+     * @example
+     * // Get one LogLogin
+     * const logLogin = await prisma.logLogin.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends LogLoginFindFirstArgs>(args?: SelectSubset<T, LogLoginFindFirstArgs<ExtArgs>>): Prisma__LogLoginClient<$Result.GetResult<Prisma.$LogLoginPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LogLogin that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LogLoginFindFirstOrThrowArgs} args - Arguments to find a LogLogin
+     * @example
+     * // Get one LogLogin
+     * const logLogin = await prisma.logLogin.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends LogLoginFindFirstOrThrowArgs>(args?: SelectSubset<T, LogLoginFindFirstOrThrowArgs<ExtArgs>>): Prisma__LogLoginClient<$Result.GetResult<Prisma.$LogLoginPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more LogLogins that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LogLoginFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all LogLogins
+     * const logLogins = await prisma.logLogin.findMany()
+     * 
+     * // Get first 10 LogLogins
+     * const logLogins = await prisma.logLogin.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const logLoginWithIdOnly = await prisma.logLogin.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends LogLoginFindManyArgs>(args?: SelectSubset<T, LogLoginFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LogLoginPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a LogLogin.
+     * @param {LogLoginCreateArgs} args - Arguments to create a LogLogin.
+     * @example
+     * // Create one LogLogin
+     * const LogLogin = await prisma.logLogin.create({
+     *   data: {
+     *     // ... data to create a LogLogin
+     *   }
+     * })
+     * 
+     */
+    create<T extends LogLoginCreateArgs>(args: SelectSubset<T, LogLoginCreateArgs<ExtArgs>>): Prisma__LogLoginClient<$Result.GetResult<Prisma.$LogLoginPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many LogLogins.
+     * @param {LogLoginCreateManyArgs} args - Arguments to create many LogLogins.
+     * @example
+     * // Create many LogLogins
+     * const logLogin = await prisma.logLogin.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends LogLoginCreateManyArgs>(args?: SelectSubset<T, LogLoginCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a LogLogin.
+     * @param {LogLoginDeleteArgs} args - Arguments to delete one LogLogin.
+     * @example
+     * // Delete one LogLogin
+     * const LogLogin = await prisma.logLogin.delete({
+     *   where: {
+     *     // ... filter to delete one LogLogin
+     *   }
+     * })
+     * 
+     */
+    delete<T extends LogLoginDeleteArgs>(args: SelectSubset<T, LogLoginDeleteArgs<ExtArgs>>): Prisma__LogLoginClient<$Result.GetResult<Prisma.$LogLoginPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one LogLogin.
+     * @param {LogLoginUpdateArgs} args - Arguments to update one LogLogin.
+     * @example
+     * // Update one LogLogin
+     * const logLogin = await prisma.logLogin.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends LogLoginUpdateArgs>(args: SelectSubset<T, LogLoginUpdateArgs<ExtArgs>>): Prisma__LogLoginClient<$Result.GetResult<Prisma.$LogLoginPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more LogLogins.
+     * @param {LogLoginDeleteManyArgs} args - Arguments to filter LogLogins to delete.
+     * @example
+     * // Delete a few LogLogins
+     * const { count } = await prisma.logLogin.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends LogLoginDeleteManyArgs>(args?: SelectSubset<T, LogLoginDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LogLogins.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LogLoginUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many LogLogins
+     * const logLogin = await prisma.logLogin.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends LogLoginUpdateManyArgs>(args: SelectSubset<T, LogLoginUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one LogLogin.
+     * @param {LogLoginUpsertArgs} args - Arguments to update or create a LogLogin.
+     * @example
+     * // Update or create a LogLogin
+     * const logLogin = await prisma.logLogin.upsert({
+     *   create: {
+     *     // ... data to create a LogLogin
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the LogLogin we want to update
+     *   }
+     * })
+     */
+    upsert<T extends LogLoginUpsertArgs>(args: SelectSubset<T, LogLoginUpsertArgs<ExtArgs>>): Prisma__LogLoginClient<$Result.GetResult<Prisma.$LogLoginPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of LogLogins.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LogLoginCountArgs} args - Arguments to filter LogLogins to count.
+     * @example
+     * // Count the number of LogLogins
+     * const count = await prisma.logLogin.count({
+     *   where: {
+     *     // ... the filter for the LogLogins we want to count
+     *   }
+     * })
+    **/
+    count<T extends LogLoginCountArgs>(
+      args?: Subset<T, LogLoginCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], LogLoginCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a LogLogin.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LogLoginAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends LogLoginAggregateArgs>(args: Subset<T, LogLoginAggregateArgs>): Prisma.PrismaPromise<GetLogLoginAggregateType<T>>
+
+    /**
+     * Group by LogLogin.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LogLoginGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends LogLoginGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: LogLoginGroupByArgs['orderBy'] }
+        : { orderBy?: LogLoginGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, LogLoginGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLogLoginGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the LogLogin model
+   */
+  readonly fields: LogLoginFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for LogLogin.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__LogLoginClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the LogLogin model
+   */
+  interface LogLoginFieldRefs {
+    readonly id: FieldRef<"LogLogin", 'String'>
+    readonly userId: FieldRef<"LogLogin", 'Int'>
+    readonly timestamp: FieldRef<"LogLogin", 'DateTime'>
+    readonly ipAddress: FieldRef<"LogLogin", 'String'>
+    readonly userAgent: FieldRef<"LogLogin", 'String'>
+    readonly successful: FieldRef<"LogLogin", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * LogLogin findUnique
+   */
+  export type LogLoginFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LogLogin
+     */
+    select?: LogLoginSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LogLogin
+     */
+    omit?: LogLoginOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LogLoginInclude<ExtArgs> | null
+    /**
+     * Filter, which LogLogin to fetch.
+     */
+    where: LogLoginWhereUniqueInput
+  }
+
+  /**
+   * LogLogin findUniqueOrThrow
+   */
+  export type LogLoginFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LogLogin
+     */
+    select?: LogLoginSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LogLogin
+     */
+    omit?: LogLoginOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LogLoginInclude<ExtArgs> | null
+    /**
+     * Filter, which LogLogin to fetch.
+     */
+    where: LogLoginWhereUniqueInput
+  }
+
+  /**
+   * LogLogin findFirst
+   */
+  export type LogLoginFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LogLogin
+     */
+    select?: LogLoginSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LogLogin
+     */
+    omit?: LogLoginOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LogLoginInclude<ExtArgs> | null
+    /**
+     * Filter, which LogLogin to fetch.
+     */
+    where?: LogLoginWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LogLogins to fetch.
+     */
+    orderBy?: LogLoginOrderByWithRelationInput | LogLoginOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LogLogins.
+     */
+    cursor?: LogLoginWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LogLogins from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LogLogins.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LogLogins.
+     */
+    distinct?: LogLoginScalarFieldEnum | LogLoginScalarFieldEnum[]
+  }
+
+  /**
+   * LogLogin findFirstOrThrow
+   */
+  export type LogLoginFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LogLogin
+     */
+    select?: LogLoginSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LogLogin
+     */
+    omit?: LogLoginOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LogLoginInclude<ExtArgs> | null
+    /**
+     * Filter, which LogLogin to fetch.
+     */
+    where?: LogLoginWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LogLogins to fetch.
+     */
+    orderBy?: LogLoginOrderByWithRelationInput | LogLoginOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LogLogins.
+     */
+    cursor?: LogLoginWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LogLogins from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LogLogins.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LogLogins.
+     */
+    distinct?: LogLoginScalarFieldEnum | LogLoginScalarFieldEnum[]
+  }
+
+  /**
+   * LogLogin findMany
+   */
+  export type LogLoginFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LogLogin
+     */
+    select?: LogLoginSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LogLogin
+     */
+    omit?: LogLoginOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LogLoginInclude<ExtArgs> | null
+    /**
+     * Filter, which LogLogins to fetch.
+     */
+    where?: LogLoginWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LogLogins to fetch.
+     */
+    orderBy?: LogLoginOrderByWithRelationInput | LogLoginOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing LogLogins.
+     */
+    cursor?: LogLoginWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LogLogins from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LogLogins.
+     */
+    skip?: number
+    distinct?: LogLoginScalarFieldEnum | LogLoginScalarFieldEnum[]
+  }
+
+  /**
+   * LogLogin create
+   */
+  export type LogLoginCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LogLogin
+     */
+    select?: LogLoginSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LogLogin
+     */
+    omit?: LogLoginOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LogLoginInclude<ExtArgs> | null
+    /**
+     * The data needed to create a LogLogin.
+     */
+    data: XOR<LogLoginCreateInput, LogLoginUncheckedCreateInput>
+  }
+
+  /**
+   * LogLogin createMany
+   */
+  export type LogLoginCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many LogLogins.
+     */
+    data: LogLoginCreateManyInput | LogLoginCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * LogLogin update
+   */
+  export type LogLoginUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LogLogin
+     */
+    select?: LogLoginSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LogLogin
+     */
+    omit?: LogLoginOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LogLoginInclude<ExtArgs> | null
+    /**
+     * The data needed to update a LogLogin.
+     */
+    data: XOR<LogLoginUpdateInput, LogLoginUncheckedUpdateInput>
+    /**
+     * Choose, which LogLogin to update.
+     */
+    where: LogLoginWhereUniqueInput
+  }
+
+  /**
+   * LogLogin updateMany
+   */
+  export type LogLoginUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update LogLogins.
+     */
+    data: XOR<LogLoginUpdateManyMutationInput, LogLoginUncheckedUpdateManyInput>
+    /**
+     * Filter which LogLogins to update
+     */
+    where?: LogLoginWhereInput
+    /**
+     * Limit how many LogLogins to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * LogLogin upsert
+   */
+  export type LogLoginUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LogLogin
+     */
+    select?: LogLoginSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LogLogin
+     */
+    omit?: LogLoginOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LogLoginInclude<ExtArgs> | null
+    /**
+     * The filter to search for the LogLogin to update in case it exists.
+     */
+    where: LogLoginWhereUniqueInput
+    /**
+     * In case the LogLogin found by the `where` argument doesn't exist, create a new LogLogin with this data.
+     */
+    create: XOR<LogLoginCreateInput, LogLoginUncheckedCreateInput>
+    /**
+     * In case the LogLogin was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<LogLoginUpdateInput, LogLoginUncheckedUpdateInput>
+  }
+
+  /**
+   * LogLogin delete
+   */
+  export type LogLoginDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LogLogin
+     */
+    select?: LogLoginSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LogLogin
+     */
+    omit?: LogLoginOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LogLoginInclude<ExtArgs> | null
+    /**
+     * Filter which LogLogin to delete.
+     */
+    where: LogLoginWhereUniqueInput
+  }
+
+  /**
+   * LogLogin deleteMany
+   */
+  export type LogLoginDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LogLogins to delete
+     */
+    where?: LogLoginWhereInput
+    /**
+     * Limit how many LogLogins to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * LogLogin without action
+   */
+  export type LogLoginDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LogLogin
+     */
+    select?: LogLoginSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LogLogin
+     */
+    omit?: LogLoginOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LogLoginInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -6164,6 +7258,18 @@ export namespace Prisma {
   export type LogErrorScalarFieldEnum = (typeof LogErrorScalarFieldEnum)[keyof typeof LogErrorScalarFieldEnum]
 
 
+  export const LogLoginScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    timestamp: 'timestamp',
+    ipAddress: 'ipAddress',
+    userAgent: 'userAgent',
+    successful: 'successful'
+  };
+
+  export type LogLoginScalarFieldEnum = (typeof LogLoginScalarFieldEnum)[keyof typeof LogLoginScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -6218,6 +7324,15 @@ export namespace Prisma {
   };
 
   export type LogErrorOrderByRelevanceFieldEnum = (typeof LogErrorOrderByRelevanceFieldEnum)[keyof typeof LogErrorOrderByRelevanceFieldEnum]
+
+
+  export const LogLoginOrderByRelevanceFieldEnum: {
+    id: 'id',
+    ipAddress: 'ipAddress',
+    userAgent: 'userAgent'
+  };
+
+  export type LogLoginOrderByRelevanceFieldEnum = (typeof LogLoginOrderByRelevanceFieldEnum)[keyof typeof LogLoginOrderByRelevanceFieldEnum]
 
 
   /**
@@ -6281,6 +7396,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     userRoles?: UserRoleListRelationFilter
+    LogLogin?: LogLoginListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -6291,6 +7407,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userRoles?: UserRoleOrderByRelationAggregateInput
+    LogLogin?: LogLoginOrderByRelationAggregateInput
     _relevance?: UserOrderByRelevanceInput
   }
 
@@ -6305,6 +7422,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     userRoles?: UserRoleListRelationFilter
+    LogLogin?: LogLoginListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -6582,6 +7700,69 @@ export namespace Prisma {
     requestBody?: StringNullableWithAggregatesFilter<"LogError"> | string | null
   }
 
+  export type LogLoginWhereInput = {
+    AND?: LogLoginWhereInput | LogLoginWhereInput[]
+    OR?: LogLoginWhereInput[]
+    NOT?: LogLoginWhereInput | LogLoginWhereInput[]
+    id?: StringFilter<"LogLogin"> | string
+    userId?: IntFilter<"LogLogin"> | number
+    timestamp?: DateTimeFilter<"LogLogin"> | Date | string
+    ipAddress?: StringNullableFilter<"LogLogin"> | string | null
+    userAgent?: StringNullableFilter<"LogLogin"> | string | null
+    successful?: BoolFilter<"LogLogin"> | boolean
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type LogLoginOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    timestamp?: SortOrder
+    ipAddress?: SortOrderInput | SortOrder
+    userAgent?: SortOrderInput | SortOrder
+    successful?: SortOrder
+    user?: UserOrderByWithRelationInput
+    _relevance?: LogLoginOrderByRelevanceInput
+  }
+
+  export type LogLoginWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: LogLoginWhereInput | LogLoginWhereInput[]
+    OR?: LogLoginWhereInput[]
+    NOT?: LogLoginWhereInput | LogLoginWhereInput[]
+    userId?: IntFilter<"LogLogin"> | number
+    timestamp?: DateTimeFilter<"LogLogin"> | Date | string
+    ipAddress?: StringNullableFilter<"LogLogin"> | string | null
+    userAgent?: StringNullableFilter<"LogLogin"> | string | null
+    successful?: BoolFilter<"LogLogin"> | boolean
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type LogLoginOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    timestamp?: SortOrder
+    ipAddress?: SortOrderInput | SortOrder
+    userAgent?: SortOrderInput | SortOrder
+    successful?: SortOrder
+    _count?: LogLoginCountOrderByAggregateInput
+    _avg?: LogLoginAvgOrderByAggregateInput
+    _max?: LogLoginMaxOrderByAggregateInput
+    _min?: LogLoginMinOrderByAggregateInput
+    _sum?: LogLoginSumOrderByAggregateInput
+  }
+
+  export type LogLoginScalarWhereWithAggregatesInput = {
+    AND?: LogLoginScalarWhereWithAggregatesInput | LogLoginScalarWhereWithAggregatesInput[]
+    OR?: LogLoginScalarWhereWithAggregatesInput[]
+    NOT?: LogLoginScalarWhereWithAggregatesInput | LogLoginScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"LogLogin"> | string
+    userId?: IntWithAggregatesFilter<"LogLogin"> | number
+    timestamp?: DateTimeWithAggregatesFilter<"LogLogin"> | Date | string
+    ipAddress?: StringNullableWithAggregatesFilter<"LogLogin"> | string | null
+    userAgent?: StringNullableWithAggregatesFilter<"LogLogin"> | string | null
+    successful?: BoolWithAggregatesFilter<"LogLogin"> | boolean
+  }
+
   export type UserCreateInput = {
     name: string
     login: string
@@ -6589,6 +7770,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     userRoles?: UserRoleCreateNestedManyWithoutUserInput
+    LogLogin?: LogLoginCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -6599,6 +7781,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    LogLogin?: LogLoginUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -6608,6 +7791,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userRoles?: UserRoleUpdateManyWithoutUserNestedInput
+    LogLogin?: LogLoginUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -6618,6 +7802,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    LogLogin?: LogLoginUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -6901,6 +8086,68 @@ export namespace Prisma {
     requestBody?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type LogLoginCreateInput = {
+    id?: string
+    timestamp?: Date | string
+    ipAddress?: string | null
+    userAgent?: string | null
+    successful: boolean
+    user: UserCreateNestedOneWithoutLogLoginInput
+  }
+
+  export type LogLoginUncheckedCreateInput = {
+    id?: string
+    userId: number
+    timestamp?: Date | string
+    ipAddress?: string | null
+    userAgent?: string | null
+    successful: boolean
+  }
+
+  export type LogLoginUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    successful?: BoolFieldUpdateOperationsInput | boolean
+    user?: UserUpdateOneRequiredWithoutLogLoginNestedInput
+  }
+
+  export type LogLoginUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: IntFieldUpdateOperationsInput | number
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    successful?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type LogLoginCreateManyInput = {
+    id?: string
+    userId: number
+    timestamp?: Date | string
+    ipAddress?: string | null
+    userAgent?: string | null
+    successful: boolean
+  }
+
+  export type LogLoginUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    successful?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type LogLoginUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: IntFieldUpdateOperationsInput | number
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    successful?: BoolFieldUpdateOperationsInput | boolean
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
@@ -6944,7 +8191,17 @@ export namespace Prisma {
     none?: UserRoleWhereInput
   }
 
+  export type LogLoginListRelationFilter = {
+    every?: LogLoginWhereInput
+    some?: LogLoginWhereInput
+    none?: LogLoginWhereInput
+  }
+
   export type UserRoleOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type LogLoginOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -7317,6 +8574,47 @@ export namespace Prisma {
     _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
+  export type LogLoginOrderByRelevanceInput = {
+    fields: LogLoginOrderByRelevanceFieldEnum | LogLoginOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type LogLoginCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    timestamp?: SortOrder
+    ipAddress?: SortOrder
+    userAgent?: SortOrder
+    successful?: SortOrder
+  }
+
+  export type LogLoginAvgOrderByAggregateInput = {
+    userId?: SortOrder
+  }
+
+  export type LogLoginMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    timestamp?: SortOrder
+    ipAddress?: SortOrder
+    userAgent?: SortOrder
+    successful?: SortOrder
+  }
+
+  export type LogLoginMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    timestamp?: SortOrder
+    ipAddress?: SortOrder
+    userAgent?: SortOrder
+    successful?: SortOrder
+  }
+
+  export type LogLoginSumOrderByAggregateInput = {
+    userId?: SortOrder
+  }
+
   export type UserRoleCreateNestedManyWithoutUserInput = {
     create?: XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput> | UserRoleCreateWithoutUserInput[] | UserRoleUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserRoleCreateOrConnectWithoutUserInput | UserRoleCreateOrConnectWithoutUserInput[]
@@ -7324,11 +8622,25 @@ export namespace Prisma {
     connect?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[]
   }
 
+  export type LogLoginCreateNestedManyWithoutUserInput = {
+    create?: XOR<LogLoginCreateWithoutUserInput, LogLoginUncheckedCreateWithoutUserInput> | LogLoginCreateWithoutUserInput[] | LogLoginUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: LogLoginCreateOrConnectWithoutUserInput | LogLoginCreateOrConnectWithoutUserInput[]
+    createMany?: LogLoginCreateManyUserInputEnvelope
+    connect?: LogLoginWhereUniqueInput | LogLoginWhereUniqueInput[]
+  }
+
   export type UserRoleUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput> | UserRoleCreateWithoutUserInput[] | UserRoleUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserRoleCreateOrConnectWithoutUserInput | UserRoleCreateOrConnectWithoutUserInput[]
     createMany?: UserRoleCreateManyUserInputEnvelope
     connect?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[]
+  }
+
+  export type LogLoginUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<LogLoginCreateWithoutUserInput, LogLoginUncheckedCreateWithoutUserInput> | LogLoginCreateWithoutUserInput[] | LogLoginUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: LogLoginCreateOrConnectWithoutUserInput | LogLoginCreateOrConnectWithoutUserInput[]
+    createMany?: LogLoginCreateManyUserInputEnvelope
+    connect?: LogLoginWhereUniqueInput | LogLoginWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -7353,6 +8665,20 @@ export namespace Prisma {
     deleteMany?: UserRoleScalarWhereInput | UserRoleScalarWhereInput[]
   }
 
+  export type LogLoginUpdateManyWithoutUserNestedInput = {
+    create?: XOR<LogLoginCreateWithoutUserInput, LogLoginUncheckedCreateWithoutUserInput> | LogLoginCreateWithoutUserInput[] | LogLoginUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: LogLoginCreateOrConnectWithoutUserInput | LogLoginCreateOrConnectWithoutUserInput[]
+    upsert?: LogLoginUpsertWithWhereUniqueWithoutUserInput | LogLoginUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: LogLoginCreateManyUserInputEnvelope
+    set?: LogLoginWhereUniqueInput | LogLoginWhereUniqueInput[]
+    disconnect?: LogLoginWhereUniqueInput | LogLoginWhereUniqueInput[]
+    delete?: LogLoginWhereUniqueInput | LogLoginWhereUniqueInput[]
+    connect?: LogLoginWhereUniqueInput | LogLoginWhereUniqueInput[]
+    update?: LogLoginUpdateWithWhereUniqueWithoutUserInput | LogLoginUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: LogLoginUpdateManyWithWhereWithoutUserInput | LogLoginUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: LogLoginScalarWhereInput | LogLoginScalarWhereInput[]
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -7373,6 +8699,20 @@ export namespace Prisma {
     update?: UserRoleUpdateWithWhereUniqueWithoutUserInput | UserRoleUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: UserRoleUpdateManyWithWhereWithoutUserInput | UserRoleUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: UserRoleScalarWhereInput | UserRoleScalarWhereInput[]
+  }
+
+  export type LogLoginUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<LogLoginCreateWithoutUserInput, LogLoginUncheckedCreateWithoutUserInput> | LogLoginCreateWithoutUserInput[] | LogLoginUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: LogLoginCreateOrConnectWithoutUserInput | LogLoginCreateOrConnectWithoutUserInput[]
+    upsert?: LogLoginUpsertWithWhereUniqueWithoutUserInput | LogLoginUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: LogLoginCreateManyUserInputEnvelope
+    set?: LogLoginWhereUniqueInput | LogLoginWhereUniqueInput[]
+    disconnect?: LogLoginWhereUniqueInput | LogLoginWhereUniqueInput[]
+    delete?: LogLoginWhereUniqueInput | LogLoginWhereUniqueInput[]
+    connect?: LogLoginWhereUniqueInput | LogLoginWhereUniqueInput[]
+    update?: LogLoginUpdateWithWhereUniqueWithoutUserInput | LogLoginUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: LogLoginUpdateManyWithWhereWithoutUserInput | LogLoginUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: LogLoginScalarWhereInput | LogLoginScalarWhereInput[]
   }
 
   export type BigIntFieldUpdateOperationsInput = {
@@ -7467,6 +8807,20 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type UserCreateNestedOneWithoutLogLoginInput = {
+    create?: XOR<UserCreateWithoutLogLoginInput, UserUncheckedCreateWithoutLogLoginInput>
+    connectOrCreate?: UserCreateOrConnectWithoutLogLoginInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutLogLoginNestedInput = {
+    create?: XOR<UserCreateWithoutLogLoginInput, UserUncheckedCreateWithoutLogLoginInput>
+    connectOrCreate?: UserCreateOrConnectWithoutLogLoginInput
+    upsert?: UserUpsertWithoutLogLoginInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutLogLoginInput, UserUpdateWithoutLogLoginInput>, UserUncheckedUpdateWithoutLogLoginInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -7694,6 +9048,32 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type LogLoginCreateWithoutUserInput = {
+    id?: string
+    timestamp?: Date | string
+    ipAddress?: string | null
+    userAgent?: string | null
+    successful: boolean
+  }
+
+  export type LogLoginUncheckedCreateWithoutUserInput = {
+    id?: string
+    timestamp?: Date | string
+    ipAddress?: string | null
+    userAgent?: string | null
+    successful: boolean
+  }
+
+  export type LogLoginCreateOrConnectWithoutUserInput = {
+    where: LogLoginWhereUniqueInput
+    create: XOR<LogLoginCreateWithoutUserInput, LogLoginUncheckedCreateWithoutUserInput>
+  }
+
+  export type LogLoginCreateManyUserInputEnvelope = {
+    data: LogLoginCreateManyUserInput | LogLoginCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserRoleUpsertWithWhereUniqueWithoutUserInput = {
     where: UserRoleWhereUniqueInput
     update: XOR<UserRoleUpdateWithoutUserInput, UserRoleUncheckedUpdateWithoutUserInput>
@@ -7716,6 +9096,34 @@ export namespace Prisma {
     NOT?: UserRoleScalarWhereInput | UserRoleScalarWhereInput[]
     userId?: IntFilter<"UserRole"> | number
     userRoletypeId?: IntFilter<"UserRole"> | number
+  }
+
+  export type LogLoginUpsertWithWhereUniqueWithoutUserInput = {
+    where: LogLoginWhereUniqueInput
+    update: XOR<LogLoginUpdateWithoutUserInput, LogLoginUncheckedUpdateWithoutUserInput>
+    create: XOR<LogLoginCreateWithoutUserInput, LogLoginUncheckedCreateWithoutUserInput>
+  }
+
+  export type LogLoginUpdateWithWhereUniqueWithoutUserInput = {
+    where: LogLoginWhereUniqueInput
+    data: XOR<LogLoginUpdateWithoutUserInput, LogLoginUncheckedUpdateWithoutUserInput>
+  }
+
+  export type LogLoginUpdateManyWithWhereWithoutUserInput = {
+    where: LogLoginScalarWhereInput
+    data: XOR<LogLoginUpdateManyMutationInput, LogLoginUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type LogLoginScalarWhereInput = {
+    AND?: LogLoginScalarWhereInput | LogLoginScalarWhereInput[]
+    OR?: LogLoginScalarWhereInput[]
+    NOT?: LogLoginScalarWhereInput | LogLoginScalarWhereInput[]
+    id?: StringFilter<"LogLogin"> | string
+    userId?: IntFilter<"LogLogin"> | number
+    timestamp?: DateTimeFilter<"LogLogin"> | Date | string
+    ipAddress?: StringNullableFilter<"LogLogin"> | string | null
+    userAgent?: StringNullableFilter<"LogLogin"> | string | null
+    successful?: BoolFilter<"LogLogin"> | boolean
   }
 
   export type UserRoleCreateWithoutUserRoletypeInput = {
@@ -7758,6 +9166,7 @@ export namespace Prisma {
     email: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    LogLogin?: LogLoginCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutUserRolesInput = {
@@ -7767,6 +9176,7 @@ export namespace Prisma {
     email: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    LogLogin?: LogLoginUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutUserRolesInput = {
@@ -7812,6 +9222,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    LogLogin?: LogLoginUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUserRolesInput = {
@@ -7821,6 +9232,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    LogLogin?: LogLoginUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserRoletypeUpsertWithoutUserRolesInput = {
@@ -7850,8 +9262,70 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type UserCreateWithoutLogLoginInput = {
+    name: string
+    login: string
+    email: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutLogLoginInput = {
+    id?: number
+    name: string
+    login: string
+    email: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutLogLoginInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutLogLoginInput, UserUncheckedCreateWithoutLogLoginInput>
+  }
+
+  export type UserUpsertWithoutLogLoginInput = {
+    update: XOR<UserUpdateWithoutLogLoginInput, UserUncheckedUpdateWithoutLogLoginInput>
+    create: XOR<UserCreateWithoutLogLoginInput, UserUncheckedCreateWithoutLogLoginInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutLogLoginInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutLogLoginInput, UserUncheckedUpdateWithoutLogLoginInput>
+  }
+
+  export type UserUpdateWithoutLogLoginInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    login?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutLogLoginInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    login?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  }
+
   export type UserRoleCreateManyUserInput = {
     userRoletypeId: number
+  }
+
+  export type LogLoginCreateManyUserInput = {
+    id?: string
+    timestamp?: Date | string
+    ipAddress?: string | null
+    userAgent?: string | null
+    successful: boolean
   }
 
   export type UserRoleUpdateWithoutUserInput = {
@@ -7864,6 +9338,30 @@ export namespace Prisma {
 
   export type UserRoleUncheckedUpdateManyWithoutUserInput = {
     userRoletypeId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type LogLoginUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    successful?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type LogLoginUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    successful?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type LogLoginUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    successful?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UserRoleCreateManyUserRoletypeInput = {

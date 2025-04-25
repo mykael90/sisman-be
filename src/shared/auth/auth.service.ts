@@ -3,6 +3,7 @@ import {
   ConsoleLogger,
   Injectable,
   UnauthorizedException,
+  Inject,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from 'src/shared/prisma/prisma.service';
@@ -13,6 +14,9 @@ import * as bcrypt from 'bcrypt';
 import { MailerService } from '@nestjs-modules/mailer';
 import { AuthRegisterAuthorizationTokenDTO } from './dto/auth-register-authorization-token.dto';
 import { AuthLoginAuthorizationTokenDTO } from './dto/auth-login-authorization-token.dto';
+import { MetricsService } from '../observability/metrics.service'; // Ajuste o caminho
+import { LogLoginService } from '../log-login/log-login.service';
+import { Request as RequestExpress } from 'express'; // <-- Importe Request
 
 @Injectable()
 export class AuthService {
@@ -23,6 +27,8 @@ export class AuthService {
     private readonly prisma: PrismaService,
     private readonly userService: UsersService,
     private readonly mailer: MailerService,
+    @Inject(MetricsService) private readonly metricsService: MetricsService, // Injete o serviço de métricas
+    @Inject(LogLoginService) private readonly logLoginService: LogLoginService, // Injete o serviço de métricas
   ) {}
 
   createToken(user: User, roles: UserRole[] = []) {
@@ -93,38 +99,86 @@ export class AuthService {
     }
   }
 
-  async loginAuthorizationToken(data: AuthLoginAuthorizationTokenDTO) {
-    const token = this.jwtService.verify(data.token, {
-      secret: process.env.AUTHORIZATION_JWT_SECRET,
-    });
+  async loginAuthorizationToken(
+    data: AuthLoginAuthorizationTokenDTO,
+    request: RequestExpress,
+  ) {
+    const ipAddress = request.ip;
+    const userAgent = request.headers['user-agent'];
+    let userId: number | null = null;
+    let loginSuccess = false;
 
-    if (!token) {
-      throw new UnauthorizedException(`Token inválido!`);
-    }
-
-    if (!token.email) {
-      throw new UnauthorizedException(`Token inválido!`);
-    }
-
-    const user: User = await this.prisma.user.findFirst({
-      where: { email: token.email },
-    });
-
-    if (!user) {
-      return this.register({
-        name: token.name,
-        email: token.email,
-        login: token.login,
+    try {
+      const token = this.jwtService.verify(data.token, {
+        secret: process.env.AUTHORIZATION_JWT_SECRET,
       });
+
+      if (!token) {
+        throw new UnauthorizedException(`Token inválido!`);
+      }
+
+      if (!token.email) {
+        throw new UnauthorizedException(`Token inválido!`);
+      }
+
+      const user: User = await this.prisma.user.findFirst({
+        where: { email: token.email },
+      });
+
+      if (!user) {
+        return this.register({
+          name: token.name,
+          email: token.email,
+          login: token.login,
+        });
+      }
+
+      const roles = await this.prisma.userRole.findMany({
+        where: { userId: user.id },
+      });
+
+      // Se chegou aqui, a validação foi bem-sucedida
+      userId = user.id;
+      loginSuccess = true;
+
+      // >>> Incrementa o contador de login BEM-SUCEDIDO AQUI <<<
+      this.metricsService.userLoginCounter.inc(); // Pode adicionar labels aqui se definiu algum
+
+      return this.createToken(user, roles);
+    } catch (error) {
+      // Se o erro não for Unauthorized, é algo inesperado, relance
+      if (!(error instanceof UnauthorizedException)) {
+        throw error;
+      }
+      // Se for Unauthorized, já tratamos acima (loginSuccess = false)
+      throw error; // Relança para o NestJS tratar e retornar 401
+    } finally {
+      // SEMPRE registra a tentativa no banco de dados, independente do sucesso
+      if (userId) {
+        // Só registra se conseguimos identificar o usuário
+        // Não use await aqui para não bloquear a resposta - "fire-and-forget"
+        this.logLoginService
+          .recordLoginAttempt({
+            userId: userId,
+            ipAddress: ipAddress,
+            userAgent: userAgent,
+            successful: loginSuccess,
+          })
+          .catch((logError) => {
+            // Log interno caso a gravação do histórico falhe
+            console.error(
+              'Failed background task: recordLoginAttempt',
+              logError,
+            );
+          });
+      } else if (!loginSuccess) {
+        // Opcional: Registrar tentativas com email inválido (sem userId)
+        // Poderia ter um campo 'attemptedEmail' na tabela LoginHistory
+        // console.warn(
+        //   `Failed login attempt for non-existent email: ${authLoginDto.email} from IP: ${ipAddress}`,
+        // );
+      }
     }
-
-    const roles = await this.prisma.userRole.findMany({
-      where: { userId: user.id },
-    });
-
-    console.log(roles);
-
-    return this.createToken(user, roles);
   }
 
   async register(data: AuthRegisterDTO) {

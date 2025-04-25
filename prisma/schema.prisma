@@ -16,6 +16,7 @@ model User {
   createdAt DateTime   @default(now()) @map("created_at") @db.Timestamp(0)
   updatedAt DateTime   @updatedAt @map("updated_at") @db.Timestamp(0)
   userRoles UserRole[]
+  LogLogin  LogLogin[]
 
   @@map("users")
 }
@@ -60,11 +61,25 @@ model LogError {
   statusCode  Int?     @map("status_code")
   path        String?
   method      String?
-  message     String
+  message     String   @db.VarChar(1022)
   stackTrace  String?  @map("stack_trace") @db.Text // Usar Text para stacks potencialmente longos
   ipAddress   String?  @map("ip_address")
   userId      String?  @map("user_id") // Opcional, depende se o usuário está logado
   requestBody String?  @map("request_body") @db.Text // Cuidado com dados sensíveis!
 
   @@map("log_errors")
+}
+
+model LogLogin {
+  id         String   @id @default(uuid())
+  userId     Int      @map("user_id") // ID do usuário que tentou logar
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade) // Relacionamento com o User
+  timestamp  DateTime @default(now()) @db.Timestamp(0) // Quando ocorreu a tentativa
+  ipAddress  String?  @map("ip_address") // IP de origem da tentativa
+  userAgent  String?  @map("user_agent") @db.Text // Informações do navegador/cliente
+  successful Boolean // Foi bem-sucedido?
+
+  @@index([userId]) // Index para buscar histórico por usuário
+  @@index([timestamp]) // Index para buscas por data
+  @@map("log_logins")
 }

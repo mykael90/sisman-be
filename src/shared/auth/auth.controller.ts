@@ -12,6 +12,7 @@ import {
   MaxFileSizeValidator,
   UsePipes,
   ValidationPipe,
+  Req,
 } from '@nestjs/common';
 import { AuthRegisterDTO } from './dto/auth-register.dto';
 import { AuthService } from './auth.service';
@@ -30,6 +31,7 @@ import { AuthLoginAuthorizationTokenDTO } from './dto/auth-login-authorization-t
 import { Roles } from '../decorators/roles.decorator';
 import { Role } from '../enums/role.enum';
 import { RoleGuard } from './guards/role.guard';
+import { Request as RequestExpress } from 'express'; // Importe Request
 
 @Controller('auth')
 @ApiTags('auth')
@@ -40,8 +42,11 @@ export class AuthController {
   ) {}
 
   @Post('login-authorization-token')
-  async loginAuthorizationToken(@Body() body: AuthLoginAuthorizationTokenDTO) {
-    return this.authService.loginAuthorizationToken(body);
+  async loginAuthorizationToken(
+    @Body() body: AuthLoginAuthorizationTokenDTO,
+    @Req() request: RequestExpress,
+  ) {
+    return this.authService.loginAuthorizationToken(body, request);
   }
 
   @Roles(Role.Admin)

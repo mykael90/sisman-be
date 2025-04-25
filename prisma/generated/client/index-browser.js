@@ -162,6 +162,15 @@ exports.Prisma.LogErrorScalarFieldEnum = {
   requestBody: 'requestBody'
 };
 
+exports.Prisma.LogLoginScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  timestamp: 'timestamp',
+  ipAddress: 'ipAddress',
+  userAgent: 'userAgent',
+  successful: 'successful'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -200,13 +209,20 @@ exports.Prisma.LogErrorOrderByRelevanceFieldEnum = {
   requestBody: 'requestBody'
 };
 
+exports.Prisma.LogLoginOrderByRelevanceFieldEnum = {
+  id: 'id',
+  ipAddress: 'ipAddress',
+  userAgent: 'userAgent'
+};
+
 
 exports.Prisma.ModelName = {
   User: 'User',
   Material: 'Material',
   UserRoletype: 'UserRoletype',
   UserRole: 'UserRole',
-  LogError: 'LogError'
+  LogError: 'LogError',
+  LogLogin: 'LogLogin'
 };
 
 /**
