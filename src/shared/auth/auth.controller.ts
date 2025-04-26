@@ -53,16 +53,20 @@ export class AuthController {
   @UseGuards(AuthGuard, RoleGuard)
   @Post('register')
   @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
-  async register(@Body() body: AuthRegisterDTO) {
-    return this.authService.register(body);
+  async register(
+    @Body() body: AuthRegisterDTO,
+    @Req() request: RequestExpress,
+  ) {
+    return this.authService.register(body, request);
   }
 
   @Post('register-authorization-token')
   @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
   async registerAuthorizationToken(
     @Body() body: AuthRegisterAuthorizationTokenDTO,
+    @Req() request: RequestExpress,
   ) {
-    return this.authService.registerAuthorizationToken(body);
+    return this.authService.registerAuthorizationToken(body, request);
   }
 
   @UseGuards(AuthGuard)

@@ -11,7 +11,7 @@ datasource db {
 model User {
   id        Int        @id @default(autoincrement())
   name      String     @db.VarChar(63)
-  login     String     @db.VarChar(63)
+  login     String     @unique @db.VarChar(63)
   email     String     @unique @db.VarChar(127)
   createdAt DateTime   @default(now()) @map("created_at") @db.Timestamp(0)
   updatedAt DateTime   @updatedAt @map("updated_at") @db.Timestamp(0)

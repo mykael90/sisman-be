@@ -11,7 +11,7 @@ datasource db {
 model User {
   id        Int        @id @default(autoincrement())
   name      String     @db.VarChar(63)
-  login     String     @db.VarChar(63)
+  login     String     @unique @db.VarChar(63)
   email     String     @unique @db.VarChar(127)
   createdAt DateTime   @default(now()) @map("created_at") @db.Timestamp(0)
   updatedAt DateTime   @updatedAt @map("updated_at") @db.Timestamp(0)
@@ -61,7 +61,7 @@ model LogError {
   statusCode  Int?     @map("status_code")
   path        String?
   method      String?
-  message     String   @db.VarChar(1022)
+  message     String   @db.VarChar(1023)
   stackTrace  String?  @map("stack_trace") @db.Text // Usar Text para stacks potencialmente longos
   ipAddress   String?  @map("ip_address")
   userId      String?  @map("user_id") // Opcional, depende se o usuário está logado

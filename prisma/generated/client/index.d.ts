@@ -7413,17 +7413,17 @@ export namespace Prisma {
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    login?: string
     email?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     name?: StringFilter<"User"> | string
-    login?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     userRoles?: UserRoleListRelationFilter
     LogLogin?: LogLoginListRelationFilter
-  }, "id" | "email">
+  }, "id" | "login" | "email">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder

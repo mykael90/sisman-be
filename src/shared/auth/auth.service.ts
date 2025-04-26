@@ -117,25 +117,28 @@ export class AuthService {
         throw new UnauthorizedException(`Token inválido!`);
       }
 
-      if (!token.email) {
+      if (!token.email || !token.login) {
         throw new UnauthorizedException(`Token inválido!`);
       }
 
-      const user: User = await this.prisma.user.findFirst({
-        where: { email: token.email },
-      });
+      const user: User = token.login
+        ? await this.prisma.user.findFirst({
+            where: { login: token.login },
+          })
+        : await this.prisma.user.findFirst({
+            where: { email: token.email },
+          });
 
       if (!user) {
-        return this.register({
-          name: token.name,
-          email: token.email,
-          login: token.login,
-        });
+        return this.register(
+          {
+            name: token.name,
+            email: token.email,
+            login: token.login,
+          },
+          request,
+        );
       }
-
-      const roles = await this.prisma.userRole.findMany({
-        where: { userId: user.id },
-      });
 
       // Se chegou aqui, a validação foi bem-sucedida
       userId = user.id;
@@ -143,6 +146,10 @@ export class AuthService {
 
       // >>> Incrementa o contador de login BEM-SUCEDIDO AQUI <<<
       this.metricsService.userLoginCounter.inc(); // Pode adicionar labels aqui se definiu algum
+
+      const roles = await this.prisma.userRole.findMany({
+        where: { userId: user.id },
+      });
 
       return this.createToken(user, roles);
     } catch (error) {
@@ -181,16 +188,65 @@ export class AuthService {
     }
   }
 
-  async register(data: AuthRegisterDTO) {
-    if (await this.existsEmail(data.email)) {
-      throw new BadRequestException(`E-mail already in use!`);
-    }
+  async register(data: AuthRegisterDTO, request: RequestExpress) {
+    const ipAddress = request.ip;
+    const userAgent = request.headers['user-agent'];
 
-    const user = await this.userService.create(data);
-    return this.createToken(user);
+    let userId: number | null = null;
+    let loginSuccess = false;
+    try {
+      if (await this.existsEmail(data.email)) {
+        throw new BadRequestException(`E-mail already in use!`);
+      }
+
+      const user = await this.userService.create(data);
+      // Se chegou aqui, a criação foi bem-sucedida
+      userId = user.id;
+      loginSuccess = true;
+
+      // >>> Incrementa o contador de login BEM-SUCEDIDO AQUI <<<
+      this.metricsService.userLoginCounter.inc(); // Pode adicionar labels aqui se definiu algum
+      return this.createToken(user);
+    } catch (error) {
+      // Se o erro não for Unauthorized, é algo inesperado, relance
+      if (!(error instanceof UnauthorizedException)) {
+        throw error;
+      }
+      // Se for Unauthorized, já tratamos acima (loginSuccess = false)
+      throw error; // Relança para o NestJS tratar e retornar 401
+    } finally {
+      // SEMPRE registra a tentativa no banco de dados, independente do sucesso
+      if (userId) {
+        // Só registra se conseguimos identificar o usuário
+        // Não use await aqui para não bloquear a resposta - "fire-and-forget"
+        this.logLoginService
+          .recordLoginAttempt({
+            userId: userId,
+            ipAddress: ipAddress,
+            userAgent: userAgent,
+            successful: loginSuccess,
+          })
+          .catch((logError) => {
+            // Log interno caso a gravação do histórico falhe
+            console.error(
+              'Failed background task: recordLoginAttempt',
+              logError,
+            );
+          });
+      } else if (!loginSuccess) {
+        // Opcional: Registrar tentativas com email inválido (sem userId)
+        // Poderia ter um campo 'attemptedEmail' na tabela LoginHistory
+        // console.warn(
+        //   `Failed login attempt for non-existent email: ${authLoginDto.email} from IP: ${ipAddress}`,
+        // );
+      }
+    }
   }
 
-  async registerAuthorizationToken(data: AuthRegisterAuthorizationTokenDTO) {
+  async registerAuthorizationToken(
+    data: AuthRegisterAuthorizationTokenDTO,
+    request: RequestExpress,
+  ) {
     const token = this.jwtService.verify(data.token, {
       secret: process.env.AUTHORIZATION_JWT_SECRET,
     });
@@ -207,15 +263,26 @@ export class AuthService {
       throw new BadRequestException(`E-mail already in use!`);
     }
 
-    return this.register({
-      name: token.name,
-      email: token.email,
-      login: token.login,
-    });
+    if (await this.existsLogin(token.login)) {
+      throw new BadRequestException(`Login already in use!`);
+    }
+
+    return this.register(
+      {
+        name: token.name,
+        email: token.email,
+        login: token.login,
+      },
+      request,
+    );
   }
 
   async existsEmail(email: string) {
     const user = await this.prisma.user.findFirst({ where: { email } });
+    return !!user;
+  }
+  async existsLogin(login: string) {
+    const user = await this.prisma.user.findFirst({ where: { login } });
     return !!user;
   }
 }
