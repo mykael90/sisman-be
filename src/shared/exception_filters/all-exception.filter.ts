@@ -6,6 +6,7 @@ import {
   Injectable, // Importe Injectable
   Scope, // Importe Scope se quiser request-scoped (geralmente não necessário aqui)
   HttpStatus, // Importe HttpStatus
+  Logger,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { LogErrorService } from '../log-error/log-error.service';
@@ -14,9 +15,12 @@ import { Prisma } from '../../../prisma/generated/client';
 @Catch() // <-- Captura TUDO que não foi pego antes
 @Injectable()
 export class AllExceptionsFilter implements ExceptionFilter {
+  private readonly logger = new Logger(AllExceptionsFilter.name);
+
   constructor(private readonly logErrorService: LogErrorService) {}
 
   async catch(exception: unknown, host: ArgumentsHost) {
+    this.logger.log('AllExceptionsFilter triggered');
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
     const request = ctx.getRequest<Request & { user?: any }>();
@@ -58,7 +62,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
 
     // Loga o erro no banco de dados (sem bloquear a resposta)
     this.logErrorService.createLog(errorLogData).catch((err) => {
-      console.error(
+      this.logger.error(
         'Error logging failed unexpectedly in AllExceptionsFilter:',
         err,
       );
@@ -79,7 +83,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
 
     // Opcional: Logar o erro completo no console para visibilidade imediata no desenvolvimento/servidor
     if (status === HttpStatus.INTERNAL_SERVER_ERROR) {
-      console.error(
+      this.logger.error(
         `[AllExceptionsFilter] Unexpected error caught:`,
         exception,
       );

@@ -32,7 +32,7 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   await app.listen(3080);
-  logger.log('Admin microservice is listening...');
+  logger.log('SISMAN is listening...');
 
   // Se o modo de desenvolvimento estiver ativo, inicie o debugger manualmente
   if (process.env.DEBUG_MODE === 'yes') {

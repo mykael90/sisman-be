@@ -24,7 +24,7 @@ model User {
 model Material {
   id            BigInt   @id @db.UnsignedBigInt
   name          String   @db.TinyText
-  specification String?  @db.VarChar(1022)
+  specification String?  @db.VarChar(1023)
   unit          String   @db.VarChar(31)
   isActive      Boolean  @default(true)
   createdAt     DateTime @default(now()) @map("created_at") @db.Timestamp(0)
@@ -61,7 +61,7 @@ model LogError {
   statusCode  Int?     @map("status_code")
   path        String?
   method      String?
-  message     String   @db.VarChar(1022)
+  message     String   @db.VarChar(1023)
   stackTrace  String?  @map("stack_trace") @db.Text // Usar Text para stacks potencialmente longos
   ipAddress   String?  @map("ip_address")
   userId      String?  @map("user_id") // Opcional, depende se o usuário está logado

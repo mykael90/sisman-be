@@ -7,6 +7,7 @@ import {
   Injectable, // Importe Injectable
   Scope, // Importe Scope se quiser request-scoped (geralmente não necessário aqui)
   HttpStatus, // Importe HttpStatus
+  Logger,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { LogErrorService } from '../log-error/log-error.service';
@@ -15,10 +16,14 @@ import { Prisma } from '../../../prisma/generated/client';
 @Catch(HttpException)
 @Injectable() // Torne o filtro injetável
 export class HttpExceptionFilter implements ExceptionFilter {
+  private readonly logger = new Logger(HttpExceptionFilter.name);
+
   // Injete o serviço de log
   constructor(private readonly errorLogService: LogErrorService) {}
 
   async catch(exception: HttpException, host: ArgumentsHost) {
+    this.logger.log('HttpExceptionFilter triggered');
+
     // Marque como async
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
@@ -47,7 +52,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     // mas garantimos que o erro interno do log seja tratado no service.
     this.errorLogService.createLog(errorLogData).catch((err) => {
       // Log adicional no console caso a promise rejeite (embora o service já tenha um catch)
-      console.error('Error logging failed unexpectedly in filter:', err);
+      this.logger.error('Error logging failed unexpectedly in filter:', err);
     });
 
     // Lógica original para enviar a resposta ao cliente
