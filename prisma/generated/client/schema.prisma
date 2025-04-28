@@ -64,7 +64,7 @@ model LogError {
   message     String   @db.VarChar(1023)
   stackTrace  String?  @map("stack_trace") @db.Text // Usar Text para stacks potencialmente longos
   ipAddress   String?  @map("ip_address")
-  userId      String?  @map("user_id") // Opcional, depende se o usuário está logado
+  userId      Int?     @map("user_id") // Opcional, depende se o usuário está logado
   requestBody String?  @map("request_body") @db.Text // Cuidado com dados sensíveis!
 
   @@map("log_errors")

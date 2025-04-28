@@ -205,7 +205,6 @@ exports.Prisma.LogErrorOrderByRelevanceFieldEnum = {
   message: 'message',
   stackTrace: 'stackTrace',
   ipAddress: 'ipAddress',
-  userId: 'userId',
   requestBody: 'requestBody'
 };
 

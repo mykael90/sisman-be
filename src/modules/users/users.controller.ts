@@ -24,7 +24,7 @@ import { AuthGuard } from 'src/shared/auth/guards/auth.guard';
 import { ApiTags, ApiCreatedResponse, ApiOkResponse } from '@nestjs/swagger';
 import { UsersEntity } from '../../shared/entities/users.entity';
 
-@Roles(Role.Admin)
+@Roles(Role.Adm)
 @UseGuards(AuthGuard, RoleGuard)
 @Controller('users')
 @ApiTags('users')
@@ -44,7 +44,7 @@ export class UsersController {
     return this.userService.list();
   }
 
-  @Roles(Role.Admin, Role.User)
+  @Roles(Role.Adm, Role.User)
   @Get(':id')
   @ApiOkResponse({ type: UsersEntity })
   async show(@Param('id', ParseIntPipe) id: number) {

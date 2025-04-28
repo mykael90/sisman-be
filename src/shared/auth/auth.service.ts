@@ -4,6 +4,7 @@ import {
   Injectable,
   UnauthorizedException,
   Inject,
+  Logger,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from 'src/shared/prisma/prisma.service';
@@ -17,9 +18,12 @@ import { AuthLoginAuthorizationTokenDTO } from './dto/auth-login-authorization-t
 import { MetricsService } from '../observability/metrics.service'; // Ajuste o caminho
 import { LogLoginService } from '../log-login/log-login.service';
 import { Request as RequestExpress } from 'express'; // <-- Importe Request
+import { read } from 'fs';
 
 @Injectable()
 export class AuthService {
+  private readonly logger = new Logger(AuthService.name);
+
   private readonly issuer = 'login';
   private readonly audience = 'users';
   constructor(
@@ -32,10 +36,12 @@ export class AuthService {
   ) {}
 
   createToken(user: User, roles: UserRole[] = []) {
+    this.logger.log(`Criando token para o usuário ${user.name}`);
     return {
       accessToken: this.jwtService.sign(
         {
           id: user.id,
+          login: user.login,
           name: user.name,
           email: user.email,
           roles: roles.map((role) => role.userRoletypeId),
@@ -51,23 +57,8 @@ export class AuthService {
     };
   }
 
-  createTokenForgetPassword(user: User) {
-    return {
-      accessToken: this.jwtService.sign(
-        {
-          id: user.id,
-        },
-        {
-          expiresIn: '30 minutes',
-          subject: String(user.id),
-          issuer: 'forget',
-          audience: this.audience,
-        },
-      ),
-    };
-  }
-
   checkToken(token: string) {
+    this.logger.log(`Verificando token para retornar o payload`);
     try {
       const data = this.jwtService.verify(token, {
         audience: this.audience,
@@ -78,19 +69,9 @@ export class AuthService {
       throw new UnauthorizedException(`Token inválido!`);
     }
   }
-  checkTokenForgetPassword(token: string) {
-    try {
-      const data = this.jwtService.verify(token, {
-        audience: this.audience,
-        issuer: 'forget',
-      });
-      return data;
-    } catch (e) {
-      throw new UnauthorizedException(`Token inválido!`);
-    }
-  }
 
   isValidToken(token: string) {
+    this.logger.log(`Verificando token para retornar se é válido`);
     try {
       this.checkToken(token);
       return true;
@@ -103,6 +84,9 @@ export class AuthService {
     data: AuthLoginAuthorizationTokenDTO,
     request: RequestExpress,
   ) {
+    this.logger.log(
+      `Iniciando o processo de login ou cadastro via Token de autorização`,
+    );
     const ipAddress = request.ip;
     const userAgent = request.headers['user-agent'];
     let userId: number | null = null;
@@ -189,6 +173,7 @@ export class AuthService {
   }
 
   async register(data: AuthRegisterDTO, request: RequestExpress) {
+    this.logger.log(`Realizando o cadastro do usuário`);
     const ipAddress = request.ip;
     const userAgent = request.headers['user-agent'];
 
@@ -247,6 +232,9 @@ export class AuthService {
     data: AuthRegisterAuthorizationTokenDTO,
     request: RequestExpress,
   ) {
+    this.logger.log(
+      `Realizando o cadastro do usuário via token de autorização`,
+    );
     const token = this.jwtService.verify(data.token, {
       secret: process.env.AUTHORIZATION_JWT_SECRET,
     });

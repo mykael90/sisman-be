@@ -5253,10 +5253,12 @@ export namespace Prisma {
 
   export type LogErrorAvgAggregateOutputType = {
     statusCode: number | null
+    userId: number | null
   }
 
   export type LogErrorSumAggregateOutputType = {
     statusCode: number | null
+    userId: number | null
   }
 
   export type LogErrorMinAggregateOutputType = {
@@ -5268,7 +5270,7 @@ export namespace Prisma {
     message: string | null
     stackTrace: string | null
     ipAddress: string | null
-    userId: string | null
+    userId: number | null
     requestBody: string | null
   }
 
@@ -5281,7 +5283,7 @@ export namespace Prisma {
     message: string | null
     stackTrace: string | null
     ipAddress: string | null
-    userId: string | null
+    userId: number | null
     requestBody: string | null
   }
 
@@ -5302,10 +5304,12 @@ export namespace Prisma {
 
   export type LogErrorAvgAggregateInputType = {
     statusCode?: true
+    userId?: true
   }
 
   export type LogErrorSumAggregateInputType = {
     statusCode?: true
+    userId?: true
   }
 
   export type LogErrorMinAggregateInputType = {
@@ -5443,7 +5447,7 @@ export namespace Prisma {
     message: string
     stackTrace: string | null
     ipAddress: string | null
-    userId: string | null
+    userId: number | null
     requestBody: string | null
     _count: LogErrorCountAggregateOutputType | null
     _avg: LogErrorAvgAggregateOutputType | null
@@ -5508,7 +5512,7 @@ export namespace Prisma {
       message: string
       stackTrace: string | null
       ipAddress: string | null
-      userId: string | null
+      userId: number | null
       requestBody: string | null
     }, ExtArgs["result"]["logError"]>
     composites: {}
@@ -5887,7 +5891,7 @@ export namespace Prisma {
     readonly message: FieldRef<"LogError", 'String'>
     readonly stackTrace: FieldRef<"LogError", 'String'>
     readonly ipAddress: FieldRef<"LogError", 'String'>
-    readonly userId: FieldRef<"LogError", 'String'>
+    readonly userId: FieldRef<"LogError", 'Int'>
     readonly requestBody: FieldRef<"LogError", 'String'>
   }
     
@@ -7319,7 +7323,6 @@ export namespace Prisma {
     message: 'message',
     stackTrace: 'stackTrace',
     ipAddress: 'ipAddress',
-    userId: 'userId',
     requestBody: 'requestBody'
   };
 
@@ -7632,7 +7635,7 @@ export namespace Prisma {
     message?: StringFilter<"LogError"> | string
     stackTrace?: StringNullableFilter<"LogError"> | string | null
     ipAddress?: StringNullableFilter<"LogError"> | string | null
-    userId?: StringNullableFilter<"LogError"> | string | null
+    userId?: IntNullableFilter<"LogError"> | number | null
     requestBody?: StringNullableFilter<"LogError"> | string | null
   }
 
@@ -7662,7 +7665,7 @@ export namespace Prisma {
     message?: StringFilter<"LogError"> | string
     stackTrace?: StringNullableFilter<"LogError"> | string | null
     ipAddress?: StringNullableFilter<"LogError"> | string | null
-    userId?: StringNullableFilter<"LogError"> | string | null
+    userId?: IntNullableFilter<"LogError"> | number | null
     requestBody?: StringNullableFilter<"LogError"> | string | null
   }, "id">
 
@@ -7696,7 +7699,7 @@ export namespace Prisma {
     message?: StringWithAggregatesFilter<"LogError"> | string
     stackTrace?: StringNullableWithAggregatesFilter<"LogError"> | string | null
     ipAddress?: StringNullableWithAggregatesFilter<"LogError"> | string | null
-    userId?: StringNullableWithAggregatesFilter<"LogError"> | string | null
+    userId?: IntNullableWithAggregatesFilter<"LogError"> | number | null
     requestBody?: StringNullableWithAggregatesFilter<"LogError"> | string | null
   }
 
@@ -8004,7 +8007,7 @@ export namespace Prisma {
     message: string
     stackTrace?: string | null
     ipAddress?: string | null
-    userId?: string | null
+    userId?: number | null
     requestBody?: string | null
   }
 
@@ -8017,7 +8020,7 @@ export namespace Prisma {
     message: string
     stackTrace?: string | null
     ipAddress?: string | null
-    userId?: string | null
+    userId?: number | null
     requestBody?: string | null
   }
 
@@ -8030,7 +8033,7 @@ export namespace Prisma {
     message?: StringFieldUpdateOperationsInput | string
     stackTrace?: NullableStringFieldUpdateOperationsInput | string | null
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: NullableIntFieldUpdateOperationsInput | number | null
     requestBody?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -8043,7 +8046,7 @@ export namespace Prisma {
     message?: StringFieldUpdateOperationsInput | string
     stackTrace?: NullableStringFieldUpdateOperationsInput | string | null
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: NullableIntFieldUpdateOperationsInput | number | null
     requestBody?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -8056,7 +8059,7 @@ export namespace Prisma {
     message: string
     stackTrace?: string | null
     ipAddress?: string | null
-    userId?: string | null
+    userId?: number | null
     requestBody?: string | null
   }
 
@@ -8069,7 +8072,7 @@ export namespace Prisma {
     message?: StringFieldUpdateOperationsInput | string
     stackTrace?: NullableStringFieldUpdateOperationsInput | string | null
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: NullableIntFieldUpdateOperationsInput | number | null
     requestBody?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -8082,7 +8085,7 @@ export namespace Prisma {
     message?: StringFieldUpdateOperationsInput | string
     stackTrace?: NullableStringFieldUpdateOperationsInput | string | null
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: NullableIntFieldUpdateOperationsInput | number | null
     requestBody?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -8526,6 +8529,7 @@ export namespace Prisma {
 
   export type LogErrorAvgOrderByAggregateInput = {
     statusCode?: SortOrder
+    userId?: SortOrder
   }
 
   export type LogErrorMaxOrderByAggregateInput = {
@@ -8556,6 +8560,7 @@ export namespace Prisma {
 
   export type LogErrorSumOrderByAggregateInput = {
     statusCode?: SortOrder
+    userId?: SortOrder
   }
 
   export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
