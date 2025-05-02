@@ -1,9 +1,20 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { RolesService } from './roles.service';
-import { CreateUserRoletypeDto } from '../../../shared/dto/user/role/create-user-roletype.dto';
 import { CreateUserRoleDto } from '../../../shared/dto/user/role/create-user-role.dto';
+import { DeleteUserRoleDto } from '../../../shared/dto/user/role/delete-user-role.dto';
+import { UpdateUserRoleDto } from '../../../shared/dto/user/role/update-user-role.dto';
 
-@Controller('roles')
+@Controller()
 export class RolesController {
   constructor(private readonly rolesService: RolesService) {}
 
@@ -15,5 +26,18 @@ export class RolesController {
   @Get()
   async list() {
     return this.rolesService.list();
+  }
+
+  @Patch()
+  async update(
+    @Query() data: UpdateUserRoleDto,
+    @Body('newUserRoletypeId', ParseIntPipe) newUserRoletypeId: number,
+  ) {
+    return this.rolesService.update(data, newUserRoletypeId);
+  }
+
+  @Delete()
+  async delete(@Query() data: DeleteUserRoleDto) {
+    return this.rolesService.delete(data);
   }
 }

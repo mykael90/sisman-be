@@ -26,7 +26,8 @@ import { UsersEntity } from '../../shared/entities/users.entity';
 
 @Roles(Role.Adm)
 @UseGuards(AuthGuard, RoleGuard)
-@Controller('users')
+// o prefixo /users é gerenciado pelo RouterModule
+@Controller()
 @ApiTags('users')
 export class UsersController {
   constructor(private readonly userService: UsersService) {}

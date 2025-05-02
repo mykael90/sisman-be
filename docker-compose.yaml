@@ -1,3 +1,5 @@
+version: '3.8' # Especificar a versão é uma boa prática
+
 services:
 
   app:
@@ -7,6 +9,11 @@ services:
       - 3080:3080
     volumes:
       - .:/home/node/sisman-be
+    restart: unless-stopped
+    depends_on:
+      - db
+    networks: # <-- Conectar à rede compartilhada
+      - sisman_net
 
   db:
     image: mariadb:11.5.2-noble
@@ -19,3 +26,11 @@ services:
     volumes:
     - ./.docker/mariadb:/docker-entrypoint-initdb.d
       # - ./docker/dbdata:/var/lib/mysql
+    restart: unless-stopped
+    networks: # <-- Conectar à rede compartilhada
+      - sisman_net
+
+      # Define a rede compartilhada
+networks:
+  sisman_net:
+    driver: bridge # Rede padrão do tipo bridge

@@ -38,7 +38,7 @@ export class AuthService {
   createToken(user: User, roles: UserRole[] = []) {
     this.logger.log(`Criando token para o usuário ${user.name}`);
     return {
-      accessToken: this.jwtService.sign(
+      access_token: this.jwtService.sign(
         {
           id: user.id,
           login: user.login,
@@ -54,6 +54,8 @@ export class AuthService {
         },
       ),
       roles: roles.map((role) => role.userRoletypeId),
+      expires_in: 'TODO: IMPLEMENTAR',
+      refresh_token: 'TODO: IMPLEMENTAR',
     };
   }
 
