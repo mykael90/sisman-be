@@ -8,4 +8,7 @@ POST {{apiUrl}}
 GET {{apiUrl}}/delay
 
 ### Test error response
-GET {{apiUrl}}/error
+GET {{apiUrl}}/error-http
+
+### Test error response
+GET {{apiUrl}}/error-not-http

@@ -1,4 +1,4 @@
-import { BadRequestException, Controller, Get } from '@nestjs/common';
+import { BadRequestException, Controller, Get, HttpException, HttpStatus } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
@@ -16,11 +16,17 @@ export class AppController {
     return 'Delayed response';
   }
 
-  @Get('error')
-  error() {
-    throw new BadRequestException('Something bad happened', {
-      cause: new Error('Internal Server Error'),
-      description: 'Some error description',
-    });
+  @Get('error-http')
+  errorHttp() {
+    throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
   }
+
+
+
+  //error not http for test
+  @Get('error-not-http')
+  errorNotHttp() {
+    throw new Error('This is a non-HTTP exception');
+  }
+
 }

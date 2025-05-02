@@ -21,7 +21,15 @@ export class UsersService {
   }
 
   async list() {
-    return await this.prisma.user.findMany();
+    return await this.prisma.user.findMany({
+      include: {
+        userRoles: {
+          select: {
+            userRoletypeId: true,
+          },
+        },
+      },
+    });
   }
   async show(id: number) {
     await this.exists(id);

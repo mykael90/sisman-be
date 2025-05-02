@@ -9,7 +9,6 @@ import { MailerModule } from '@nestjs-modules/mailer';
 import { MaterialsModule } from './modules/materials/materials.module';
 import { FilesModule } from './shared/files/files.module';
 import { ConfigModule } from '@nestjs/config';
-import { HttpExceptionFilter } from './shared/exception_filters/http-exception.filter';
 import mailerConfig from './config/mailer.config';
 import { validationSchema } from './config/validation.schema';
 import { LogErrorModule } from './shared/log-error/log-error.module';
@@ -17,6 +16,7 @@ import { AllExceptionsFilter } from './shared/exception_filters/all-exception.fi
 import { ObservabilityModule } from './shared/observability/observability.module';
 import { MetricsInterceptor } from './shared/interceptors/metrics.interceptor';
 import { LogLoginModule } from './shared/log-login/log-login.module';
+import { HttpExceptionFilter } from './shared/exception_filters/http-exception.filter';
 
 @Module({
   imports: [
@@ -53,14 +53,14 @@ import { LogLoginModule } from './shared/log-login/log-login.module';
       provide: APP_GUARD,
       useClass: ThrottlerGuard,
     },
-    // Ordem dos Filtros é Importante: Mais específico primeiro!
+    // Ordem dos Filtros é Importante: Mais específico por último!
     {
       provide: APP_FILTER,
-      useClass: HttpExceptionFilter, // 1. Tenta capturar HttpExceptions
+      useClass: AllExceptionsFilter, // 1. Captura qualquer outra exceção que sobrou (fallback)
     },
     {
       provide: APP_FILTER,
-      useClass: AllExceptionsFilter, // 2. Captura qualquer outra exceção que sobrou (fallback)
+      useClass: HttpExceptionFilter, // 2. Tenta capturar HttpExceptions
     },
     // Registre o Interceptor de Métricas Globalmente
     {
