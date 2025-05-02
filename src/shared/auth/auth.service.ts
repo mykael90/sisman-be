@@ -35,6 +35,8 @@ export class AuthService {
     private readonly logLoginService: LogLoginService, // Injete o serviço de métricas
   ) {}
 
+
+
   createToken(user: User, roles: UserRole[] = []) {
     this.logger.log(`Criando token para o usuário ${user.name}`);
     return {
@@ -47,17 +49,19 @@ export class AuthService {
           roles: roles.map((role) => role.userRoletypeId),
         },
         {
-          expiresIn: '7 days',
+          expiresIn: 1*60*60*24, //in seconds
           subject: String(user.id),
           issuer: this.issuer,
           audience: this.audience,
         },
       ),
       roles: roles.map((role) => role.userRoletypeId),
-      expires_in: 'TODO: IMPLEMENTAR',
-      refresh_token: 'TODO: IMPLEMENTAR',
+      //implementar a chave expires_in baseado no valor da assinatura já informado
+      expires_in: 1*60*60*24, //valor em segundos
     };
   }
+
+  //não há necessidade de implementar refresh_token uma vez que o fluxo convencional já utiliza um token para fornecer o access_token, sempre que receber o token correto pode retornar o access_token que vai poder ser utilizado por 24hs
 
   checkToken(token: string) {
     this.logger.log(`Verificando token para retornar o payload`);
