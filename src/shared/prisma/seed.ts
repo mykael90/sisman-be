@@ -5,6 +5,7 @@ import { PrismaClient } from 'prisma/generated/client'; // Correct path for gene
 import { main as seedUsers } from './seeds/users.seed';
 import { main as seedMaterials } from './seeds/materials.seed';
 import { main as seedUserRoletypes } from './seeds/users-roletypes.seed';
+import {main as seedUsersRoles} from './seeds/users-roles.seed'
 
 const logger = console;
 
@@ -20,6 +21,7 @@ async function mainSeed() {
     await seedUsers(prisma);
     await seedMaterials(prisma);
     await seedUserRoletypes(prisma);
+    await seedUsersRoles(prisma);
 
     logger.log('Database seeding completed successfully.');
     // No need for process.exit(0) here, natural exit is success

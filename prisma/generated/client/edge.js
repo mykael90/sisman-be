@@ -237,12 +237,11 @@ const config = {
     "db"
   ],
   "activeProvider": "mysql",
-  "postinstall": true,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DB_URL",
-        "value": null
+        "value": "mysql://root:EGHq1zzwUF0EVXVorbyZ857Q4vh96b@db-sisman:3306/sismandev"
       }
     }
   },

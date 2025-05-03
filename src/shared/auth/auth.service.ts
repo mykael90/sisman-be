@@ -56,6 +56,7 @@ export class AuthService {
         },
       ),
       roles: roles.map((role) => role.userRoletypeId),
+      id: user.id,
       //implementar a chave expires_in baseado no valor da assinatura já informado
       expires_in: 1*60*60*24, //valor em segundos (corresponde a 24hs)
     };
